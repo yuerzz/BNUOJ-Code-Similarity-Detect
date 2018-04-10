@@ -24,6 +24,6 @@ BNU Online Judge:
 * 拼接上开源工具[SIM](https://dickgrune.com/Programs/similarity_tester/)，从词法层面增强检测效果
 
 ## 用法
-![image]（https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/1.jpg）
-![image]（https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/2.jpg）
-![image]（https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/3.png）
+![image](https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/1.jpg)
+![image](https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/2.jpg)
+![image](https://github.com/ZitanChen/BNUOJ-Code-Similarity-Detect/blob/master/3.png)

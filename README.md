@@ -1,5 +1,5 @@
-# BNUOJ-utility
-针对BNUOJ的代码查重工具
+# BNUOJ-code
+针对BNUOJ的代码查重辅助工具
 
 BNU Online Judge:
 
@@ -12,10 +12,9 @@ BNU Online Judge:
 * 作业查重
 
 ## 功能：
-
 * 抓取IP对应的网络环境，由此判定交题时的终端物理位置合法性
-
-* 重新格式化代码，并通过Levenshtein距离来判断代码相似度
+* 删除注释片段并重新格式化代码
+* 通过Levenshtein距离来判断代码相似度
 
 没有可执行文件，使用方法示例：
 [Jupyter Notebook](https://github.com/ZitanChen/BNUOJ-utility/blob/master/BNUOJ%20Submission%20Analysis.ipynb)

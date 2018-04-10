@@ -1,0 +1,15 @@
+T=eval(input())
+def f(n):
+    a=0
+    for k in range(0,n):
+        answer=input()
+        if answer!="PERFECT":
+            a=a+1
+    if a==0:
+        print("MILLION Master")
+    else:
+        print("NAIVE Noob")
+
+for i in range(0,T):
+    n=eval(input())
+    f(n)

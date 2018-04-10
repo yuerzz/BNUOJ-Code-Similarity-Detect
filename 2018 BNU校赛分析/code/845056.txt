@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define mem(a,b) memset(a,b,sizeof(a))
+using namespace std;
+int main()
+{
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        string c;
+        cin>>c;
+        vector<string>ans;
+        string pos;
+        ans.clear();
+        bool jc=0;
+        for(int i=0;i<c.size();i++)
+        {
+
+            if(c[i]>='A'&&c[i]<='Z')
+            {
+                if(pos.size()!=0)
+                ans.push_back(pos);
+
+                if(pos.size()<=1&&pos.size()!=0)
+                {
+                    jc=1;
+                    //cout<<1<<endl;
+                }
+                pos.clear();
+            }
+            pos+=c[i];
+            //cout<<pos<<endl;
+        }
+        if(pos.size()<2)
+            jc=1;
+        ans.push_back(pos);
+//        for(int i=0;i<ans.size();i++)
+//            cout<<i<<" "<<ans[i]<<" ";
+//        cout<<endl;
+        if(ans.size()<2||jc)
+        {
+            cout<<c<<endl;
+        }else
+        {
+            if(ans[0][0]>='A'&&ans[0][0]<='Z')
+                ans[0][0]=(char)(ans[0][0]-'A'+'a');
+            cout<<ans[0];
+            for(int i=1;i<ans.size();i++)
+            {
+                cout<<"_";
+               ans[i][0]=(char)(ans[i][0]-'A'+'a');
+               cout<<ans[i];
+            }
+            cout<<endl;
+        }
+    }
+}

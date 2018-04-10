@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+#include<vector>
+
+string test[20005];
+
+int main()
+{
+	int t;
+	cin>>t;
+	int i;
+	for(i=0;i<t;i++)
+		cin>>test[i];
+	
+	for(i=0;i<t;i++)
+	{
+		int j;
+		vector<int>a;
+		bool flag=1;
+		for(j=0;j<test[i].size();j++)
+		{
+			if(test[i][j]>='A'&&test[i][j]<='Z')
+				a.push_back(j);				
+		}
+		//cout<<a.size()<<endl;
+		if(a.size()<1)
+			flag=0;
+		if(a.size()==1&&(a[0]==0||a[0]==1))
+			flag=0;
+		int k;
+		if(flag)
+		{
+		for(k=0;k<a.size()-1;k++)
+		{
+			if((a[k+1]-a[k])<2)
+			{
+				flag=0;
+				break;
+			}
+		}
+	}
+		if(flag)
+		if(a[a.size()-1]==(test[i].size()-1))
+			flag=0;
+			
+		int num=0;
+		if(flag)
+		{
+			//cout<<test[i]<<endl;
+			char temp[1000];
+			num=0;
+			for(k=0;k<test[i].size();k++)
+			{
+				if(test[i][k]>='A'&&test[i][k]<='Z'&&k!=0)
+				{
+					temp[k+num]='_';
+					num++;
+				}
+				if(test[i][k]>='A'&&test[i][k]<='Z')
+				{
+					
+					temp[k+num]=test[i][k];
+					temp[k+num]+=('a'-'A');
+				}
+				else
+				temp[k+num]=test[i][k];
+				//cout<<temp[k+num]<<endl;
+			}
+			temp[a.size()+test[i].size()]='\0';
+			//cout<<temp.size()<<endl;
+			cout<<temp<<endl;
+		}
+		else
+			cout<<test[i]<<endl;
+	}
+	return 0;
+}

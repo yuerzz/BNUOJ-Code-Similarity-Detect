@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+int find_min(int *cat_n,int n)
+{
+    int minm=100000000;
+    int min_index;
+    for(int i=0;i<n;i++)
+    {
+        if(cat_n[i]>0&&cat_n[i]<minm)
+        {
+            minm=cat_n[i];
+            min_index=i;
+        }
+    }
+    return min_index;
+}
+int main()
+{
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        int n,m;
+        scanf("%d",&n);
+        scanf("%d",&m);
+        int x,y,z;
+        int cat_n[n];
+        int way[n][n];
+        memset(way,0,sizeof(way));
+        memset(cat_n,0,sizeof(cat_n));
+        for(int i=0;i<m;i++)
+        {
+            scanf("%d%d%d",&x,&y,&z);
+            way[x][y]=way[y][x]=z;
+            cat_n[x]+=z;
+            cat_n[y]+=z;
+        }
+        int min_n=0;
+        int index_min=0;
+        for(int i=0;i<n;i++)
+        {
+            index_min=find_min(cat_n,n);
+            if(cat_n[index_min]>min_n)
+            {
+                min_n=cat_n[index_min];
+            }
+            for(int i=0;i<n;i++)
+            {
+                cat_n[i]-=way[index_min][i];
+                way[index_min][i]=way[i][index_min]=0;
+            }
+        }
+        printf("%d\n",min_n);
+    }
+    return 0;
+}

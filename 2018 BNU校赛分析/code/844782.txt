@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+#define MAX 100001
+bool pipei(string s)
+{
+	if(s[0]=='P') return 1;
+	else return 0;
+}
+
+int main() {
+	int ne;
+	cin>>ne;
+	while(ne--)
+	{
+		int n;
+		cin>>n;
+		int k=0;
+		for(int i=0;i<n;i++){
+			string sp;
+			cin>>sp;
+			if(pipei(sp)) k++;
+			else break;
+		}
+		if(k==n) cout<<"MILLION Master"<<endl;
+		else cout<<"NAIVE Noob"<<endl;
+	}
+	return 0;
+}

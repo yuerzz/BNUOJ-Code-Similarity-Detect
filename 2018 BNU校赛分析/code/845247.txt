@@ -1,0 +1,22 @@
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int T; scanf("%d", &T);
+    while (T--)
+    {
+        double n, sum = 1; scanf("%lf", &n);
+        for (double i = 2; i <= n; i++)
+            sum *= i;
+        double f = sum / n;
+        double o = f * 2 * n + (sum - f * 2 - 2) * (n - 1) + 2 * 2;
+        if (n == 2) o = f * n;
+        printf("%f\n", o / sum);
+    }
+    return 0;
+}

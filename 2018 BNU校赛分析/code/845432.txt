@@ -1,0 +1,67 @@
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+long long p[100001][3];
+long long ed[3];
+bool judge(long long i,long long pi,long long j,long long pj)
+{
+    if(p[i][pi]<p[j][pj])
+        return true;
+    else if(p[i][pi]==p[j][pj]&&(pj==ed[j]-1||(pi!=ed[i]-1&&p[i][pi+1]<=p[j][pj+1])))
+        return true;
+    else return false;
+}
+int main()
+{
+    long long T,n,m,k,pa,pb,pc;
+    long long ans;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%lld%lld%lld",&ed[0],&ed[1],&ed[2]);
+        for(long long i=0;i<ed[0];i++)
+            scanf("%lld",&p[0][i]);
+        for(long long i=0;i<ed[1];i++)
+            scanf("%lld",&p[1][i]);
+        for(long long i=0;i<ed[2];i++)
+            scanf("%lld",&p[2][i]);
+        pa=0;
+        pb=0;
+        pc=0;
+        ans=10000000000LL;
+        while(1)
+        {
+            if(abs(p[0][pa]-p[1][pb])+abs(p[1][pb]-p[2][pc])<ans)
+                ans=abs(p[0][pa]-p[1][pb])+abs(p[1][pb]-p[2][pc]);
+            if(pa==ed[0]-1&&pb==ed[1]-1&&pc==ed[2]-1)
+                break;
+            if(judge(0,pa,1,pb)&&judge(0,pa,2,pc))
+            {
+                if(pa<ed[0]-1)
+                    pa++;
+                else if(pb<ed[1]-1&&(judge(1,pb,2,pc)||pc==ed[2]-1))
+                    pb++;
+                else pc++;
+            }
+            else if(judge(1,pb,0,pa)&&judge(1,pb,2,pc))
+            {
+                if(pb<ed[1]-1)
+                    pb++;
+                else if(pa<ed[0]-1&&(judge(0,pa,2,pc)||pc==ed[2]-1))
+                    pa++;
+                else pc++;
+            }
+            else if(judge(2,pc,0,pa)&&judge(2,pc,1,pb))
+            {
+                if(pc<ed[2]-1)
+                    pc++;
+                else if(pa<ed[0]-1&&(judge(0,pa,1,pb)||pb==ed[1]-1))
+                    pa++;
+                else pb++;
+            }
+        }
+        printf("%lld\n",ans+3);
+    }
+    return 0;
+}

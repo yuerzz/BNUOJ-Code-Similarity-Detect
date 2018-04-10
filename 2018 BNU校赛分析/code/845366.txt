@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+int T;
+int n;
+string str;
+int main()
+{
+    cin>>T;
+    while(T--)
+    {
+        string ans;
+        cin>>str;
+        if(str.size()<4) {cout<<str<<endl;continue;}
+        int flag=1;
+        int findone=0;
+        int t=1;
+        ans+=str[0];
+        if(str[0]<'a') ans[0]+=32;
+        for(int i=1;i<str.size();i++)
+        {
+            if(t==1)
+            {
+                if(str[i]>='A'&&str[i]<='Z') {flag=0;break;}
+                t=0;
+                ans+=str[i];
+                continue;
+            }
+            else
+            {
+                if(str[i]>='A'&&str[i]<='Z')
+                {
+                    t=1;
+                    ans+='_';
+                    findone=1;
+                    ans+=str[i]+32;
+                }
+                else ans+=str[i];
+            }
+        }
+        if(t==1||findone==0) flag=0;
+        if(flag) cout<<ans<<endl;
+        else cout<<str<<endl;
+    }
+
+    return 0;
+}
+//for(int i=1;i<=n;i++) cin>>a[i];

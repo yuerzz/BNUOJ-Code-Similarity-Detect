@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m,x,y,z,min=0,r;
+		cin>>n>>m;
+		int all[n][n]={0};
+		int sum[n]={0};
+		for(int i=0;i<m;i++)
+		{
+			cin>>x>>y>>z;
+			all[x-1][y-1]=z;
+			all[y-1][x-1]=z;
+			sum[x-1]+=z;
+			sum[y-1]+=z;
+		}
+		for(int i=1;i<n;i++)
+			if(sum[i]<sum[min]&&sum[i]>0)
+				min=i;
+		r=sum[min];
+		int flag=0;
+		while(flag==0)
+		{
+			for(int i=0;i<n;i++)
+				if(all[i][min]>0&&sum[i]>0)
+					sum[i]-=all[i][min];
+			sum[min]=0;min=0;
+			flag=1;
+			for(int i=1;i<n;i++)
+				if(sum[i]<sum[min]&&sum[i]>0)
+					min=i;
+			if(sum[min]>r)
+				r=sum[min];
+			for(int i=0;i<n;i++)
+				if(sum[i]>0)
+					flag=0;
+		}
+		cout<<r<<endl;
+	}
+	return 0;
+}

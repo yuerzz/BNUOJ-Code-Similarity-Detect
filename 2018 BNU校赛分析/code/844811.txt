@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+namespace fastIO{
+	#define BUF_SIZE 100000
+	//fread -> read
+	bool IOerror=0;
+	inline char nc(){static char buf[BUF_SIZE],*p1=buf+BUF_SIZE,*pend=buf+BUF_SIZE;if(p1==pend){p1=buf;pend=buf+fread(buf,1,BUF_SIZE,stdin);if(pend==p1){IOerror=1;return -1;}}return *p1++;}
+	inline bool blank(char ch){return ch==' '||ch=='\n'||ch=='\r'||ch=='\t';}
+	inline void read(ll &x){char ch;ll f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(int &x){char ch;int f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(char* s){char ch;while(blank(ch=nc()));if(IOerror)return;int i=0;for (;!blank(ch);s[i++]=ch,ch=nc());s[i]='\0';}
+	#undef BUF_SIZE
+};
+using namespace fastIO;
+inline ll read()
+{
+	ll x=0,f=1;char ch=getchar();
+	while(ch<'0'||ch>'9'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int n,k;
+ll a[1010];
+ll b[1010];
+const int mod=1e9+7;
+inline ll quickpow(ll a,ll b)
+{
+    ll ans=1;
+    while (b)
+    {
+        if (b&1)ans=ans*a%mod;
+        a=a*a%mod;
+        b>>=1;
+    }
+    return ans;
+}
+inline void work(int cur)
+{
+    //printf("Case #%d: ",cur);
+    scanf("%d%d",&n,&k);
+    for(int i=1;i<=n;i++)scanf("%lld",a+i);
+    memset(b,0,sizeof b);
+    for (int i=1;i<=n;i++)
+    {
+        ll now=1;
+        for (int j=i,p=1;j>=1;j--,p++)
+        {
+            ll toadd=now*a[j]%mod;
+            if (p&1)b[i]+=toadd;else b[i]-=toadd;
+            now=now*(k-p+1)%mod;now=now*quickpow(p,mod-2);
+        }
+        b[i]%=mod;if (b[i]<0)b[i]+=mod;
+    }
+    for (int i=1;i<=n;i++)printf("%lld%c",b[i],i==n?'\n':' ');
+}
+int main()
+{
+    int T,cnT=0;
+    scanf("%d",&T);
+    //T=1;
+    while (T--)work(++cnT);
+    return 0;
+}

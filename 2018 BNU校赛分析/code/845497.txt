@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+using ull = unsigned long long;
+using vull = std::vector<ull>;
+const ull M = 1000000007;
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        size_t n;
+        myis >> n;
+        double ans = 0.0;
+        for (size_t i = 2; i <= n; ++i) {
+            ans = (1.0 - (1.0 / double(i))) * ans + double(i - 1);
+        }
+        myos << std::fixed << std::setprecision(12) << ans << std::endl;
+    }
+    return 0;
+}

@@ -1,0 +1,84 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e3+10;
+typedef long long ll;
+const ll mod = 1e9+7;
+
+ll a[N];
+ll c[N];
+ll aa[N];
+ll res[N];
+ll rinv[N];
+ll qpow(ll a,ll n)
+{
+    ll res=1,tmp=a;
+    for(;n;n/=2){
+        if(n&1){
+            res=res*tmp%mod;
+        }
+        tmp=tmp*tmp%mod;
+    }
+    return res%mod;
+}
+ll inv(ll a)
+{
+    return qpow(a,mod-2);
+}
+ll combi(ll n,ll m)
+{
+    if(n<=1) return 1;
+    ll res=1;
+    for(ll i=1;i<=m;i++){
+        res*=(n+1-i);res%=mod;
+    }
+    for(ll i=1;i<=m;i++){
+        res*=rinv[i];res%=mod;
+    }
+    return res%mod;
+}
+
+
+int main()
+{
+    //freopen("test.txt","r",stdin);
+    int t;scanf("%d",&t);
+    for(int i=0;i<1005;i++){
+        rinv[i]=inv(i);
+    }
+    while(t--){
+        memset(a,0,sizeof(a));
+        memset(c,0,sizeof(c));
+        memset(aa,0,sizeof(aa));
+        memset(res,0,sizeof(res));
+        ll n,k;scanf("%lld%lld",&n,&k);
+        for(int i=0;i<n;i++){
+            scanf("%lld",&a[i]);
+        }
+        for(ll i=0;i<n;i++){
+            c[i]=combi(k-1+i,i);
+        }
+        for(ll i=0;i<n;i++){
+            aa[i]=(mod-a[i])%mod;
+        }
+        for(ll i=0;i<n;i++) res[i]=a[i];
+        for(ll i=0;i<n;i++){
+            for(ll j=1;i-j>=0;j++){
+                res[i]+=c[j]*aa[i-j]%mod;
+                res[i]%=mod;
+            }
+            aa[i]=(mod-res[i])%mod;
+        }
+        if(k==0){
+            for(int i=0;i<n;i++){
+                res[i]=a[i];
+            }
+        }
+        for(ll i=0;i<n;i++){
+            if(i) printf(" ");
+            printf("%lld",res[i]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}

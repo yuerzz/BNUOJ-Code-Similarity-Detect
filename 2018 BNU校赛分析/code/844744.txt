@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+using namespace std;
+const int maxn=1e5+5;
+
+    string a[maxn];
+int main(void){
+    ios::sync_with_stdio(0);
+    int t;
+    cin>>t;
+    while(t--){
+
+    int n,jud=1;
+    cin>>n;
+    for(int i=0;i<n;++i){
+        cin>>a[i];
+        if(a[i]!="PERFECT")
+            jud=0;
+    }
+    if(jud)
+        cout<<"MILLION Master"<<endl;
+    else
+        cout<<"NAIVE Noob"<<endl;
+
+    }
+    return 0;
+}

@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define REP(I,S,N) for (I=S;I<N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+typedef long long LL;
+const int INF=0x3f3f3f3f;
+const LL INFF=0x3f3f3f3f3f3f3f3f;
+const int maxn=1e6+7;
+
+LL Abs(LL x){return x>0?x:-x;}
+int n;
+LL A[maxn],B[maxn],C[maxn],F[maxn];
+LL now;
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        int n,m,k,i;
+        scanf("%d%d%d",&n,&m,&k);
+        A[0]=-INFF;A[n+1]=INFF;
+        C[0]=-INFF;C[k+1]=INFF;
+        FOR(i,1,n) scanf("%lld",&A[i]);
+        FOR(i,1,m) scanf("%lld",&B[i]);
+        FOR(i,1,k) scanf("%lld",&C[i]);
+        LL ans=INFF;
+        FOR(i,1,m){
+            int posA=lower_bound(A+1,A+1+n,B[i])-A;
+            LL lenA=min(Abs(A[posA]-B[i]),Abs(A[posA-1]-B[i]));
+            int posC=lower_bound(C+1,C+1+k,B[i])-C;
+            LL lenC=min(Abs(C[posC]-B[i]),Abs(C[posC-1]-B[i]));
+            ans=min(ans,lenA+lenC+3);
+        }printf("%lld\n",ans);
+    }
+}
+/*
+2
+3 1
+DMM
+3 3
+DMM
+*/

@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int t,l,a,b,c;
+char s[200010];
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		scanf("%s",s);
+		l=strlen(s);a=0;
+		if (!(s[1]<='z'&&s[1]>='a'))
+		{
+			puts(s);
+			continue;
+		}
+		for (int i=0;i<=l;i++)
+			if (i==l)
+			{
+				if (!a) puts(s);
+				else 
+				{
+					for (int j=0;j<l;j++)
+					if (s[j]<='Z'&&j)  printf("_%c",'a'+s[j]-'A');
+					else printf("%c",s[j]);
+					cout<<endl;
+				}
+			}
+			else if (!((s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z')))
+			{
+				puts(s);
+				break;
+			}
+			else if (s[i]>='A'&&s[i]<='Z')
+			{
+				if (s[i+1]<'a'||s[i+1]>'z')
+				{
+					puts(s);
+					break;
+				}
+				else if (i) a++;
+			}
+	}
+	return 0;
+}

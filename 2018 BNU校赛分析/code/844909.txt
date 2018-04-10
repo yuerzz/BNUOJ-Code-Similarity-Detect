@@ -1,0 +1,83 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <cctype>
+#include <string>
+#include <cstring>
+#define	NAME "G"
+
+using namespace std;
+
+int T;
+string av;
+
+void readin() {
+	cin >> av;
+}
+
+bool judge() {
+	bool ret = true;
+	int cnt = 0, len = 0;
+	for(int i = 0; i < av.size(); ++i) {
+		if(i == av.size()-1 && isupper(av[i])) {
+			ret = false;
+			break;
+		} else if(isupper(av[i]) && isupper(av[i+1])) {
+			ret = false;
+			break;
+		} else if(isupper(av[i]) || i == 0) {
+			if(len >= 2) {
+				cnt++;
+			}
+			len = 1;
+		} else {
+			++len;
+		}
+	}
+	if(len >= 2) {
+		cnt++;
+	}
+	if(cnt <= 1) {
+		ret = false;
+	}
+	return ret;
+}
+
+void cut() {
+	for(int i = 0; i < av.size(); ++i) {
+		if(i == 0 && isupper(av[i])) {
+			cout << (char)tolower(av[i]);
+		} else if(isupper(av[i])) {
+			cout << "_" << (char)tolower(av[i]);
+		} else {
+			cout << av[i] << flush;
+		}
+	}
+	cout << endl;
+}
+
+void process() {
+	if(judge()) {
+		cut();
+	} else {
+		cout << av << endl;
+	}
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+
+	cin >> T;
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

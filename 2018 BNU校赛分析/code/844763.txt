@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdio>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+const int INF=0x3f3f3f3f;
+const int maxn=1e6+7;
+typedef long long LL;
+char A[10];
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        int k;bool mark=1;
+        scanf("%d",&k);
+        while (k--){
+            scanf("%s",A);
+            if (A[0]!='P') mark=0;
+        }
+        if (mark) puts("MILLION Master");
+        else puts("NAIVE Noob");
+    }
+}
+/*
+2
+5
+PERFECT
+PERFECT
+PERFECT
+PERFECT
+PERFECT
+10
+PERFECT
+MISS
+PERFECT
+BAD
+BAD
+GOOD
+BAD
+GOOD
+GOOD
+MISS
+*/

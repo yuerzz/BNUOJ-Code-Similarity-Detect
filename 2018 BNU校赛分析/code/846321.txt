@@ -1,0 +1,22 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		int n;
+		cin>>n;
+		double sum=0.0;
+		double res=0.0;
+		if(n==1)
+			cout<<0<<endl;
+		for(int j=1;j<n;j++){
+			sum=sum+j*(j+1);
+		}
+		res=sum/n;
+		printf("%.12lf\n",res);
+	
+	}
+	return 0;
+}

@@ -1,0 +1,100 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <cctype>
+#include <string>
+#include <cstring>
+#define	NAME "G"
+
+using namespace std;
+
+int T, size;
+char av[50];
+
+void readin() {
+	scanf("%s", av);
+	size = strlen(av);
+}
+
+bool judge() {
+	bool ret = true;
+	int cnt = 0, len = 0;
+	for(int i = 0; i < size; ++i) {
+		if(isupper(av[i]) || i == 0) {
+#ifdef DEBUG
+			printf("|");
+#endif
+			if(len >= 2) {
+				cnt++;
+#ifdef DEBUG
+				printf("|");
+#endif
+			} else if(i != 0) {
+				ret = false;
+			}
+#ifdef DEBUG
+			printf("%c", av[i]);
+#endif
+			len = 1;
+		} else {
+#ifdef DEBUG
+			printf("%c", av[i]);
+#endif
+			++len;
+		}
+	}
+	if(len >= 2) {
+#ifdef DEBUG
+				printf("||");
+#endif
+		cnt++;
+	} else {
+		ret = false;
+	}
+#ifdef DEBUG
+	printf("\n");
+#endif
+	if(cnt <= 1) {
+		ret = false;
+	}
+	return ret;
+}
+
+void cut() {
+	for(int i = 0; i < size; ++i) {
+		if(i == 0 && isupper(av[i])) {
+			printf("%c", (char)tolower(av[i]));
+		} else if(isupper(av[i])) {
+			printf("_%c", (char)tolower(av[i]));
+		} else {
+			printf("%c", av[i]);
+		}
+	}
+	printf("\n");
+}
+
+void process() {
+	if(judge()) {
+		cut();
+	} else {
+		printf("%s\n", av);
+	}
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+
+	cin >> T;
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

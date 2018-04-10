@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include <string.h>
+
+int main(void){
+    int T;
+    int n,i,j;
+    int pc=0;
+    char pan[10];
+
+    scanf("%d",&T);
+
+    for(i=0;i<T;i++){
+        scanf("%d",&n);
+        pc=0;
+
+        for(j=0;j<n;j++){
+            scanf("%s",pan);
+
+            if(strcmp(pan,"PERFECT")==0){
+                pc++;
+            }
+        }
+
+        if(pc==n){
+            printf("MILLION Master\n");
+        }else{
+            printf("NAIVE Noob\n");
+        }
+    }
+}

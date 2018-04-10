@@ -1,0 +1,19 @@
+T = int(input())
+y =[]
+for i in range(T):
+    n = int(input())
+    x = 0
+    
+    for i in range(n):
+        if input('') != 'PERFECT' :
+            
+            pass 
+        
+        else :
+            x += 1
+    if x == n :
+        y.append('MILLION Master')
+    else :
+        y.append('NAIVE Noob')
+for i in range(T):
+    print(y[i])

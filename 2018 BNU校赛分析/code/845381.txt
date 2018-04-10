@@ -1,0 +1,71 @@
+#include<cstdio>
+#include<cstring>
+#include<cctype>
+#include<algorithm>
+using namespace std;
+
+bool isdx(char ch)
+{
+	if(ch-'A' >= 0 && ch-'A' < 26) return true;
+	else return false;
+}
+
+char xx(char ch)
+{
+	if(isdx(ch)) return 'a'+(ch-'A');
+	return ch;
+}
+
+int main()
+{
+	//freopen("in.txt", "r", stdin);
+	int T;
+	scanf("%d", &T);
+	while(T--)
+	{
+		char s[30];
+		scanf("%s", s);
+		int len = strlen(s);
+		bool ok = true, pd = true;
+		int x = 0, cnt = 0;
+		for(int i = 1; i < len; i++)
+		{
+			if(isdx(s[i])) 
+			{
+				cnt++;
+				if(i-x == 1) 
+				{
+					pd = false;
+				}
+				x = i;
+			}
+		}
+		if(isdx(s[1])) pd = false;
+		if(!cnt) pd = false;
+		if(cnt == 1)
+		{
+			if(isdx(s[0]) || isdx(s[len-1])) pd = false;
+		}
+		if(isdx(s[0]) && isdx(s[len-1])) pd = false;
+		if(!pd) 
+		{
+			for(int i = 0; i < len; i++) printf("%c", s[i]);
+			printf("\n");
+		}
+		else
+		{
+			printf("%c", xx(s[0]));
+			for(int i = 1; i < len; i++)
+			{
+				if(isdx(s[i])) 
+				{
+					printf("_");
+					printf("%c", xx(s[i]));
+				}
+				else printf("%c", s[i]);
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}

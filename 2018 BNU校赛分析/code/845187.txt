@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+#define bugs
+const int maxN = 1e6 + 3;
+typedef std::string str;
+typedef long long ll;
+typedef long double db;
+typedef ll llvec[maxN];
+typedef int intvec[maxN];
+typedef bool boolvec[maxN];
+typedef db dbvec[maxN];
+typedef char c_str[maxN];
+template <typename T> inline const T abs (T x) {return x>=0?x:-x;}
+ll mod = 1e9 + 7;
+ll pow(ll x,ll n)
+{
+	if (n<0) return pow(x,n*(2-mod));
+	ll ans=1,tmp=x;
+	while (n)
+	{
+		if (n&1) ans = ans*tmp%mod;
+		tmp=tmp*tmp%mod;
+		n>>=1;
+	}
+	return ans;
+}
+
+int N;
+ll k,p,nd;
+c_str s1;
+void test()
+{
+	std::scanf("%d %lld %s",&N,&k,s1);
+	p=nd=0;
+	for (int i=0;i<N;++i)
+	{
+		if (s1[i]=='D') ++nd;
+		else p+=nd;
+	}
+	if (nd*(N-nd)<k) std::printf("-1\n");
+	else std::printf("%lld\n",abs(p-k));
+}
+int main()
+{
+	int T;
+	std::scanf("%d",&T);
+	while (T--) test();
+}

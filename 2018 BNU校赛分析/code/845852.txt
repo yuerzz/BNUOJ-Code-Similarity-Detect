@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int main()
+{
+	int t,q,x;
+	char *a,*c;
+	a=(char*)calloc(1,22);
+	c=(char*)calloc(1,32);
+	scanf("%d",&t);
+	for (int j=0;j<t;j++)
+	{
+		for(int k=0;k<22;k++)
+		{
+			a[k]=0;
+		}
+		for(int k=0;k<32;k++)
+		{
+			c[k]=0;
+		}
+		scanf("%s",a);
+		x=strlen(a);
+		//printf("%d",x);
+		if(a[x-1]<=82)
+		{
+			printf("%s\n",a);
+			continue;
+		}
+		//printf("%s",a);
+		for (int i=0;i<2;i++)
+		{
+			c[i]=a[i];
+		}
+		if(c[1]<=82)
+		{
+			printf("%s\n",a);
+			continue;
+		}
+		
+		q=1;
+		
+
+		
+		
+		for (int i=2;i<(x+1);i++)
+		 	{	
+				q++;
+				c[q]=a[i];
+				
+				if(a[i]<=90&&a[i-1]<=90)
+				{
+					for (int w=0;w<32;w++)
+					{
+					c[w]=0;
+					}
+					printf("%s",a)	;
+					break;
+				
+				}
+				if (a[i]<=90&&a[i]>65)
+				{
+					c[q]='_';
+					q++;
+					c[q]=(a[i]+32);	
+				 	if(c[0]<=90)
+				c[0]+=32;
+				}
+			
+			}
+		
+		printf("%s\n",c);
+}
+	}

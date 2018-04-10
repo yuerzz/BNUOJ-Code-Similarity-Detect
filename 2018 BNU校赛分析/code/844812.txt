@@ -1,0 +1,46 @@
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+    int maxn=1000000007;
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        int num_bank,date;
+        scanf("%d%d",&num_bank,&date);
+        int bank[num_bank];
+        for(int i=0;i<num_bank;i++)
+        {
+            scanf("%d",&bank[i]);
+        }
+        for(int d=0;d<date;d++)
+        {
+            for(int i=num_bank-1;i>0;i--)
+            {
+                if((bank[i]-bank[i-1])>=0)
+                {
+                    bank[i]=bank[i]-bank[i-1];
+                }
+                else
+                {
+                    bank[i]=bank[i]-bank[i-1]+maxn;
+                }
+
+
+            }
+        }
+        int flag=1;
+        for(int i=0;i<num_bank;i++)
+        {
+            if(flag)
+                flag=0;
+            else
+                printf(" ");
+            printf("%d",bank[i]);
+        }
+        printf("\n");
+    }
+    return 0;
+}

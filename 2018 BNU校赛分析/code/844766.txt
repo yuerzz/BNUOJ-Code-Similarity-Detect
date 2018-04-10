@@ -1,0 +1,34 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+int T,n;
+int flag=0;
+string a;
+int main()
+{
+	cin>>T;
+	while(T)
+	{
+
+		cin>>n;
+		for(int i=0;i<n;i++)
+	    {
+			cin>>a;
+			if(a!="PERFECT")
+				flag=1;
+	    }
+		if(flag)
+			cout<<"NAIVE Noob"<<endl;
+		else
+			cout<<"MILLION Master"<<endl;
+
+	flag=0;
+	   T--;
+	}
+	
+
+  return 0;
+}

@@ -1,0 +1,83 @@
+#include<iostream>
+#include<math.h>
+#include<string>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	(cin >> N).get();
+	for (int i = 0; i < N; i++)
+	{
+		string s;
+		cin >> s;
+		string *a = new string[100];
+		int k = 0;
+		int flag1, flag2;
+		int temp = 1;
+		for (int i = 0; i < s.length(); i++)
+		{
+			
+			if (i == 0)
+			{
+				flag1 = 0;
+			}
+
+			if (s[i] <= 'z' &&s[i] >= 'a')
+			{
+				if ((s[i + 1] <= 'Z' &&s[i + 1] >= 'A') || i == s.length()-1)
+				{
+					flag2 = i;
+					a[k] = s.substr(flag1, flag2-flag1+1);
+					flag1 = i + 1;
+					k++;
+				}
+			}
+
+			if (s[i] <= 'Z' &&s[i] >= 'A')
+			{
+				if (s[i + 1] <= 'Z' &&s[i + 1] >= 'A')
+					temp = 0;
+				flag1 = i;
+			}
+			if (i == s.length() - 1 && k == 0)
+			{
+				a[0] = s;
+				k++;
+			}
+
+		}
+		
+		if (k == 1)
+			temp = 0;
+		for (int i = 0; i < k; i++)
+		{
+			if (a[i].length() < 2)
+				temp = 0;
+		}
+
+		if (temp == 0)
+			cout << s << endl;
+		else
+		{
+			for (int i = 0; i < k; i++)
+			{
+				if (i == 0)
+				{
+					if (a[0][0] <= 'Z' &&a[0][0] >= 'A')
+						a[0][0] += 32;
+					cout << a[0];
+				}
+				else
+				{
+					a[i][0] += 32;
+					cout << "_" << a[i] ;
+				}	
+			}
+			cout << endl;
+		}
+
+
+	}
+}

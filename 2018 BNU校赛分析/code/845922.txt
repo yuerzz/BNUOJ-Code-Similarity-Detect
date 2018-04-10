@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int dp[1010][110][110],t,n,m,a[1010],b[110];
+int Dp(int q,int w,int e)
+{
+	if (dp[q][w][e]!=-1) return dp[q][w][e];
+	if (q+w+e>=m+n) return 0;
+	if (q==n) dp[q][w][e]=Dp(q,w+1,e+1)+b[m-e];
+	else if (w+e==m) dp[q][w][e]=max(Dp(q+2,w,e)+a[1+q],Dp(q+1,w,e));
+	else
+	{
+		dp[q][w][e]=max(max(Dp(q+1,w+1,e)+a[1+q],Dp(q+1,w,e+1)+b[m-e]),max(Dp(q,w+1,e),Dp(q+1,w,e)));
+		if (q+2<=n)dp[q][w][e]=max(dp[q][w][e],Dp(q+2,w,e)+a[1+q]);
+		if (w+e+2<=m) dp[q][w][e]=max(dp[q][w][e],Dp(q,w+1,e+1)+b[m-e]);
+	}
+	//printf("%d %d %d %d\n",q,w,e,dp[q][w][e]);
+	return dp[q][w][e];
+}
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		n=read();m=read();
+		for (int i=1;i<=n;i++) a[i]=read();
+		for (int i=1;i<=m;i++) b[i]=read();
+		sort(b+1,b+1+m);
+		me(dp,-1);
+		cout<<Dp(0,0,0)<<endl;;
+	}
+	return 0;
+}

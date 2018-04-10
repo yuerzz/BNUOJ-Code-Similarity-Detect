@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+#define bugs
+const int maxN = 1e5 + 3;
+typedef std::string str;
+typedef long long ll;
+typedef long double db;
+typedef ll llvec[maxN];
+typedef int intvec[maxN];
+typedef bool boolvec[maxN];
+typedef db dbvec[maxN];
+typedef char c_str[maxN];
+template <typename T> inline const T abs (T x) {return x>=0?x:-x;}
+ll mod = 1e9 + 7;
+ll pow(ll x,ll n)
+{
+	if (n<0) return pow(x,n*(2-mod));
+	ll ans=1,tmp=x;
+	while (n)
+	{
+		if (n&1) ans = ans*tmp%mod;
+		tmp=tmp*tmp%mod;
+		n>>=1;
+	}
+	return ans;
+}
+
+c_str s1,s2;
+void test()
+{
+	std::fill_n(s2,maxN,'\0');
+	std::scanf("%s",s1);
+	int len = std::strlen(s1),pos=0;
+	if (len==1)
+	{
+		std::printf("%s\n",s1);
+		return;
+	}
+	if (s1[1]<='Z')
+	{
+		std::printf("%s\n",s1);
+		return;
+	}
+	if (s1[len-1]<='Z')
+	{
+		std::printf("%s\n",s1);
+		return;
+	}
+	s2[pos++] = s1[0]<='Z'?s1[0]+('a'-'A'):s1[0];
+	int k=1;
+	for (;k<len;++k)
+	{
+		if (s1[k]>='a') s2[pos++] = s1[k];
+		else break;
+	}
+	if (k==len)
+	{
+		std::printf("%s\n",s1);
+		return;
+	}
+	bool flag = false;
+	for (int i=k;i<len;++i)
+	{
+		if (s1[i] <= 'Z')
+		{
+			s2[pos++]='_';
+			if (flag == false)
+			{
+				flag = true;
+				s2[pos++]=s1[i]+('a'-'A');
+			}
+			else
+			{
+				std::printf("%s\n",s1);
+				bugs;
+				return;
+			}
+		}
+		else
+		{
+			s2[pos++] = s1[i];
+			flag = false;
+		}
+	}
+	std::printf("%s\n",s2);
+}
+int main()
+{
+	int T;
+	std::scanf("%d",&T);
+	while (T--) test();
+}

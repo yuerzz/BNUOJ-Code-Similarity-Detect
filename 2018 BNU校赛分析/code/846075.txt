@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int T;
+int n,m,k;
+int a[100005]={0};
+int b[100005]={0};
+int c[100005]={0};
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cin>>T;
+    while(T--)
+    {
+        int ans=INT_MAX;
+        cin>>n>>m>>k;
+        for(int i=1;i<=n;i++) cin>>a[i];
+        for(int i=1;i<=m;i++) cin>>b[i];
+        for(int i=1;i<=k;i++) cin>>c[i];
+        int q=1,e=1;
+        for(int i=1;i<=m;i++)
+        {
+            int sum1=INT_MAX,sum2=INT_MAX;
+            for(int j=q;j<=n;j++)
+            {
+                if(abs(a[j]-b[i])<sum1) sum1=abs(a[j]-b[i]);
+                else {q=j-1;break;}
+            }
+            for(int l=e;l<=k;l++)
+            {
+                if(abs(c[l]-b[i])<sum2) sum2=abs(c[l]-b[i]);
+                else {e=l-1;break;}
+            }
+            ans=min(ans,sum1+sum2);
+        }
+        cout<<ans+3<<endl;
+    }
+    return 0;
+}
+//for(int i=1;i<=n;i++) cin>>a[i];

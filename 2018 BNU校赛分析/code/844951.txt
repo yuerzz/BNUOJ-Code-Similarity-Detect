@@ -1,0 +1,56 @@
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        string s;
+        cin>>s;
+        int flag = true;
+        if(s.length()==1){
+            cout<<s<<endl;
+            continue;
+        }
+        for(int i=0;i<s.length()-1;i++){
+            if((s[i]>='A'&&s[i]<='Z')&&(s[i+1]>='A'&&s[i+1]<='Z')){
+                flag = false;
+                break;
+            }
+        }
+        if(s[s.length()-1]>='A'&&s[s.length()-1]<='Z'){
+            flag = false;
+        }
+        if(!flag){
+            cout<<s<<endl;
+            continue;
+        }
+        int cnt = 0;
+        int st = 0;
+        string ss = "";
+        for(int i=0;i<s.length();i++){
+            if(i==s.length()-1){
+                cnt++;
+                if(cnt>=2){
+                    if(st!=0)
+                        ss+="_";
+                    ss+=s.substr(st,cnt);
+                    cnt=0;
+                    st = i;
+                }
+            }
+            else if((i!=0&&s[i]>='A'&&s[i]<='Z')){
+                if(cnt>=2){
+                    if(st!=0)
+                        ss+="_";
+                    ss+=s.substr(st,cnt);
+                    cnt=0;
+                    st = i;
+                }
+            }
+            cnt++;
+        }
+        cout<<ss<<endl;
+    }
+}

@@ -1,0 +1,28 @@
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+double x(int m);
+
+
+int main()
+{
+	int N;
+	(cin >> N).get();
+	for (int i = 0; i < N; i++)
+	{
+		int n;
+		(cin >> n).get();
+		printf("%.9f \n", x(n));
+	//	cout << x(n)<<endl;
+	}
+
+}
+
+double x(int m)
+{
+	if (m == 2)
+		return 1;
+	else
+		return x(m - 1) + (2.0*m - 1) / 3;
+}

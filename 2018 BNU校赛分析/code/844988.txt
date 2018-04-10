@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e2+10;
+
+double res[N];
+double dif[N];
+int main()
+{
+    //freopen("test.txt","r",stdin);
+    res[2]=1;dif[2]=5.0/3;
+    for(int i=3;i<105;i++) dif[i]=dif[i-1]+2.0/3;
+    for(int i=3;i<105;i++) res[i]=res[i-1]+dif[i-1];
+    int t;scanf("%d",&t);
+    while(t--){
+        int n;scanf("%d",&n);
+        printf("%.10lf\n",res[n]);
+    }
+    return 0;
+}

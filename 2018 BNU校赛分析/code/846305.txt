@@ -1,0 +1,63 @@
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+#define mod 1000000007
+long long ans[1005],m[1005][1005],tempm[1005][1005],tempans[1005];
+inline void mul(int k,int n)
+{
+    while(k)
+    {
+        if(k&1)
+        {
+            for(register int i=0;i<n;i++)
+                tempans[i]=0;
+            for(register int i=0;i<n;i++)
+                for(register int j=0;j<n;j++)
+                    tempans[i]=(tempans[i]+ans[j]*m[j][i])%mod;
+            for(register int i=0;i<n;i++)
+                ans[i]=tempans[i];
+        }
+        for(register int i=0;i<n;i++)
+            for(register int j=i;j<n;j++)
+                tempm[i][j]=0;
+        for(register int i=0;i<n;i++)
+            for(register int j=i;j<n;j++)
+                for(register int k=i;k<=j;k++)
+                    tempm[i][j]=(tempm[i][j]+(m[i][k]*m[k][j]))%mod;
+        for(register int i=0;i<n;i++)
+            for(register int j=i;j<n;j++)
+                m[i][j]=tempm[i][j];
+        k>>=1;
+        /*for(long long i=0;i<n;i++)
+        {
+            for(long long j=0;j<n;j++)
+                printf("%lld ",m[i][j]);
+            printf("\n");
+        }
+        printf("\n");*/
+    }
+}
+int main()
+{
+    int T,n,k;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d%d",&n,&k);
+        for(register int i=0;i<n;i++)
+            for(register int j=0;j<n;j++)
+                m[i][j]=0;
+        for(register int i=0;i<n;i++)
+        {
+            m[i][i]=1;
+            m[i][i+1]=mod-1;
+        }
+        for(register int i=0;i<n;i++)
+            scanf("%lld",&ans[i]);
+        mul(k,n);
+        for(register int i=0;i<n-1;i++)
+            printf("%lld ",ans[i]);
+        printf("%lld\n",ans[n-1]);
+    }
+    return 0;
+}

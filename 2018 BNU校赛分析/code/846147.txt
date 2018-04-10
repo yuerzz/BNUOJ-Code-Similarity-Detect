@@ -1,0 +1,33 @@
+T = int(input())
+o = []
+for i in range(T):
+    a = input('')
+    a = a.split(' ')
+    n = int(a[0])
+    m = int(a[1])
+    b = input('')
+    b = b.split(' ')
+    n1 = []
+    m1 = []
+    c = input('')
+    c = c.split(' ')
+    for ii in b:
+        
+        n1.append(int(ii))
+        
+    for ii in c:
+        m1.append(int(ii))
+    n1.sort()
+    m1.sort()
+    m1 = m1[::-1]
+    iii = 0
+    while m1[iii] > n1[iii]:
+        q = n1[iii]
+        p = m1[iii]
+        n1[iii] = p
+        m1[iii] = q
+        iii += 1
+    o.append(sum(n1))
+for i in range(T):
+    print(o[i])
+    

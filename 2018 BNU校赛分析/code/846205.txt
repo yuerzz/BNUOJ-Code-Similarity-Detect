@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    int i, n, k;
+    char s[1000000];
+    int d, m, sum, change;
+    double ans;
+    while(t--)
+    {
+        d=m=0;
+        change = sum = 0;
+        scanf("%d %d",&n, &k);
+        getchar();
+        for(i=0; i<n; i++)
+        {
+            scanf("%c",&s[i]);
+            if(s[i]=='D')
+                ++d;
+            if(s[i]=='M')
+            {
+                ++m;
+                sum=sum+d;
+            }
+           //printf("%d %d",d,m);
+        }
+        if(m*d<k)
+            printf("-1\n");
+        else
+        {
+            change=abs(sum-k);
+            printf("%d\n",change);
+        }
+    }
+}

@@ -1,0 +1,56 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <utility>
+#include <queue>
+#include <map>
+#include <algorithm>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+using ull = unsigned long long;
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        ull n, k;
+        myis >> n >> k;
+        std::string data;
+        myis >> data;
+        ull cntd = 0, cntm = 0;
+        ull curr = 0;
+        for (ull i = 0; i != n; ++i) {
+            if (data[i] == 'D') {
+                ++cntd;
+            }
+            if (data[i] == 'M') {
+                ++cntm;
+                curr += cntd;
+            }
+        }
+        if (cntm * cntd < k) {
+            myos << "-1" << std::endl;
+            continue;
+        }
+        myos << std::max(k, curr) - std::min(k, curr) << std::endl;
+    }
+    return 0;
+}

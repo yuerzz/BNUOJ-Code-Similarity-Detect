@@ -1,0 +1,64 @@
+#include<iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+void judge(char s[])
+{
+	int flag = 0;
+	int count = 0;
+	int d[20];
+	d[count] = 0;
+	int i;
+	for (i = 1; s[i] != '\0'; i++)
+	{
+
+		if (s[i] >= 'A' && s[i] <= 'Z' && s[i + 1] != '\0')
+		{
+			count++;
+			d[count] = i;
+		}
+	}
+	count++;
+	d[count] = i - 1;
+	for (int i = 0; i < count; i++)
+	{
+		if (d[i + 1] - d[i] < 2 || count<2)
+			flag = 1;
+	}
+	if (flag == 0)
+	{
+		if (s[0] >= 'A' && s[0] <= 'Z')
+			s[0] += 32;
+		for (int i = 1; i < count; i++)
+		{
+			s[d[i]] += 32;
+		}
+		for (int i = 0, j = 1; s[i] != '\0'; i++)
+		{
+			if (i == d[j] && j<count)
+			{
+				cout << "_";
+				j++;
+			}
+			cout << s[i];
+		}
+		cout << endl;
+	}
+	else
+		cout << s << endl;
+}
+
+
+int main()
+{
+	int T;
+	cin >> T;
+	while (T--)
+	{
+		char s[20];
+		cin >> s;
+		judge(s);
+	}
+
+	return 0;
+}

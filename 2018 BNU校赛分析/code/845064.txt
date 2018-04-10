@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdio>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+const int INF=0x3f3f3f3f;
+typedef long long LL;
+const LL maxn=1e6+7;
+const LL M=1e9+7;
+
+LL poww(LL a,LL b){
+    LL ret=1;
+    for (;b;b>>=1,a=a*a%M)
+        if (b&1) ret=ret*a%M;
+    return ret;
+}
+LL A[maxn];
+LL f[maxn],g[maxn];
+int main(){
+//    printf("%lld\n",poww(2,4));
+    int T,i,j;
+    scanf("%d",&T);
+    while (T--){
+        LL n,k;
+        scanf("%lld%lld",&n,&k);
+        FOR(i,1,n) scanf("%lld",&A[i]);
+        f[1]=1;
+        FOR(i,2,n) f[i]=f[i-1]*(k+i-2)%M*poww(i-1,M-2)%M;
+//        FOR(i,1,n) printf("%lld%c",f[i]," \n"[i==n]);
+        FOR(i,1,n){
+            rFOR(j,1,i-1) A[i]=(A[i]-f[i-j+1]*A[j])%M;
+            if (A[i]<0) A[i]+=M;
+        }FOR(i,1,n) printf("%lld%c",A[i]," \n"[i==n]);
+    }
+}
+/*
+2
+3 0
+3 2 1
+4 0
+1 2 1 2
+*/

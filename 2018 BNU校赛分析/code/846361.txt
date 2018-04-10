@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<math.h>
+
+int main(void){
+    int T,i;
+    int dn,mn;
+    char duilie[1000000];
+    int n,k,j;
+    int know,disk,m;
+    int changtimes=0;
+
+    scanf("%d",&T);
+
+    for(i=0;i<T;i++){
+        scanf("%d%d",&n,&k);
+        mn=dn=0;
+        know=0;
+        scanf("%s",duilie);
+        j=0;
+
+        while(duilie[j]!=0){
+            if(duilie[j]=='D'){
+                dn++;
+            }else{
+                know = know + dn;
+                mn++;
+            }
+            j++;
+        }
+
+
+        if(k>mn*dn){
+            printf("-1\n");
+        }else{
+            disk = abs(k,know);
+            changtimes = 0;
+            for(m=n;m>0;){
+                changtimes++;
+                if(k/m==0){
+                    break;
+                }
+                k=k%m;
+                m=m-2;
+            }
+            printf("%d\n",changtimes);
+        }
+
+    }
+}

@@ -1,0 +1,101 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+typedef pair<int,ll>pil;
+const int MAX=1e5+5;
+const ll MOD=1e9+7;
+
+#define pb push_back
+#define mp make_pair
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+template<typename T>inline T abs(T a) {return a>0?a:-a;}
+template<class T> inline
+void read(T& num) {
+    bool start=false,neg=false;
+    char c;
+    num=0;
+    while((c=getchar())!=EOF) {
+        if(c=='-') start=neg=true;
+        else if(c>='0' && c<='9') {
+            start=true;
+            num=num*10+c-'0';
+        } else if(start) break;
+    }
+    if(neg) num=-num;
+}
+inline ll powMM(ll a,ll b,ll M){
+    ll ret=1;
+    a%=M;
+    while (b){
+        if (b&1) ret=ret*a%M;
+        b>>=1;
+        a=a*a%M;
+    }
+    return ret;
+}
+int t,n,m;
+ll ct[MAX];
+bool vi[MAX];
+vector<pil>edge[MAX];
+ll an;
+int u,v;
+ll z;
+struct node
+{
+    int who;
+    ll cost;
+    bool operator<(const node& x)const
+    {
+        return cost>x.cost;
+    }
+};
+int main()
+{
+    scanf("%d",&t);
+    while(t--)
+    {
+        memset(vi,false,sizeof(vi));
+        memset(ct,0,sizeof(ct));
+        scanf("%d%d",&n,&m);
+        an=0;
+        for(int i=1;i<=m;i++)
+        {
+            scanf("%d%d%lld",&u,&v,&z);
+            edge[u].pb(mp(v,z));
+            edge[v].pb(mp(u,z));
+            ct[u]+=z;ct[v]+=z;
+        }
+        priority_queue<node> que;
+        for(int i=1;i<=n;i++)
+            que.push(node{i,ct[i]});
+        while(!que.empty())
+        {
+            node tem=que.top();
+            que.pop();
+            int now=tem.who;
+            ll cst=tem.cost;
+//            printf("now=%d cst=%lld\n",now,cst);
+            if(vi[now])continue;
+            else
+            {
+                if(cst>ct[now])continue;
+                vi[now]=1;
+                an=max(an,cst);
+                for(pil x:edge[now])
+                {
+                    int s=x.first;
+                    if(vi[s])continue;
+                    ll ju=x.second;
+                    ct[s]-=ju;
+                    que.push(node{s,ct[s]});
+                }
+            }
+        }
+        for(int i=1;i<=n;i++)
+            vector<pil>().swap(edge[i]);
+        printf("%lld\n",an);
+    }
+    return 0;
+}

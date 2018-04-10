@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+#define mem(a,b) memset(a,b,sizeof(a))
+using namespace std;
+const int maxn=1e5+5,inf=1e9+7;
+int p[maxn];
+int main(void){
+    ios::sync_with_stdio(0);
+    int t;
+    cin>>t;
+    while(t--){
+        string use,use2;
+        cin>>use;
+        use2=use;
+        p[0]=0;
+        int cnt=0,jud=0;;
+        for(int i=0;i<use.size();++i){
+            if(use[i]>='A'&&use[i]<='Z'&&i-p[cnt]<2&&i!=0){
+                jud=0;
+                break;
+            }
+            if(i==use.size()-1&&use[i]>='A'&&use[i]<='Z'){
+                jud=0;
+            }
+            if(use[i]>='A'&&use[i]<='Z'&&i-p[cnt]>=2&&i!=use.size()-1){
+                jud=1;
+                cnt++;
+                p[cnt]=i;
+                use[i]=use[i]-'A'+'a';
+            }
+            if(i==0&&use[i]>='A'&&use[i]<='Z'){
+                use[i]=use[i]-'A'+'a';
+            }
+        }
+        cnt++;
+        p[cnt]=use.size();
+        if(!jud){
+            cout<<use2<<endl;
+            continue;
+        }
+        string re=use.substr(0,p[1]-p[0]);
+        for(int i=1;i<cnt;++i){
+            re+='_';
+            re+=use.substr(p[i],p[i+1]-p[i]);
+        }
+        cout<<re<<endl;
+    }
+    return 0;
+}

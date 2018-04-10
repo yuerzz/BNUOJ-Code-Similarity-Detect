@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+namespace fastIO{
+	#define BUF_SIZE 100000
+	//fread -> read
+	bool IOerror=0;
+	inline char nc(){static char buf[BUF_SIZE],*p1=buf+BUF_SIZE,*pend=buf+BUF_SIZE;if(p1==pend){p1=buf;pend=buf+fread(buf,1,BUF_SIZE,stdin);if(pend==p1){IOerror=1;return -1;}}return *p1++;}
+	inline bool blank(char ch){return ch==' '||ch=='\n'||ch=='\r'||ch=='\t';}
+	inline void read(ll &x){char ch;ll f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(int &x){char ch;int f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(char* s){char ch;while(blank(ch=nc()));if(IOerror)return;int i=0;for (;!blank(ch);s[i++]=ch,ch=nc());s[i]='\0';}
+	#undef BUF_SIZE
+};
+using namespace fastIO;
+inline ll read()
+{
+	ll x=0,f=1;char ch=getchar();
+	while(ch<'0'||ch>'9'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int n,len;
+char s[10010];
+int pos[20];
+int mrk;
+inline void solve()
+{
+    mrk=1;int t=0;
+    for(int i=1;i<=len;i++)
+    {
+        if (i==1){pos[++t]=1;continue;}
+        if (s[i]>='A'&&s[i]<='Z')
+        {
+            if (pos[t]==i-1){mrk=0;return;}
+            pos[++t]=i;
+        }
+    }
+    if (pos[t]==len||t<2){mrk=0;return;}
+    for (int i=1;i<=len;i++)
+    {
+        if (s[i]>='A'&&s[i]<='Z'&&i!=1)putchar('_');
+        if (s[i]>='A'&&s[i]<='Z')s[i]+=32;
+        putchar(s[i]);
+    }
+    puts("");
+}
+inline void work(int cur)
+{
+    scanf("%s",s+1);len=strlen(s+1);
+    solve();
+    if (!mrk)puts(s+1);
+}
+int main()
+{
+    int T,cnT=0;
+    scanf("%d",&T);
+    //T=1;
+    while (T--)work(++cnT);
+    return 0;
+}

@@ -1,0 +1,100 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<set>
+#include<map>
+#include<queue>
+#include<utility>
+#include<cstdlib>
+using namespace std;
+typedef long long LL;
+#define pb push_back
+#define rep(i,a,b) for(int i=(a);i<(b);i++)
+#define fi first
+#define se second
+#define de(x) cout<<">> "<<#x<<" = "<<x<<endl;
+const int MAXN = 1e2+5;
+const int mod = 1e9+7;
+const double eps = 1e-10;
+int cmp(double x)
+{
+    if (fabs(x) <eps) return 0;
+    if (x>0) return 1;
+    return -1;
+}
+struct point{
+    double x, y;
+    point(){};
+    point(double xx, double yy){x=xx;y=yy;}
+
+
+};
+point operator-(const point &a, const point &b)
+    {
+        return point(a.x-b.x,a.y-b.y);
+    }
+   point operator/(const point &a, const double &b)
+    {
+        return point(a.x/b, a.y/b);
+    }
+    point operator*(const point &a, const double &b)
+    {
+        return point(a.x*b, a.y*b);
+    }
+
+struct line{
+    point a,b;
+};
+
+double det(const point &a, const point &b)
+{
+    return a.x*b.y-a.y*b.x;
+}
+double dot(const point &a, const point &b)
+{
+    return a.x*b.x+a.y*b.y;
+}
+bool line_make_point(line a, line b)
+{
+    double s1=det(a.a-b.a,b.b-b.a);
+    double s2=det(a.b-b.a,b.b-b.a);
+    point p = ((a.b*s1)-(a.a*s2))/(s1-s2);
+    return cmp(det(p-a.a,p-a.b))==0 && cmp(dot(p-a.a,p-a.b))<=0;
+}
+int T;
+int x[MAXN],n,y[MAXN];
+point p[MAXN];
+bool vis[MAXN];
+point s;
+int X,Y;
+int main()
+{
+    freopen("in.txt","r",stdin);
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d",&n);
+        rep(i,0,n) scanf("%d%d",x+i,y+i),p[i]=point(x[i],y[i]);
+        scanf("%d%d",&X,&Y); s=point(X,Y);
+        memset(vis,0,sizeof vis);
+        rep(i,0,n)
+        {
+            rep(j,0,n)
+            {
+                line l; l.a=p[j], l.b=p[(j+1)%n];
+                line ll; ll.a=s; ll.b=p[i];
+                if (i!=j&&i!=(j+1)%n&&line_make_point(l,ll)) vis[i]=1;
+            }
+        }
+        double ans = 0;
+        rep(i,0,n)
+        {
+            de(vis[i])
+            if (!vis[i] && !vis[(i+1)%n]) ans += sqrt((p[i].x-p[(i+1)%n].x)*(p[i].x-p[(i+1)%n].x) + (p[i].y-p[(i+1)%n].y)*(p[i].y-p[(i+1)%n].y));
+        }
+        printf("%.10f\n",ans);
+    }
+}

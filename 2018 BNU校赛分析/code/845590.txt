@@ -1,0 +1,43 @@
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+using namespace std;
+
+int jiecheng(int *n)
+{
+    int i,result;
+    for(i=1;i<=*n;i++)
+    {
+        result=result*i;
+    }
+    return result;
+}
+
+int main()
+{
+	int T,i;
+	cin>>T;
+	for(i=0;i<T;i++)
+    {
+        int n,a,b,c,j,k;
+        cin>>n;
+        c=n-1;
+        a=jiecheng(&n)-jiecheng(&c);
+        b=a*2/(n-1);
+        int sum2,sum3=0;
+        for(j=1;j<=n;j++)
+        {
+            int sum1=0;
+            for(k=1;k<=n;k++)
+            {
+                sum1+=abs(k-j);
+            }
+            sum2=sum1*b;
+            sum3+=sum2;
+        }
+        double result2;
+        result2=sum3/2/jiecheng(&n);
+        cout<<fixed<<setprecision(12)<<result2<<endl;
+    }
+    return 0;
+}

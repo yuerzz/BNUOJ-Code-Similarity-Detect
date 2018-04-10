@@ -1,0 +1,68 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <climits>
+#define	NAME "D"
+
+using namespace std;
+
+int T, N, M, K;
+int ava[100005], avb[100005], avc[100005];
+int disl[100005], disr[100005];
+
+void readin() {
+	scanf("%d%d%d", &N, &M, &K);
+	for(int i = 1; i <= N; ++i) {
+		scanf("%d", ava+i);
+	}
+	for(int i = 1; i <= M; ++i) {
+		scanf("%d", avb+i);
+	}
+	for(int i = 1; i <= K; ++i) {
+		scanf("%d", avc+i);
+	}
+}
+
+void process() {
+	int a, ans = INT_MAX;
+	for(int i = 1; i <= M; ++i) {
+		a = lower_bound(ava+1, ava+1+N, avb[i])-ava;
+		if(a == 1) {
+			disl[i] = abs(ava[a]-avb[i]);
+		} else if(a == N+1) {
+			disl[i] = abs(ava[a-1]-avb[i]);
+		} else {
+			disl[i] = min(abs(ava[a]-avb[i]), abs(ava[a-1]-avb[i]));
+		}
+		a = lower_bound(avc+1, avc+1+K, avb[i])-avc;
+		if(a == 1) {
+			disr[i] = abs(avc[a]-avb[i]);
+		} else if(a == K+1) {
+			disr[i] = abs(avc[a-1]-avb[i]);
+		} else {
+			disr[i] = min(abs(ava[a]-avb[i]), abs(ava[a-1]-avb[i]));
+		}
+		ans = min(disl[i]+disr[i], ans);
+	}
+	printf("%d\n", ans+3);
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+	scanf("%d", &T);
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

@@ -1,0 +1,51 @@
+#include <iostream>
+#include <ctype.h>
+
+using namespace std;
+
+int iscamle(char *s) {
+	char *p;
+	int l, n;
+	n = 1;
+	for (p = s, l = 0; *p != '\0'; p++) {
+		if (isupper(*p)) {
+			if (p != s)
+				n++;
+			if (p != s && l < 2)
+				return 0;
+			l = 1;
+			if (*(p + 1) != '\0' && islower(*(p + 1)))
+				++p,++l;
+			else
+				return 0;
+		}
+		else
+			l++;
+	}
+	if (n < 2)
+		return 0;
+	return 1;
+}
+
+int main() {
+	int T, i;
+	char s[30], *p;
+	cin >> T;
+	while (T--) {
+		cin >> s;
+		if (iscamle(s)) {
+			cout << (char)tolower(*s);
+			for (p = s + 1; *p != '\0'; p++) {
+				if (isupper(*p))
+					cout << '_';
+				cout << (char)tolower(*p);
+			}
+			cout << endl;
+		}
+		else
+			cout << s << endl;
+		
+	}
+	
+	return 0;
+}

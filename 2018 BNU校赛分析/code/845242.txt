@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int T;
+int n;
+string str;
+int main()
+{
+    cin>>T;
+    while(T--)
+    {
+        string ans;
+        cin>>str;
+        ans+=str[0];
+        if(str[1]>='A'&&str[1]<='Z') {cout<<str<<endl;continue;}
+        for(int i=1;i<str.size()-1;i++)
+        {
+            if(str[i]>='A'&&str[i]<='Z'&&str[i+1]>='A'&&str[i+1]<='Z') {ans=str;goto xia;}
+            if(str[i]>='A'&&str[i]<='Z') ans+='_',ans+=str[i]+32;
+            else ans+=str[i];
+        }
+        if(str[str.size()-1]>='A'&&str[str.size()-1]<='Z') ans=str;
+        else ans+=str[str.size()-1];
+        xia:;
+        cout<<ans<<endl;
+    }
+
+    return 0;
+}
+//for(int i=1;i<=n;i++) cin>>a[i];

@@ -1,0 +1,41 @@
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+int qd[1000005];
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        int n,m;
+        cin>>n>>m;
+        string s;
+        cin>>s;
+        int cnt = 0;
+        int sum = 0;
+        int sumD = 0;
+        int sumM = 0;
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='D'){
+                cnt++;
+                sumD++;
+            }
+            qd[i] = cnt;
+            if(s[i]=='M'){
+                sum+=cnt;
+                sumM++;
+            }
+        }
+        if(sumM*sumD <m){
+            cout<<-1<<endl;
+            return 0;
+        }
+        if(sum < m){
+            cout<<m-sum<<endl;
+        }
+        else{
+            cout<<sum-m<<endl;
+        }
+
+    }
+}

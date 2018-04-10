@@ -1,0 +1,73 @@
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+#include<climits>
+using namespace std;
+int mm = INT_MAX;
+struct s{
+    int pos;
+    int num;
+} arr[100005];
+bool cmp(s s1,s s2){
+    return s1.pos<s2.pos;
+}
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        int n,m,k;
+        cin>>n>>m>>k;
+        for(int i=0;i<n;i++){
+            cin>>arr[i].pos;
+            arr[i].num = 1;
+        }
+        for(int i=n;i<n+m;i++){
+            cin>>arr[i].pos;
+            arr[i].num = 2;
+        }
+        for(int i=n+m;i<n+m+k;i++){
+            cin>>arr[i].pos;
+            arr[i].num = 3;
+        }
+        sort(arr,arr+n+m+k,cmp);
+
+     //   for(int i=0;i<n+m+k;i++){
+     //       cout<<arr[i].num<<" "<<arr[i].pos<<endl;
+     //   }
+        int a = -1e9;
+        int b = 1e9;
+        int c = -1e9;
+        for(int i=0;i<n+m+k;i++){
+            if(arr[i].num==1){
+                int tempa = arr[i].pos;
+                if(abs(tempa-b)+abs(c-b)<mm){
+                    mm = abs(tempa-b)+abs(c-b);
+
+                }
+                a = tempa;
+            }
+
+            if(arr[i].num==2){
+                int tempb = arr[i].pos;
+                if(abs(a-tempb)+abs(c-tempb)<mm){
+                    mm = abs(a-tempb)+abs(c-tempb);
+
+                }
+                b = tempb;
+            }
+            if(arr[i].num==3){
+                int tempc = arr[i].pos;
+                if(abs(a-b)+abs(tempc-b)<mm){
+                    mm = abs(a-b)+abs(tempc-b);
+
+                }
+                c = tempc;
+
+            }
+        }
+       // cout<<a<<" "<<b<<" "<<c<<endl;
+        cout<<mm+3<<endl;
+
+    }
+}

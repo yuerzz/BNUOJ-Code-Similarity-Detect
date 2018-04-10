@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+const int maxN = 1e6 + 3;
+typedef long long ll;
+typedef int intvec[maxN];
+typedef ll llvec[maxN];
+typedef bool boolvec[maxN];
+const ll linf = 0x3f3f3f3f3f3f;
+
+intvec head,to,next;
+int edge_count;
+llvec weight;
+boolvec used;
+void init()
+{
+	std::fill_n(head,maxN,-1);
+	std::fill_n(to,maxN,-1);
+	std::fill_n(next,maxN,-1);
+	std::fill_n(weight,maxN,0);
+	std::fill_n(used,maxN,false);
+	edge_count = 0;
+}
+void add(int u,int v,ll w)
+{
+	to[edge_count] = v;
+	next[edge_count] = head[u];
+	weight[u] += w;
+	head[u] = edge_count++;
+}
+void biadd(int u,int v,int w)
+{
+	add(u,v,w);
+	add(v,u,w);
+}
+struct helper
+{
+	int n;
+	ll w;
+	helper(int _n,ll _w):n(_n),w(_w) {}
+	bool operator<(const helper& h) const
+	{
+		return w>h.w;
+	}
+};
+int N,M;
+void mp()
+{
+	init();
+	int a,b;
+	ll c;
+	std::scanf("%d %d",&N,&M);
+	for (int i=0;i<M;++i)
+	{
+		std::scanf("%d %d %lld",&a,&b,&c);
+		biadd(a,b,c);
+	}
+	std::priority_queue<helper> q;
+	for (int i=1;i<=N;++i) q.emplace(i,weight[i]);
+	int k=0;
+	ll ans=0;
+	while (k<N)
+	{
+		helper tmp = q.top();
+		q.pop();
+		if (used[tmp.n]) continue;
+		used[tmp.n] = true;
+		++k;
+		if (ans<weight[tmp.n]) ans=weight[tmp.n];
+		for (int i=head[tmp.n];~i;i=next[i])
+		{
+			weight[to[i]] -= weight[tmp.n];
+		}
+	}
+	std::printf("%lld\n",ans);
+}
+int main()
+{
+	int T;
+	std::scanf("%d",&T);
+	while (T--) mp();
+}

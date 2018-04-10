@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+const int maxn = 20 + 5;
+char s[maxn],ans[maxn * 2];
+
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        int n;
+        scanf("%d",&n);
+        double ans = 0;
+        for(int i = 1;i < n;i++) {
+            ans += (n-i)*(n-i+1);
+            ans -= i * (n - i);
+        }
+        printf("%.9f\n",ans * 2 / n);
+    }
+    return 0;
+}

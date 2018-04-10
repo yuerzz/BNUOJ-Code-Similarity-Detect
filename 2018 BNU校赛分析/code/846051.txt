@@ -1,0 +1,82 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <queue>
+#include <cstring>
+#include <climits>
+#define	NAME "F"
+
+using namespace std;
+
+struct edge {
+	int to, v, nxt;
+} E[200005];
+
+int T, M, N, cne, av[100005];
+bool usd[100005];
+int node[100005];
+priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > que;
+
+void add_edge(int f, int t, int v) {
+	E[cne].to = t;
+	E[cne].v = v;
+	E[cne].nxt = node[f];
+	node[f] = cne++;
+	av[t] += v;
+}
+
+void readin() {
+	scanf("%d%d", &N, &M);
+	int a, b, c;
+	memset(node, -1, sizeof(node));
+	memset(av, 0, sizeof(av));
+	memset(usd, 0, sizeof(usd));
+	cne = 0;
+	while(!que.empty()) {
+		que.pop();
+	}
+	for(int i = 1; i <= M; ++i) {
+		scanf("%d%d%d", &a, &b, &c);
+		add_edge(a, b, c);
+		add_edge(b, a, c);
+	}
+	for(int i = 1; i <= N; ++i) {
+		que.push(make_pair(av[i], i));
+	}
+}
+
+void process() {
+	int ans = INT_MIN;
+	while(!que.empty()) {
+		pair<int, int> now = que.top();
+		que.pop();
+		if(!usd[now.second] && av[now.second] == now.first) {
+			ans = max(ans, av[now.second]);
+			usd[now.second] = true;
+			for(int e = node[now.second]; e != -1; e = E[e].nxt) {
+				av[E[e].to] -= E[e].v;
+				que.push(make_pair(av[E[e].to], E[e].to));
+			}
+		}
+	}
+	printf("%d\n", ans);
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+
+	scanf("%d", &T);
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+const long long mod=1000000007;
+long long a[1001],c[1001];
+long long ni(long long x,long long y)
+{
+	if(y==0) return 1;
+	long long k=ni(x,y/2);
+	k=k*k%mod;
+	if(y&1) k=k*x%mod;
+	return k;
+}
+long long C(long long x,long long y)
+{
+	long long i,j;
+	long long ans=1;
+	for(i=x-y+1,j=1;i<=x;i++,j++)
+		ans=ans*i%mod*ni(j,mod-2)%mod;
+	return ans;
+}
+int main()
+{
+	long long t,n,k;
+	long long i,j;
+	
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		for(i=1;i<=n;i++) cin>>a[i];
+		if(k==0) goto end;
+		for(i=1;i<n;i++) c[i]=C(k+i-1,i);
+		for(i=2;i<=n;i++)
+			for(j=1;j<i;j++)
+				a[i]=(a[i]+mod-a[j]*c[i-j]%mod)%mod;
+		end:for(i=1;i<=n;i++)
+		{
+			cout<<a[i];
+			if(i!=n) cout<<' ';
+		}
+		cout<<endl;
+	}
+}

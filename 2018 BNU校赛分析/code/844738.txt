@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+#define ll long long
+const ll mod=1e9+7;
+const int N=1e6+10;
+using namespace std;
+
+int main()
+{
+    int t;  cin>>t;
+    while(t--)
+    {
+        int f=0;  string a;
+        int n;  cin>>n;
+        while(n--)
+        {
+            cin>>a;
+            if(a!="PERFECT") f=1;
+        }
+        if(f)  cout<<"NAIVE Noob"<<endl; else  cout<<"MILLION Master"<<endl;
+    }
+return 0;
+}

@@ -1,0 +1,55 @@
+#include<iostream>
+#include<string>
+#include<cstdio>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		char s[21];
+		scanf("%s", s);
+		int len = 0;
+		for (int i = 0; s[i] != '\0'; i++)
+			len++;
+		if (s[1] >= 'A'&&s[1] <= 'Z'|| s[0] >= 'A'&&s[0] <= 'Z'&&s[len-1] >= 'A'&&s[len - 1] <= 'Z')
+		{
+			cout << s << endl;
+			continue;
+		}
+		int f = 1;
+		for (int i = 1; s[i] != '\0'; i++)
+		{
+			if (s[i] >= 'A'&&s[i] <= 'Z')
+			{
+				f = 0;
+				break;
+			}
+		}
+		if (f == 1)
+		{
+			cout << s << endl;
+			continue;
+		}
+		for (int i = 0; s[i] != '\0'; i++)
+		{
+			if (s[i] >= 'A'&&s[i] <= 'Z'&&s[i + 1] >= 'A'&&s[i + 1] <= 'Z')
+				break;
+			if (s[i] >= 'A'&&s[i] <= 'Z'&&s[i + 1] >= 'a'&&s[i + 1] <= 'z')
+			{
+				s[i] = s[i] - 'A' + 'a';								
+				if (i != 0)
+				{	
+					for (int j = len; j >i; j--)
+						s[j] = s[j - 1];
+					s[i] = '_';
+				}
+				len++;
+				s[len] = '\0';
+			}
+		}
+		cout << s << endl;
+	}
+	return 0;
+}

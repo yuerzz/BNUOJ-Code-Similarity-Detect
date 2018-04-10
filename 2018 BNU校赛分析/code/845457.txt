@@ -1,0 +1,22 @@
+import time
+T = int(input())
+y=[1]*T
+y1=['MILLION Master','NAIVE Noob']
+
+for i in range(T):
+    n = int(input())
+    x = 0
+    
+    for ii in range(n):
+        if input('')[0] != 'P' :
+            for iii in range(n-ii-1):
+                input('')
+            y[i]=1
+            break
+        else :
+            x += 1
+    if  x == n:
+        y[i] = 0
+    
+for i in y:
+    print(y1[i])

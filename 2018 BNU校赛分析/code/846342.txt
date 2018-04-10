@@ -1,0 +1,32 @@
+#include<cstdio>  
+    #include <cstdlib>
+	#include<iostream>
+	#include<math.h>  
+    using namespace std; 
+    int main()
+    {
+    int t;
+        scanf("%d",&t); 
+        for(int i=1;i<=t;i++)
+        {
+        		int n,k,d=0,m=0,qw=0;
+        	 cin >> n;
+        	 cin >> k;
+        	 string str;
+        	 cin>>str;
+        	 
+        	 for(int i=0;i<str.size();i++)
+        	 {
+        	 	if(str[i]=='D')
+        	 	d++;
+        	 	else 
+				 {
+				m++;
+        	 	qw=qw+d; }
+			 }
+			 if(k>d*m||k<0)cout<<-1<<endl;
+			 else
+			 cout<<abs(qw-k)<<endl;
+		}
+       return 0; 
+		} 

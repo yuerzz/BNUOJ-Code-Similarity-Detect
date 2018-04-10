@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+    int n,j,i,re[50];
+    char ju[10];
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        int judge=1;
+        int x;scanf("%d",&x);
+        for(j=0;j<x;j++)
+        {
+            scanf("%s",ju);
+            if(strcmp(ju,"PERFECT")!=0)
+            {
+                judge=0;break;
+            }
+        }
+        if(judge==1)re[i]=1;
+        else re[i]=0;
+    }
+    for(i=0;i<n;i++)
+    {
+        if(re[i]==1)
+            printf("MILLION Master");
+        else printf("NAIVE Noob");
+        if(i!=n-1)printf("\n");
+    }
+}

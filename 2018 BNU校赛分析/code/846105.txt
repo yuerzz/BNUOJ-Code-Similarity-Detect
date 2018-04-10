@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define int ll
+vector<pair<int,int> > g[1000010];
+int d[100010],q[1000010];
+int vis[1000010];
+void solve()
+{
+	int n,m;scanf("%lld%lld",&n,&m);
+	int u,v,w;
+	for(int i=1;i<=m;i++)
+	{
+		scanf("%lld%lld%lld",&u,&v,&w);
+		g[u].push_back({v,w});	g[v].push_back({u,w});
+		d[u]+=w;d[v]+=w;
+	}
+	ll l = 1,r = 1000000000000;
+	while(l<=r)
+	{
+		ll m = (l+r)/2;
+		memset(vis,0,sizeof vis);
+		priority_queue<pair<int,int> > que;
+		int fg=1;
+		for(int i=1;i<=n;i++)que.push({-d[i],i}),q[i]=d[i];
+		while(!que.empty())		
+		{
+			pair<int,int> u = que.top();que.pop();
+			int re = u.second;int de = q[re];if(vis[re] == 1)continue; vis[re] = 1;
+			if(de>m){fg=0;break;}
+			for(int i = 0;i<g[re].size();i++)
+			{
+				int v = g[re][i].first;
+				q[v]-=g[re][i].second;
+				que.push({-q[v],v});
+			}
+		}
+		if(fg)r = m-1;
+		else l = m+1;
+	}
+	printf("%lld\n",l);
+	
+	
+} 
+main()
+{
+	int t;scanf("%lld",&t);
+	while(t--)solve();
+}
+/*
+1243
+1 1 1
+0 
+10000
+20
+
+*/

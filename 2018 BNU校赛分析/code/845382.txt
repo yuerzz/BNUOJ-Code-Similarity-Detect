@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+const int maxn = 20 + 5;
+char s[maxn],ans[maxn * 2];
+
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        scanf("%s",s);
+        int n = strlen(s);
+        if(n < 4) {
+            printf("%s\n",s);
+            continue;
+        }
+
+        int cnt = 0,flag = 0;
+        for(int i = 0;i < n;i++){
+            if(isupper(s[i])){
+                cnt++;
+            }
+            else cnt = 0;
+            if(cnt > 0) flag = 1;
+            if(cnt > 1) {
+                flag = 0;
+                break;
+            }
+        }
+
+        if((islower(s[0])&&isupper(s[1]))||isupper(s[n-1])) flag = 0;
+        if(flag&&isupper(s[0])){
+            int tflag = 0;
+            for(int i = 1;i < n;i++) if(isupper(s[i])){
+                tflag = 1;
+                break;
+            }
+            flag = tflag;
+        }
+        if(!flag) printf("%s\n",s);
+        else{
+            int pos = 0;
+            for(int i = 0;i < n;i++){
+                if(i&&isupper(s[i])) ans[pos++] = '_';
+                ans[pos++] = tolower(s[i]);
+            }
+            ans[pos++] = '\0';
+            printf("%s\n",ans);
+        }
+
+    }
+    return 0;
+}

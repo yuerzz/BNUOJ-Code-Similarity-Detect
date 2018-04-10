@@ -1,0 +1,51 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#define	NAME "A"
+
+using namespace std;
+
+int T, N;
+bool flag;
+
+void readin() {
+	cin >> N;
+	flag = true;
+}
+
+void process() {
+	string str;
+	for(int i = 1; i <= N; ++i) {
+		cin >> str;
+		if(str[0] != 'P') {
+			flag = false;
+		}
+	}
+	if(flag) {
+		cout << "MILLION Master" << endl;
+	} else {
+		cout << "NAIVE Noob" << endl;
+	}
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+	cin >> T;
+	while(T--) {
+		readin();
+#ifdef DEBUG
+		cout << N << endl;
+#endif
+		process();
+	}
+
+	return 0;
+}

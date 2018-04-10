@@ -1,0 +1,34 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int n, flag = 0;
+		cin >> n;
+		vector<string> s;
+		while (n--)
+		{
+			string tmp;
+			cin >> tmp;
+			s.push_back(tmp);
+		}
+		for (vector<string>::iterator i = s.begin(); i != s.end(); i++)
+		{
+			if (*i != "PERFECT")
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag)
+			cout << "NAIVE Noob\n";
+		else
+			cout << "MILLION Master\n";
+	}
+	return 0;
+}

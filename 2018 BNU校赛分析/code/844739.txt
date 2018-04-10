@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define mem(a,b) memset(a,b,sizeof(a))
+using namespace std;
+int main()
+{
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        string c;
+        bool jc=1;
+        for(int i=0;i<n;i++)
+        {
+            cin>>c;
+            if(c!="PERFECT")
+            {
+                jc=0;
+            }
+        }
+        if(jc)
+        {
+            cout<<"MILLION Master"<<endl;
+        }else
+        {
+            cout<<"NAIVE Noob"<<endl;
+        }
+    }
+}

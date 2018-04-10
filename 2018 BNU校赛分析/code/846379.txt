@@ -1,0 +1,20 @@
+def f():
+    n,k =map(int, input().split())
+    ls = []
+    m = 10 ** 9 + 7
+
+    for i in range(0, n):
+        ls.append(eval(input()))
+    a = ls.copy()
+    for k in range(0, k):
+        for i in range(1, n):
+            ls[i] = a[i] - a[i - 1]
+        a = ls.copy()
+
+    for i in range(0, len(ls)):
+        ls[i] = str((10 * m + ls[i]) % m)
+    print(" ".join(ls))
+
+T=eval(input())
+for i in range(0,T):
+    f()

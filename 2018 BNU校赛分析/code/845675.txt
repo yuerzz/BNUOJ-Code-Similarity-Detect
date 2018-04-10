@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<math.h>
+#include<algorithm>
+using namespace std;
+double dis(double a,double b,double c,double d)
+{
+    return (double)sqrt((a-c)*(a-c)+(b-d)*(b-d));
+}
+int main()
+{
+    int nums;
+    scanf("%d",&nums);
+    while(nums--)
+    {
+        int num;
+        scanf("%d",&num);
+        double point[num][2];
+        for(int i=0;i<num;i++)
+        {
+            scanf("%lf%lf",&point[i][0],&point[i][1]);
+        }
+        double sx,sy;
+        scanf("%lf%lf",&sx,&sy);
+        double min_k,max_k;
+        min_k=100000000;
+        max_k=-1000000000;
+        int index_min;
+        int index_max;
+        double k;
+        for(int i=0;i<num;i++)
+        {
+            k=(sy-point[i][1])/(sx-point[i][0]);
+            if(k<min_k)
+            {
+                min_k=k;
+                index_min=i;
+            }
+            if(k>max_k)
+            {
+                max_k=k;
+                index_max=i;
+            }
+        }
+        double final_dis=0;
+        for(int i=index_max;i!=index_min;i++)
+        {
+            if(i==num)
+            {
+                i=0;
+            }
+            final_dis+=dis(point[i][0],point[i][1],point[(i+1)%num][0],point[(i+1)%num][1]);
+        }
+        printf("%.10f\n",final_dis);
+    }
+    return 0;
+}

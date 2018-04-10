@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e2+10;
+
+char str[N];
+int main()
+{
+    //freopen("test.txt","r",stdin);
+    int t;scanf("%d",&t);
+    while(t--){
+        memset(str,0,sizeof(str));
+        scanf("%s",str);
+        int len=strlen(str);
+        bool flag=true;
+        if(isupper(str[1])) flag=false;
+        if(isupper(str[len-1])) flag=false;
+        for(int i=0;i<len-1;i++){
+            if(isupper(str[i]) && isupper(str[i+1])){
+                flag=false;break;
+            }
+        }
+        int upcnt=0;
+        for(int i=1;i<len;i++){
+            if(isupper(str[i])) upcnt++;
+        }
+        if(upcnt==0) flag=false;
+        if(flag){
+            str[0]=tolower(str[0]);printf("%c",str[0]);
+            for(int i=1;i<len-1;i++){
+                printf("%c",str[i]);
+                if(islower(str[i]) && isupper(str[i+1])){
+                    printf("_");
+                    str[i+1]=tolower(str[i+1]);
+                }
+            }
+            printf("%c\n",str[len-1]);
+        }
+        else{
+            printf("%s\n",str);
+        }
+
+    }
+    return 0;
+}

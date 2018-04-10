@@ -1,0 +1,67 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int a[100001],b[100001],c[100001];
+struct node
+{
+	int d;
+	long long t;
+} d[7],e[7];
+int fin1(int a[],int l,int r,int x)
+{
+	while(l<r)
+	{
+		int mid=(l+r+1)>>1;
+		if(a[mid]<=x) l=mid;
+		else r=mid-1;
+	}
+	return l;
+}
+int main()
+{
+	int n,m,k;
+	int i,j,x,t;
+	int top,top1;
+	long long ans;
+	
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m>>k;
+		ans=1ll<<60;
+		for(i=1;i<=n;i++) scanf("%d",a+i);
+		for(i=1;i<=m;i++) scanf("%d",b+i);
+		for(i=1;i<=k;i++) scanf("%d",c+i);
+		for(i=1;i<=k;i++)
+		{
+			top=1;top1=0;
+			for(j=1;j<=6;j++) d[j]=(node){0,0};
+			for(j=1;j<=6;j++) e[j]=(node){0,0};
+			d[top]=(node){c[i],1};
+			for(j=1;j<=top;j++)
+			{
+				if(d[j].d<b[1]) {e[++top1]=(node){b[1],b[1]-d[j].d+1+d[j].t};continue;}
+				if(d[j].d>b[m]) {e[++top1]=(node){b[m],d[j].d-b[m]+1+d[j].t};continue;}
+				x=fin1(b,1,m,d[j].d);
+				e[++top1]=(node){b[x],d[j].d-b[x]+1+d[j].t};
+				if(d[j].d==b[x]) continue;
+				x++;e[++top1]=(node){b[x],b[x]-d[j].d+1+d[j].t};
+			}
+			for(j=1;j<=top1;j++) d[j]=e[j];
+			top=top1;top1=0;
+			for(j=1;j<=top;j++)
+			{
+				if(d[j].d<a[1]) {e[++top1]=(node){a[1],a[1]-d[j].d+1+d[j].t};continue;}
+				if(d[j].d>a[n]) {e[++top1]=(node){a[n],d[j].d-a[n]+1+d[j].t};continue;}
+				x=fin1(a,1,n,d[j].d);
+				e[++top1]=(node){a[x],d[j].d-a[x]+1+d[j].t};
+				if(d[j].d==a[x]) continue;
+				x++;e[++top1]=(node){a[x],a[x]-d[j].d+1+d[j].t};
+			}
+			for(j=1;j<=top1;j++) d[j]=e[j];
+			top=top1;
+			for(j=1;j<=top;j++) ans=min(ans,d[j].t);
+		}
+		cout<<ans<<endl;
+	}
+}

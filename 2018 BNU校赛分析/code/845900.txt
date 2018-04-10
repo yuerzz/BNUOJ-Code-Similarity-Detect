@@ -1,0 +1,57 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<algorithm>
+#include<math.h>
+using namespace std;
+
+int T,n,m,k;
+int nn[10000];
+int nnn[10000];
+int mm[10000];
+int kk[10000];
+int kkk[10000];
+int oo[10000];
+
+
+
+
+int main()
+{
+	cin>>T;
+	while(T)
+	{
+		cin>>n>>m>>k;
+		for(int i=0;i<n;i++)
+			cin>>nn[i];
+		for(int i=0;i<m;i++)
+			cin>>mm[i];
+		for(int i=0;i<k;i++)
+			cin>>kk[i];
+		   
+	   for(int i=0;i<m;i++)
+	   {
+		   int j=0;
+		   while(j<n)
+		   {
+			   nnn[j]=abs(mm[i]-nn[j]);
+			   j++;
+		   }
+		   j=0;
+		  while(j<k)
+		   {
+			   kkk[j]=abs(mm[i]-kk[j]);
+			   j++;
+		   }
+		   sort(nnn,nnn+n);
+		   sort(kkk,kkk+k);
+		   oo[i]=nnn[0]+kkk[0];
+	   }
+		sort(oo,oo+m);
+		cout<<oo[0]+3<<endl;
+
+	   T--;
+	}
+
+  return 0;
+}

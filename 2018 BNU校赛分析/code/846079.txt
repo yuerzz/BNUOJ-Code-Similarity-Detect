@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+#define max 1000000
+int main(){
+	int t,n,m;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		cin>>n>>m;
+		int a[n+1][n+1];
+		for(int j=1;j<=n;j++){
+			for(int k=1;k<=n;k++){
+				a[j][k]=0;
+			}
+		}
+		for(int j=1;j<=m;j++){
+			int b=0,c=0,d=0;
+			cin>>b>>c>>d;
+			
+			a[b][c]=d;
+			a[c][b]=d;
+		}
+		int min=0;
+		for(int p=0;p<n;p++){
+			int temp=5000000;
+			int loc=1;
+			for(int i=1;i<=n;i++){
+				int sum=0;
+				for(int j=1;j<=n;j++){
+					sum=sum+a[i][j];
+				}
+				if(sum<temp){
+					temp=sum;
+					loc=i;
+				}
+			}
+			for(int i=1;i<=n;i++){
+				a[i][loc]=max;
+				a[loc][i]=max;
+			}
+//			for(int j=1;j<=n;j++){
+//				for(int k=1;k<=n;k++){
+//					cout<<a[j][k]<<" ";
+//				}
+//				cout<<endl;
+//			}
+			if(min<temp-p*max){
+				min=temp-p*max;
+			}
+			
+			
+		}
+		cout<<min<<endl;
+
+	}
+	return 0;
+}

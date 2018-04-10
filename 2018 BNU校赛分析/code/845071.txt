@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int m;
+	cin>>m;
+	while(m--)
+	{
+		int n;
+		cin>>n;
+	int tmp=3;
+	long double ans=0;
+	for(int i=1;i<=n-1;i++)
+	{
+		ans+=tmp;
+		tmp+=2;
+	//	cout<<ans<<' '<<endl;
+	}
+	long double aa=ans/3;
+	cout<<aa<<endl;
+    }
+}

@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+int ans;
+int n;
+int used[100005];
+int tem[100005];
+int pre;
+int k,first;
+int s[100005];
+void dps(int th,int start)
+{
+    //printf("th=%d n=%d\n",th,n);
+    if(th>k)
+    {
+        int sum=0;
+        for(int i=0;i<k;i++)
+        {
+            sum+=tem[i];
+        }
+        sum=sum*sum;
+        if(first==1)
+            ans=sum;
+        else    ans=ans^sum;
+        //printf("%d ",sum);
+        first=0;
+        return ;
+        //printf("\n");
+    }
+    //printf("th = %d\n",th);
+    for(int i = start+1;i<=n;i++)
+    {
+        if(used[i]==1)
+        {
+            continue;
+        }
+        else
+        {
+            if(used[i]==0)
+            {
+               // a[th-1]=i;
+                tem[th-1]=s[i-1];
+                //printf("ans=%lf\n",ans)
+                used[i]=1;
+                dps(th+1,i);
+                used[i]=0;
+            }
+        }
+    }
+    return;
+}
+
+int main ()
+{
+    int t;
+    //freopen("test.txt","r",stdin);
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&n,&k);
+        for(int i = 0 ; i<n;i++)
+        {
+            scanf("%d",&s[i]);
+        }
+        for(int i=0;i<=100004;i++)
+            used[i]=0;
+        int flag=0;
+        first=1;
+        dps(1,0);
+        printf("%d\n",ans);
+    }
+    return 0;
+}

@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int t, n, m, l, i, j, k, ii;
+    int a[100000], b[100000], c[100000];
+    int temp, ans;
+    scanf("%d", &t);
+    for(; t > 0; t--) {
+        scanf("%d%d%d", &n, &m, &l);
+        for(i = 0; i < n; i++) scanf("%d", &a[i]);
+        for(i = 0; i < m; i++) scanf("%d", &b[i]);
+        for(i = 0; i < l; i++) scanf("%d", &c[i]);
+        i = 0;
+        j = 0;
+        k = 0;
+        for(; i < n; i++) {
+            temp = 0;
+            if(a[i] < b[j]) temp += b[j]-a[i];
+            else {
+                for(ii = j+1; ii < m; ii++) {
+                    if(a[i] < b[ii]) break;
+                }
+                temp += a[i]-b[ii-1];
+                j = ii-1;
+                if(ii < m) {
+                    if(2*a[i] > b[ii]+b[ii-1]) {
+                        temp += b[ii]+b[ii-1]-2*a[i];
+                        j++;
+                    }
+                }
+            }
+            if(b[j] < c[k]) temp += c[k]-b[j];
+            else {
+                for(ii = k+1; ii < l; ii++) {
+                    if(b[j] < c[ii]) break;
+                }
+                temp += b[j]-c[ii-1];
+                k = ii-1;
+                if(ii < l) {
+                    if(2*b[j] > c[ii-1]+c[ii]) {
+                        temp += c[ii-1]+c[ii]-2*b[j];
+                        k++;
+                    }
+                }
+            }
+            if(i) {
+                if(ans > temp) ans = temp;
+            } else ans = temp;
+        }
+        ans += 3;
+        printf("%d\n", ans);
+    }
+    return 0;
+}

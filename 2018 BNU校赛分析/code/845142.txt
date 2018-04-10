@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<string.h>
+using namespace std;
+int down_word(char *word,int i)
+{
+    if(word[i+1]<='z'&&word[i+1]>='a')
+        return 1;
+    else
+        return 0;
+}
+int up_word(char *word,int i)
+{
+    if(word[i]<='Z'&&word[i]>='A')
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        char word[20];
+        char outword[40];
+        memset(word,0,sizeof(word));
+        memset(outword,0,sizeof(outword));
+        scanf("%s",word);
+        int flag=1;
+        int num_up=0;
+        int index_outword=0;
+        for(int i=0;i<strlen(word);i++)
+        {
+            if(up_word(word,i))
+            {
+                if(i==strlen(word)-1)
+                {
+                    printf("%s\n",word);
+                    flag=0;
+                    break;
+                }
+                else if(down_word(word,i))
+                {
+                    if(i)
+                    {
+                        outword[index_outword]='_';
+                    index_outword++;
+                    }
+                    outword[index_outword]=word[i]-'A'+'a';
+                    index_outword++;
+                    num_up++;
+                }
+
+            }
+            else
+            {
+                outword[index_outword]=word[i];
+                index_outword++;
+            }
+        }
+
+            if(flag)
+            {
+                if(num_up>=2)
+                    printf("%s\n",outword);
+                else
+                    printf("%s\n",word);
+            }
+    }
+    return 0;
+}

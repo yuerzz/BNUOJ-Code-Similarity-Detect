@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int T;
+	scanf("%d", &T);
+	for (int i = 0; i < T; i++)
+	{
+		int n, f = 1;
+		scanf("%d", &n);
+		for (int j = 0; j < n; j++)
+		{
+			string ch;
+			scanf("%s", ch);
+			if (ch != "perfect")
+			{
+				printf("NAIVE Noob\n");
+				f = 0;
+				break;
+			}
+		}
+		if (f) printf("MILLION Master\n");
+	}
+	return 0;
+}

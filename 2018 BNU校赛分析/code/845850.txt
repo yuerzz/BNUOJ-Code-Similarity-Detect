@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const int maxn = 1e6 + 10;
+char s[maxn];
+
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        int n,k;
+        ll Dcnt = 0,up = 0;
+        scanf("%d%d",&n,&k);
+        scanf("%s",s);
+
+        for(int i = 0;i < n;i++) if(s[i] == 'D') Dcnt++;
+        up = Dcnt * (ll)(n - Dcnt);
+
+        if(k > up) {
+            printf("-1\n");
+            continue;
+        }
+
+        ll cnr_cnt = 0,cnr_g = 0;
+        for(int i = 0;i < n;i++){
+            if(s[i] == 'D') {
+                cnr_cnt++;
+            }
+            else {
+                cnr_g += cnr_cnt;
+            }
+        }
+        printf("%lld\n",abs(cnr_g - (ll)k));
+    }
+    return 0;
+}

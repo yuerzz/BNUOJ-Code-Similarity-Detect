@@ -1,0 +1,51 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+double d;
+void swap(double* o,int i,int j)
+{
+    int t=o[i];
+    o[i]=o[j];
+    o[j]=t;
+}
+void per(double array[],int len,int index)
+{
+    int i;
+    if(index!=len)
+    {
+        for(i=index;i<len;++i)
+        {
+            swap(array,index,i);
+            per(array,len,index+1);
+            swap(array,index,i);
+        }
+    }
+     else
+    {
+        double di;
+    for(i=1;i<len;i++)
+    {
+        di+=fabs(array[i]-array[i-1]);
+    }
+    d+=di;
+    }
+}
+int main()
+{
+    int t,i,j;
+    cin>>t;
+    for(i=0;i<t;i++)
+    {
+        int n;
+        cin>>n;
+        double a[n],p=1;
+        d=0;
+        for(j=0;j<n;j++)
+            a[j]=double(j+1);
+        for(j=1;j<=n;j++)
+        p*=j;
+        per(a,n,0);
+        cout<<d/p<<endl;
+    }
+    return 0;
+}

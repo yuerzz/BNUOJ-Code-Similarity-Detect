@@ -1,0 +1,16 @@
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        int n;
+        scanf("%d",&n);
+        double x=(double) n;
+        x=(x-1)*(x-1)*2.0/x;
+        printf("%f\n",x);
+    }
+return 0;
+}

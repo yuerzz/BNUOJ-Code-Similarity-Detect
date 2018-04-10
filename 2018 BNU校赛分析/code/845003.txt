@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<algorithm>
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+
+int x[105];
+int sum, n;
+
+int f(int k, int m)
+{
+    int i, t;
+    if(k==m)
+    {
+        for(i=1; i<n; i++)
+            sum += abs(x[i+1]-x[i]);
+    }
+    else
+    {
+        for(i=k; i<=m; i++)
+        {
+            t=x[k];
+            x[k]=x[i];
+            x[i]=t;
+            f(k+1,m);
+            t=x[k];
+            x[k]=x[i];
+            x[i]=t;
+        }
+    }
+}
+
+int main()
+{
+    int t, i, j, k, m;
+    cin>>t;
+    double ans;
+    for(i=0; i<t; i++)
+    {
+        cin>>n;
+        k = n*(n-1);
+        for(j=1; j<=n; j++)
+            x[j]=j;
+        sum = 0;
+        f(1,n);
+        ans = 1.0*sum/k;
+        cout<<ans<<endl;
+    }
+
+
+    return 0;
+}

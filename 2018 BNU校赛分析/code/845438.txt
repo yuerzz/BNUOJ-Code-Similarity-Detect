@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+char s[1000005];
+
+long long ab(long long a){
+    if(a>=0) return a;
+    else return -a;
+}
+int main(){
+    int T;
+    cin >> T;
+    while(T--){
+        int n;
+        long long K;
+        cin >> n >> K;
+        cin >> s;
+        int num_m = 0;
+        int num_f = 0;
+        for(int i=0;i<strlen(s);i++){
+            if(s[i]=='M') num_m++;
+        }
+        int num_d = strlen(s) - num_m;
+        long long now = 0;
+        long long maxx = num_m * num_d;
+        for(int i=0;i<strlen(s);i++){
+            if(s[i]=='D') num_f++;
+            else now += num_f;
+        }
+        if(K > maxx) cout << -1 << endl;
+        else{
+            int time = ab( K - now )/num_m;
+            if(ab(K-now)%num_m!=0) time++;
+            cout << time <<endl;
+        }
+    }
+}

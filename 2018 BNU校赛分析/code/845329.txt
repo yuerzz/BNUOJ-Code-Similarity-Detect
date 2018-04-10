@@ -1,0 +1,116 @@
+// Permutation.cpp : 定义控制台应用程序的入口点。
+//
+//N个数全排列的非递归算法
+ 
+  #include<cstdio>  
+    #include <cstdlib>
+	#include<iostream>
+	#include<math.h>  
+    using namespace std;  
+      double count=0.0;  
+   int ac=0;
+   int jiecheng(int n)
+    {
+    	int x=1;
+    	for(int i=3;i<=n;i++)
+    	x=x*i;
+    	return x;
+	}
+void swap(int &a, int &b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+ 
+/*
+根据当前的排列p，计算下一个排列。
+原则是从1234-->4321，若p已经是最后一个排列，传回false，否则传回true。
+p是一个n维向量。
+*/
+bool nextPermutation(int *p, int n)
+{
+    int last = n - 1;
+    int i, j, k;
+ 
+    //从后向前查找，看有没有后面的数大于前面的数的情况，若有则停在后一个数的位置。
+    i = last;
+    while (i > 0 && p[i] < p[i - 1])
+       i--;
+    //若没有后面的数大于前面的数的情况，说明已经到了最后一个排列，返回false。
+    if (i == 0)
+       return false;
+ 
+    //从后查到i，查找大于p[i - 1]的最小的数，记入k
+    k = i;
+    for (j = last; j >= i; j--)
+       if (p[j] > p[i - 1] && p[j] < p[k])
+           k = j;
+    //交换p[k]和p[i - 1]
+    swap(p[k], p[i - 1]);
+    //倒置p[last]到p[i]
+    for (j = last, k = i; j > k; j--, k++)
+       swap(p[j], p[k]);
+ 
+    return true;
+}
+ 
+//显示一个排列
+void showPermutation(int *p, int n)
+{
+   // for (int i = 0; i < n; i++)
+    //   cout << p[i];
+       for(int i=0;i<n-1;i++)
+           {
+		   count=abs(p[i+1]-p[i])+count; 
+		 
+		   }
+}
+ 
+int main()
+{
+	 int t;
+        scanf("%d",&t); 
+        for(int i=1;i<=t;i++)
+        {
+		
+    int n;
+    int *p;
+   	 count=0.0;  
+   ac=0;
+    cin >> n;
+    p = new int[n];
+ 
+    for (int i = 0; i < n; i++)
+       p[i] = i + 1;
+ 
+    showPermutation(p, n);
+    //cout << endl;
+ ac++; 
+    while(nextPermutation(p, n))
+    {
+    	
+       showPermutation(p, n);
+      //cout << endl;
+       ac++; 
+        if(n>=3&&ac==jiecheng(n)) 
+		   {
+		double b=count/ac*1.0;     
+        printf("%.12lf\n",b); 
+        return 0;
+         	} 
+    }
+
+if(n<3)		{
+  
+double b=count/ac*1.0;
+         
+        printf("%.12lf\n",b); 
+        }
+    delete[] p;
+ 
+   
+ }
+    return 0;
+}

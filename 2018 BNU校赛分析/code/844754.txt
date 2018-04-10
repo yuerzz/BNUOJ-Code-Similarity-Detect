@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+char s[100010];
+int main()
+{
+	int t,n;scanf("%d",&t);
+	while(t--){
+		scanf("%d",&n);
+		int cnt=0;
+		for(int i=1;i<=n;i++)
+		{
+			scanf("%s",s);
+			if(s[0]=='P')cnt++;
+		}
+		if(cnt==n)printf("MILLION Master\n");
+		else printf("NAIVE Noob\n");
+	}
+	
+}

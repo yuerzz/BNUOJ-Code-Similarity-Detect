@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+double a[100010];
+int main()
+{
+	int t,n,k;scanf("%d",&t);
+	a[1]=0;
+	int tot = 3;
+	for(int i=2;i<=100;i++)
+	{
+		a[i]=a[i-1]+tot;
+		tot+=2;
+	}
+	while(t--){
+		scanf("%d",&n);
+		printf("%.9f\n",a[n]/3);
+	}
+	
+}
+/*
+10
+1
+2
+3
+4
+5
+
+*/

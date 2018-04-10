@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+
+const int MAX=1e5+5;
+const ll MOD=1e9+7;
+
+#define pb push_back
+#define mp make_pair
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+template<typename T>inline T abs(T a) {return a>0?a:-a;}
+template<class T> inline
+void read(T& num) {
+    bool start=false,neg=false;
+    char c;
+    num=0;
+    while((c=getchar())!=EOF) {
+        if(c=='-') start=neg=true;
+        else if(c>='0' && c<='9') {
+            start=true;
+            num=num*10+c-'0';
+        } else if(start) break;
+    }
+    if(neg) num=-num;
+}
+inline ll powMM(ll a,ll b,ll M){
+    ll ret=1;
+    a%=M;
+    while (b){
+        if (b&1) ret=ret*a%M;
+        b>>=1;
+        a=a*a%M;
+    }
+    return ret;
+}
+int t,n,m,k;
+ll a[MAX],b[MAX],c[MAX];
+int lo[10];
+int main()
+{
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d%d",&n,&m,&k);
+
+        for(int i=1;i<=n;i++)scanf("%lld",&a[i]);
+        for(int i=1;i<=m;i++)scanf("%lld",&b[i]);
+        for(int i=1;i<=k;i++)scanf("%lld",&c[i]);
+        for(int i=0;i<=3;i++)lo[i]=1;
+        ll an=1e10;
+        for(int i=1;i<=m;i++)
+        {
+            int now=b[i];
+            while(a[lo[0]]<=now&&lo[0]<=n)++lo[0];
+            int xiao=max(lo[0]-1,1);
+            ll tem=min(abs(1LL*now-a[lo[0]]),abs(1LL*now-a[xiao]));
+            while(c[lo[2]]<=now&&lo[2]<=k)++lo[2];
+            xiao=max(lo[2]-1,1);
+            tem+=min(abs(1LL*now-c[lo[2]]),abs(1LL*now-c[xiao]));
+            an=min(an,tem);
+        }
+        printf("%lld\n",an+3);
+    }
+    return 0;
+}

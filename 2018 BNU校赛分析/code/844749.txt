@@ -1,0 +1,29 @@
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int T; scanf("%d", &T);
+    while (T--)
+    {
+        string stds = "PERFECT";
+        int n; scanf("%d", &n);
+        bool ok = true;
+        for (int i = 0; i < n; i++)
+        {
+            string in; cin >> in;
+            if (in != stds)
+                ok = false;
+        }
+        if (ok)
+            printf("MILLION Master");
+        else
+            printf("NAIVE Noob");
+        if(T != 0) printf("\n");
+    }
+    return 0;
+}

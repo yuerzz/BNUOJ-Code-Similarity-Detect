@@ -1,0 +1,58 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+typedef unsigned long long LL;
+LL add[120];
+LL bdd[120];
+LL cdd[120];
+long double ddd[120];
+LL gcd(LL a ,LL b)
+{
+	return (b!=0)?gcd(b,a%b):a;
+}
+void init()
+{
+	add[2] = 2;
+	add[3] = 8;
+	cdd[1] = 1;
+	cdd[2] = 2;
+	cdd[3] = 6;
+	ddd[2] = 1.0;
+	ddd[3] = ddd[2]*(long double(2*4)/(long double)(1.0*3));
+	for(int i = 4;i<=101;i++)
+	{
+		if(i<50)
+		{
+			add[i] = add[i-1]*(i+1);
+			bdd[i] = add[i]*(i-1);
+			//cout<<bdd[i]<<endl;
+			cdd[i] = cdd[i-1]*i;
+			
+			//cout<<bdd[i]<<" "<<cdd[i]<<endl;
+			ddd[i] = (long double)(bdd[i])/(1.0*(long double)cdd[i]);
+		}
+		else
+		{
+			ddd[i] = ddd[i-1]*((long double)(i*i-1)/long double(i*i-2*i));
+		}
+	}
+}
+
+int main()
+{
+	init();
+	int T;
+	cin>>T;
+	
+	//cout<<add[100]<<endl;
+	while(T--)
+	{
+		int n;
+		cin>>n;
+		printf("%.12llf\n",ddd[n]);
+	}
+}

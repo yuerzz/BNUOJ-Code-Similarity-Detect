@@ -1,0 +1,51 @@
+#include <cstdio>
+#include <queue>
+using namespace std;
+priority_queue<pair<long long,long long>,vector<pair<long long,long long> >,greater<pair<long long,long long> > > pq;
+vector<pair<long long,long long> > mp[100001];
+long long dis[100001];
+bool vis[100001];
+int main()
+{
+    long long T,n,m,x,y,z,ans;
+    pair<long long,long long> now;
+    scanf("%lld",&T);
+    while(T--)
+    {
+        scanf("%lld%lld",&n,&m);
+        for(long long i=1;i<=n;i++)
+            dis[i]=0;
+        for(long long i=0;i<m;i++)
+        {
+            scanf("%lld%lld%lld",&x,&y,&z);
+            mp[x].push_back(make_pair(y,z));
+            mp[y].push_back(make_pair(x,z));
+            dis[x]+=z;
+            dis[y]+=z;
+        }
+        for(long long i=1;i<=n;i++)
+            if(dis[i])
+                pq.push(make_pair(dis[i],i));
+        for(long long i=1;i<=n;i++)
+            vis[i]=false;
+        ans=0;
+        while(!pq.empty())
+        {
+            now=pq.top();
+            pq.pop();
+            if(vis[now.second])
+                continue;
+            if(ans<dis[now.second])
+                ans=dis[now.second];
+            vis[now.second]=true;
+            for(long long i=0;i<mp[now.second].size();i++)
+                if(!vis[mp[now.second][i].first])
+                {
+                    dis[mp[now.second][i].first]-=mp[now.second][i].second;
+                    pq.push(make_pair(dis[mp[now.second][i].first],mp[now.second][i].first));
+                }
+        }
+        printf("%lld\n",ans);
+    }
+    return 0;
+}

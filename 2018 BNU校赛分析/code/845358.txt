@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+typedef struct
+{
+    char name[45];
+}aaa_t;
+int main(void)
+{
+    int t,len,i,j;
+    aaa_t re[20000];
+    char name[25];
+    scanf("%d",&t);
+    for(int i=0;i<t;i++)
+    {
+        scanf("%s",name);
+        len=strlen(name);
+        int judge=1,count=0;
+        for(j=0;j<len;j++)
+            {
+                if(name[j]>='A'&&name[j]<='Z')
+                     count++;
+            }
+        for(j=0;j<len;j++)
+            {
+                if(name[j]>='A'&&name[j]<='Z'&&name[j+1]>='A'&&name[j+1]<='Z')
+                    {strcpy(re[i].name,name);judge=0;break;}
+            }
+        if(len<4||(name[len-1]<='Z'&&name[len-1]>='A')){strcpy(re[i].name,name);continue;}
+        else if(count<2)
+            {strcpy(re[i].name,name);continue;}
+        else if(judge==1)
+        {
+            int a=0;
+            for(j=0;j<len;j++)
+            {
+
+                if(name[j]<='z'&&name[j]>='a')
+                {re[i].name[a++]=name[j];}
+                else if(name[j]<='Z'&&name[j]>='A'&&j!=0)
+                {
+                    re[i].name[a++]='_';
+                    re[i].name[a++]=name[j]-'A'+'a';
+                }
+                else if (name[j]<='Z'&&name[j]>='A'&&j==0)
+                    re[i].name[a++]=name[j]-'A'+'a';
+
+            }
+            re[i].name[a]='\0';
+        }
+        else;
+
+    }
+    for(i=0;i<t;i++)
+        {
+            printf("%s",re[i].name);
+            if(i!=(t-1))printf("\n");
+        }
+}

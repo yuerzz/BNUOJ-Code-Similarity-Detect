@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<math.h>
+
+int main(){
+    int time;
+    scanf("%d",&time);
+    while(time--){
+        int n,ans=0;
+        scanf("%d",&n);
+        int i;
+        for(i=0;i<=n;i++){
+            ans+=i*(i-1);
+        }
+        printf("%.12f\n",ans*1.0/n);
+    }
+}

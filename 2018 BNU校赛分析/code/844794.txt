@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <queue>
+#include <vector>
+#include <stack>
+#include <map>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 1105;
+
+int a[maxn];
+
+int main(){
+	int T,n,m;
+	scanf("%d",&T);
+	while(T--){
+		scanf("%d%d",&n,&m);
+		
+		for (int i=0;i<n+m;i++){
+			scanf("%d",&a[i]);
+		}
+		sort(a,a+m+n);
+		int cnt = m+n;
+		int ans = 0;
+		if (cnt%2==0){
+			for (int i=cnt/2;i<cnt;i++){
+				ans += a[i];
+			}
+		}else {
+			for (int i=cnt/2;i<cnt;i++){
+				ans+= a[i];
+			}
+		}
+		printf("%d\n",ans);
+	}
+	return 0;
+	
+}

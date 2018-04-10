@@ -1,0 +1,16 @@
+#include <cstdio>
+int main()
+{
+    int T,n;
+    double ans;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d",&n);
+        ans=0;
+        for(int i=1;i<n;i++)
+            ans+=(n-i)*i*2;
+        printf("%.9f\n",ans/n);
+    }
+    return 0;
+}

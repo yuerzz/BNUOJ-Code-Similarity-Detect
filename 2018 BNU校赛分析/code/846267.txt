@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int a[100010],t,n,k,b[100010];
+long long c,ans;
+void dfs(int q,int w)
+{
+	
+	if (q+w==n)
+	{
+		ans^=(b[n]-b[q]+c)*(b[n]-b[q]+c);//printf("a:%d %d\n",q,w);
+		return;
+	}
+	if (!w)
+	{
+		ans^=c*c;//printf("b:%d %d\n",q,w);
+		return;
+	}
+	c+=a[q+1];
+	dfs(q+1,w-1);
+	c-=a[q+1];
+	dfs(q+1,w);
+}
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		scanf("%d%d",&n,&k);ans=c=0;
+		for (int i=1;i<=n;i++) scanf("%d",&a[i]),b[i]=a[i]+b[i-1];
+		dfs(0,k);
+		printf("%lld\n",ans);
+	}
+	return 0;
+}

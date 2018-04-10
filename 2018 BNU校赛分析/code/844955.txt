@@ -1,0 +1,28 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main(){
+	int t,n,temp=0;
+	string st;
+	cin>>t;
+	string stand="PERFECT";
+	for(int i=0;i<t;i++){
+		cin>>n;
+		for(int j=0;j<n;j++){
+			cin>>st;
+			if(st=="PERFECT"){
+				temp++;
+			}
+		}
+		if(temp==n){
+			cout<<"MILLION Master";
+		}
+		else{
+			cout<<"NAIVE Noob";
+		}
+		if(i<t-1){
+			cout<<endl;
+		}
+	}
+	return 0;
+}

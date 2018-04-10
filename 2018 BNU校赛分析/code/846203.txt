@@ -1,0 +1,119 @@
+#include<bits/stdc++.h>
+using namespace std;
+char d[50005];
+int main()
+{
+	int n;
+	cin>>n;
+	while(n--)
+	{
+	char a[50005];
+	cin>>a;
+	int js=strlen(a);
+	int jss=0;
+	for(int i=1;i<js;i++)
+	{
+		char c;
+		c=a[i];
+		for(int j=65;j<=90;j++)
+		{
+		//	cout<<char(j)<<' ';
+	//	cout<<int(c)<<endl;
+			if((int(c)-j==0)) 
+			{
+			jss++;
+		    }
+		  //  cout<<jss<<endl;
+		}
+	}
+		//	cout<<"aaa"<<endl;
+			int tmp[jss+2];
+			memset(tmp,-1,sizeof(tmp));
+			bool f=false;
+			bool pan=false;
+			int mi=1;
+			for(int i=0;i<=js;i++)
+			{
+				char c=a[i];
+			for(int j=65;j<=90;j++)
+		    {
+			     if((int(c)-j==0) ) 
+			     {
+			     	
+			     	tmp[mi]=i;
+			     	mi++;
+			     	if(i==0) f=true;
+			    //cout<<tmp[mi-1]<<endl;
+			      }
+			    
+			 }
+		    }
+		  //  cout<<tmp[1]<<' '<<tmp[2]<<endl;
+		    for(int i=2;i<=mi;i++)
+		    {
+		    	if(tmp[i]-tmp[i-1]==1) {
+				pan=true;}
+			}
+		//	if(pan==true) cout<<"ahbd"<<endl;
+		    if(pan==false )
+		    {
+		//	 cout<<tmp<<endl;
+	//	cout<<tmp[1]<<' '<<js<<endl;
+		        if(f==false)
+		        {
+		        	if(tmp[1]!=1 && tmp[mi-1]!=js-1)
+		        	{
+		        	tmp[0]=0;
+		        	cout<<a[0];
+		        	for(int m=1;m<mi;m++)
+		        	{
+			     	for(int k=tmp[m-1]+1;k<tmp[m];k++)
+			     	{
+			     		cout<<a[k];
+					}
+					cout<<"_";
+					cout<<char(int(a[tmp[m]])+32);
+				    }
+				   for(int j=tmp[mi-1]+1;j<js;j++)
+				   {
+				   	cout<<a[j];
+				   }
+				   cout<<endl;
+			      }
+			      else cout<<a<<endl;
+				}
+			//	cout<<"==="<<jss<<endl;
+				if(f==true)
+				{
+					if(tmp[mi-1]!=js-1)
+					{
+					if(jss==0) cout<<a<<endl;
+					else
+					{
+					cout<<char(int(a[0])+32);
+			    	tmp[0]=1;
+		        	for(int m=2;m<mi;m++)
+		        	{
+		        		int k;
+			     	for( k=tmp[m-1]+1;k<tmp[m];k++)
+			     	{
+			     		cout<<a[k];
+					}
+					cout<<"_";
+					cout<<char(int(a[tmp[m]])+32);
+				   }
+				   for(int j=tmp[mi-1]+1;j<js;j++)
+				   {
+				   	cout<<a[j];
+				   }
+				   cout<<endl;
+			      }
+			      
+	          }
+	          else cout<<a<<endl;
+             	}	
+             }
+        else if (pan == true) cout<<a<<endl;
+        
+   }
+}

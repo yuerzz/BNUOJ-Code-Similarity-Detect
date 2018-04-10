@@ -1,0 +1,42 @@
+#include<stdio.h>
+int main(void){
+
+int t,i,n,j,k,f;
+char c;
+scanf("%d",&t);
+int z[t];
+
+for(i=0;i<t;i++){
+    f=0;
+    scanf("%d",&n);
+    for(j=0;j<n;j++){
+        scanf("%c",&c);
+        if(c=='P'){
+            f+=1;
+        }
+        else{
+            f+=0;
+        }
+    }
+    if(f==n){
+        z[i]=1;
+    }
+    else{
+        z[i]=0;
+    }
+}
+for(k=0;k<t-1;k++){
+    if(z[k]==1){
+        printf("MILLION Master\n");
+        }
+    else{
+        printf("NAIVE Noob\n");
+    }
+}
+if(z[t-1]==1){
+    printf("MILLION Master");
+}
+else{
+    printf("NAIVE Noob");
+}
+}

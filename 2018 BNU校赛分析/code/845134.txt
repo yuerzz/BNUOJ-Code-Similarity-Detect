@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool up(char c)
+{
+    if(c >= 'A' && c <= 'Z') return true;
+    return false;
+}
+bool judge(string s)
+{
+    int cnt = 0;
+    int fst = -1;
+    for(int i = 0; i < s.length()-1; i++)
+    {
+        if(up(s[i]) && up(s[i+1]))
+            return false;
+        if(up(s[i]))
+        {
+            if(fst == -1) fst = i;
+            cnt++;
+        }
+    }
+    if(up(s[s.length()-1])) return false;
+    if(!up(s[0]) && fst < 2) return false;
+    if(up(s[0]) && cnt >= 2) return true;
+    else if( !up(s[0]) && cnt >= 1) return true;
+    return false;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++)
+    {
+        string s;
+        cin >> s;
+        if(!judge(s))
+        {
+            cout << s << endl;
+            continue;
+        }
+        for(int i = 0; i < s.length()-1; i++)
+        {
+            if(up(s[i])) s[i] += 'a'-'A';
+            cout << s[i];
+            if(up(s[i+1])) cout << "_";
+        }
+        cout << s[s.length()-1] << endl;
+    }
+
+    return 0;
+}

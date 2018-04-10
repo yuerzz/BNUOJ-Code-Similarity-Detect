@@ -1,0 +1,37 @@
+#include<iostream>
+#include<iomanip>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+char ch[21];
+int main()
+{
+	int n;
+	int i;
+	int t;
+
+	cin>>t;
+	while(t--)
+	{
+		scanf("%s",ch);
+		n=strlen(ch);
+		for(i=1;i<n;i++) if(ch[i]>='A'&&ch[i]<='Z') break;
+		if(i==1) {cout<<ch<<endl;continue;}
+		while(i<n)
+		{
+			if(ch[i]>='A'&&ch[i]<='Z'&&ch[i-1]>='A'&&ch[i-1]<='Z') break;
+			i++;
+		}
+		if(i<n||ch[n-1]>='A'&&ch[n-1]<='Z') {cout<<ch<<endl;continue;}
+		for(i=0;i<n;i++)
+		{
+			if(ch[i]>='A'&&ch[i]<='Z')
+			{
+				if(i!=0) cout<<'_';
+				cout<<(char)(ch[i]+32);
+			}
+			else cout<<ch[i];
+		}
+		cout<<endl;
+	}
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+   int T,n;
+   string str;
+   string str1;
+   cin>>T;
+   for(int j=0;j<T;j++)
+   {
+       cin>>n;
+       for(int i=0;i<n;i++)
+       {
+           cin>>str;
+
+
+
+           if(str=="MISS")
+           {
+               cout<<"NAIVE Noob"<<endl;
+               break;
+           }
+           if(i==n-1)
+            cout<<"MILLION Master"<<endl;
+
+       }
+
+
+   }
+    return 0;
+}

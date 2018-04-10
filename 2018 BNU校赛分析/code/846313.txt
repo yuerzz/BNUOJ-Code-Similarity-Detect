@@ -1,0 +1,65 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+#include<algorithm>
+#include<cmath>
+
+int a[20];
+
+using namespace std;
+
+int main()
+{
+   // freopen("a.txt","r",stdin);
+
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int f=0,ans=0;
+        int n;
+        cin>>n;
+        if (n<=10){
+if (n==1) cout<<"0.000000000000"<<endl;
+else if (n==2) cout<<"1.000000000000"<<endl;
+else if (n==3) cout<<"2.666666666667"<<endl;
+else if (n==4) cout<<"5.000000000000"<<endl;
+else if (n==5) cout<<"8.000000000000"<<endl;
+else if (n==6) cout<<"11.666666666667"<<endl;
+else if (n==7) cout<<"16.000000000000"<<endl;
+else if (n==8) cout<<"21.000000000000"<<endl;
+else if (n==9) cout<<"26.666666666667"<<endl;
+else if (n==10) cout<<"33.000000000000"<<endl;}
+//else if (n==11) cout<<"40.000000000000"<<endl;
+//else if (n==12) cout<<"47.666666666667"<<endl;
+//else if (n==13) cout<<"56.000000000000"<<endl;
+//else if (n==14) cout<<"65.000000000000"<<endl;
+//else if (n==15) cout<<"74.666666666667"<<endl;
+//else if (n==16) cout<<"85.000000000000"<<endl;
+//else if (n==17) cout<<"96.000000000000"<<endl;
+//else if (n==18) cout<<"107.666666666667"<<endl;
+//else if (n==19) cout<<"120.000000000000"<<endl;
+//else if (n==20) cout<<"133.000000000000"<<endl;
+        else
+        {
+            int i=33;
+            int bb=7;
+            for (int t=0;t<n-10;t++){
+                i+=bb;
+                if (t%3==1)
+                {
+                    bb+=2;
+                }
+            }
+            if (n%3==0)
+            cout<<i<<".666666666667"<<endl;
+            else cout<<i<<".000000000000"<<endl;
+        }
+
+    }
+
+}

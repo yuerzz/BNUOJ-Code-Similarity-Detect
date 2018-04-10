@@ -1,0 +1,30 @@
+#include<iostream>
+#include<string.h>
+#include<iomanip>s
+
+using namesapce std;
+
+int main(void)
+{
+    int t;
+    cin >> t;
+    for(int i = 0;i < t;i++)
+    {
+        int total;
+        int flag = 1;
+        cin >> total;
+        string s;
+        for(int j = 0;j < total;j++)
+        {
+            cin >> s;
+            if(s != "PERFECT")
+                flag = 0;
+        }
+        if(flag == 1)
+            cout << "MILLION Master" <<endl;
+        else
+            cout << "NAIVE Noob" <<endl;
+
+    }
+    return 0;
+}

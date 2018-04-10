@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+vector<pair<int,ll> > g[100010];
+ll d[100010],q[100010];
+int vis[100010];
+void solve()
+{
+	int n,m;scanf("%d%d",&n,&m);
+	int u,v;ll w;
+	for(int i=1;i<=n;i++)g[i].clear(),d[i]=0;
+	ll mi =10000000000000,mx = 0;
+	for(int i=1;i<=m;i++)
+	{
+		scanf("%d%d%lld",&u,&v,&w);
+		g[u].push_back({v,w});	g[v].push_back({u,w});
+		d[u]+=w;d[v]+=w;
+	}
+	int re;
+	ll de;
+	for(int i=1;i<= n;i++)mi= min(mi,d[i]),mx = max(mx,d[i]);
+	ll l = mi,r = mx; 
+	priority_queue<pair<ll,int> > que;
+	while(l<=r)
+	{
+		ll m = (l+r)/2;
+		while(!que.empty())que.pop();
+		int fg=1;
+		for(int i=1;i<=n;i++)que.push({-d[i],i}),q[i]=d[i],vis[i]=0;
+		while(!que.empty())		
+		{
+			pair<int,ll> u = que.top();que.pop();
+			re = u.second;de = q[re];if(vis[re] == 1)continue; vis[re] = 1;
+			if(de>m){fg=0;break;}
+			for(int i = 0;i<g[re].size();i++)
+			{
+				int v = g[re][i].first;
+				q[v]-=g[re][i].second;
+				if(vis[v] == 0)	que.push({-q[v],v});
+			}
+		}
+		if(fg)r = m-1;
+		else l = m+1;
+	}
+	printf("%lld\n",l);
+} 
+main()
+{
+	int t;scanf("%d",&t);
+	while(t--)solve();
+}
+/*
+1243
+1 1 1
+0 
+10000
+20
+
+*/

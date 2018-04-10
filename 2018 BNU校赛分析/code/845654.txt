@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+#include<stack>
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,m;
+		scanf("%d%d",&n,&m);
+		string str;
+		cin>>str;
+		int i;
+		int ans;
+		for(i=0;i<m;i++)
+		{
+			//cout<<str<<endl;
+			int x,y;
+			scanf("%d%d",&x,&y);
+			//cout<<x<<y<<"hh\n";
+			if(x==1)
+			{
+				if(str[y-1]=='(')
+					str[y-1]=')';
+				else
+					str[y-1]='(';
+			//cout<<str<<endl;
+			}
+			else
+			{
+				//cout<<str[y-1]<<endl;
+				if(str[y-1]==')')
+				{
+					ans=0;
+					cout<<ans<<endl;
+					continue;
+				}
+				stack<char>a;
+				while(!a.empty())
+					a.pop();
+				int k;
+				for(k=y-1;k<str.size();k++)
+				{
+					if(str[k]=='(')
+						a.push(str[k]);
+					else
+					{
+						if(!a.empty())
+						{
+							if(a.top()=='(')
+								a.pop();
+							else
+							{
+							//cout<<"o\n";
+								break;
+							}
+						}
+						else
+							break;
+					}
+				}
+				if(a.empty())
+				cout<<k-y+1<<endl;
+				else
+				cout<<"0\n";
+			}
+		}
+	}
+}

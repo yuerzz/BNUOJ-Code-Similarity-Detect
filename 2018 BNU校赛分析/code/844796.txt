@@ -1,0 +1,30 @@
+#include<stdio.h>
+int main()
+{
+	int T;
+	scanf("%d",&T);
+	while (T--)
+	{
+		int n;
+		scanf("%d",&n);
+		char s[100000][10];
+		int temp = 0;
+		for (int i = 0; i < n; i++)
+			scanf("%s", s[i]);
+		for (int i = 0; i < n; i++)
+		{
+			if (s[i] != "PERFECT")
+			{
+				temp = 1;
+				break;
+			}
+		}
+		if (temp == 0)
+			printf( "MILLION Master\n" );
+		
+		if (temp == 1)
+			printf( "NAIVE Noob\n");
+
+	}
+    return 0;
+}

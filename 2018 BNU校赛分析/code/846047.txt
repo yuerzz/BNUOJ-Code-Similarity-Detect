@@ -1,0 +1,63 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+#define maxn 100
+using namespace std;
+int n;
+int rcd[maxn];
+int used[maxn];
+int num[maxn];
+int cnt;
+double result;
+void perm(int I,const int factn)
+{
+	if (cnt == factn / 2)
+		return;
+	int i;
+	if (I == n)
+	{
+		cnt++;
+		for (i = 0; i < n - 1; i++)
+		{
+			//cout << rcd[i] << " ";
+			result += abs(rcd[i + 1] - rcd[i]);
+		}
+		//cout << rcd[i] << endl;
+		return;
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (!used[i])
+		{
+			used[i] = 1;
+			rcd[I] = num[i];
+			perm(I + 1,factn);
+			used[i] = 0;
+		}
+	}
+}
+int fact(int n)
+{
+	if (n <= 1)return 1;
+	else return n*fact(n - 1);
+}
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		cnt = 0;
+		result = 0;
+		cin >> n;
+		for (int i = 0; i < n; i++)
+		{
+			num[i] = i;
+			used[i] = 0;
+		}
+		int factn = fact(n);
+		perm(0,factn);
+		printf("%.12lf\n", result*2 / factn);
+	}
+	return 0;
+}

@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <utility>
+#include <queue>
+#include <map>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        std::string data;
+        myis >> data;
+        std::string out;
+        bool flag = true;
+        size_t cnt = 0;
+        size_t len = 0;
+        for (size_t i = 0; i != data.size(); ++i) {
+            if (data[i] >= 'A' && data[i] <= 'Z') {
+                if (i) {
+                    out.push_back('_');
+                    ++cnt;
+                }
+                if (len == size_t(1)) {
+                    flag = false;
+                    break;
+                }
+                out.push_back(data[i] - 'A' + 'a');
+                len = 0;
+            } else {
+                out.push_back(data[i]);
+            }
+            ++len;
+        }
+        if (cnt && flag && len != size_t(1)) {
+            myos << out << std::endl;
+        } else {
+            myos << data << std::endl;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,67 @@
+#include <iostream>
+#include<cstring>
+#include <cstdio>
+
+//命名法
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    char s[200005];
+    getchar();
+    while(t--)
+    {
+        cin.getline(s,200005);
+        long int len;
+        len=strlen(s);
+        bool tuo=true;
+        int cnt=0;
+        if(len<4)
+            tuo=false;
+		else if(s[len-1]>='A' && s[len-1]<='Z')
+			tuo=false;
+        else
+        {
+			if(s[1]>='a'&&s[1]<='z')
+            cnt++;
+            for(int i=2;i<len;i++)
+        {
+            if(s[i]>='A' && s[i]<='Z')
+            {
+                if(i<len-1)
+                {
+                    if(s[i+1]>='a'&&s[i+1]<='z')
+                        cnt++;
+                    else
+                        tuo=false;
+                }
+            }
+        }
+        if(tuo&&cnt>=2)
+            tuo=true;
+		else
+			tuo=false;
+        }
+		
+        if(tuo)
+        {
+            if(s[0]>='A'&&s[0]<='Z')
+            s[0]=s[0]+32;
+               printf("%c",s[0]);
+             for(int i=1;i<len;i++)
+             {
+               if(s[i]>='A' && s[i]<='Z')
+            {
+                s[i]=s[i]+32;
+                    printf("_%c",s[i]);
+            }
+            else
+                printf("%c",s[i]);
+             }
+             printf("\n");
+        }
+        else
+            printf("%s\n",s);
+    }
+}

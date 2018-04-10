@@ -1,0 +1,38 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int n;
+		long int k;
+		cin >> n >> k;
+		vector<long int> s;
+		while (n--)
+		{
+			long int tmp;
+			cin >> tmp;
+			s.push_back(tmp);
+		}
+		while (k--)
+		{
+			for (vector<long int>::iterator i = s.end() - 1; i != s.begin(); i--)			
+					*i = *i - *(i - 1);			
+		}
+		vector<long int>::iterator it;
+		for (it = s.begin(); it != s.end(); it++)
+		{
+			while (*it < 0)
+				*it += 1000000007;
+			cout << *it;
+			if (it != s.end() - 1)
+				cout << " ";
+			else
+				cout << endl;
+		}
+	}
+	return 0;
+}

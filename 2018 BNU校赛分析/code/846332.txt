@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int INF  = 0x3f3f3f;
+const int maxn = 1e5+5;
+int main()
+{
+    //freopen("in.txt", "r", stdin);
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n, m, k;
+        cin >> n >> m >> k;
+        vector<int> ve1;
+        vector<int> ve2;
+        for(int i = 0; i < n; i++)
+        {
+            int x;
+            cin >> x;
+            ve1.push_back(x);
+        }
+        int res[maxn];
+        for(int i = 0; i < m; i++)
+        {
+            int x;
+            cin >> x;
+            int idx = upper_bound(ve1.begin(), ve1.end(), x)-ve1.begin();
+            if(idx > 0)res[i] = 1+min(abs((ve1[idx]-x)),  abs(ve1[idx-1]-x));
+            else if(idx >= ve1.size()) res[i] = 1+abs(ve1[ve1.size()-1]-x);
+            else res[i] = 1+abs(ve1[idx]-x);
+            ve2.push_back(res[i]);
+        }
+        int res1[maxn];
+        vector<int> ve3;
+        for(int i = 0; i < k; i++)
+        {
+            int x;
+            cin >> x;
+            ve3.push_back(x);
+            int idx = upper_bound(ve2.begin(), ve2.end(), x)-ve2.begin();
+            if(idx > 0)res1[i] = 1+min(abs((ve2[idx]-x)),  abs(ve2[idx-1]-x));
+            else if(idx >= ve2.size()) res1[i] = 1+abs(ve2[ve2.size()-1]-x);
+            else res1[i] = 1+abs(ve2[idx]-x);
+        }
+        sort(res1, res1+k);
+        cout << res1[0]+2 << endl;
+    }
+
+    return 0;
+}

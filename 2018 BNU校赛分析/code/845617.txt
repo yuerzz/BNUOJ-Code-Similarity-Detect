@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<string.h>
+int d(char*w,int i)
+{
+if(w[i+1]<='z'&&w[i+1]>='a')
+return 1;
+else
+return 0;
+}
+int u(char*w,int i)
+{
+if(w[i+1]<='Z'&&w[i+1]>='A')
+return 1;
+else
+return 0;
+} 
+int main(){
+   int num;
+       scanf("%d",&num);
+       while(num--)
+       {
+           char word[20];
+           char outword[40];
+           memset(word,0,sizeof(word));
+           memset(outword,0,sizeof(outword));
+           scanf("%s",word);
+           int flag=1;
+           int num_up=1;
+           int index_outword=0;
+           for(int i=0;i<strlen(word);i++)
+           {
+               if(u(word,i))
+               {
+                   if(i==strlen(word)-1||i==1)
+                   {
+                       printf("%s\n",word);
+                       flag=0;
+                       break;
+                   }
+                   else if(d(word,i))
+                   {
+                       if(i)
+                       {
+                           outword[index_outword]='_';
+                           index_outword++;
+                       }
+                       outword[index_outword]=word[i]-'A'+'a';
+                       index_outword++;
+                       if(i)
+                           num_up++;
+                   }
+                   else
+                   {
+                       printf("%s\n",word);
+                       flag=0;
+                       break;
+                   }
+               }
+               else
+               {
+                   outword[index_outword]=word[i];
+                   index_outword++;
+               }
+           }
+   
+               if(flag)
+               {
+                   if(num_up>=2)
+                       printf("%s\n",outword);
+                   else
+                       printf("%s\n",word);
+               }
+       }
+       return 0;
+   }

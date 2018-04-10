@@ -1,0 +1,61 @@
+#include<cstdio>
+#include<queue>
+#include<map>
+#include<vector>
+#include<cstring>
+#include<algorithm>
+#define ll long long int
+using namespace std;
+const int maxn=100005;
+int n,m;
+ll nian[maxn];
+vector<int>nxt[maxn];
+struct cmp
+{
+    bool operator()(const int a,const int b)const
+    {
+        return nian[a]>nian[b];
+    }
+};
+priority_queue<int,vector<int>,cmp>q;
+map<int,ll>mp[maxn];
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while (T--)
+    {
+        int cnt=0;
+        ll res =-1;
+        scanf("%d %d",&n,&m);
+        for (int i=1;i<=n;i++)nxt[i].clear(),mp[i].clear();
+        memset(nian,0,sizeof(nian));
+        while (!q.empty())q.pop();
+        for (int i=0;i<m;i++)
+        {
+            int x,y,z;
+            scanf("%d %d %d",&x,&y,&z);
+            nxt[x].push_back(y);
+            nxt[y].push_back(x);
+            nian[x]+=z;
+            nian[y]+=z;
+            mp[x][y]=z;
+            mp[y][x]=z;
+        }
+        for (int i=1;i<=n;i++)q.push(i);
+        while (!q.empty())
+        {
+            int ind=q.top();
+            q.pop();
+            res=max(res,nian[ind]);
+            for (int i=0,len=nxt[ind].size();i<len;i++)
+            {
+                int nx=nxt[ind][i];
+                nian[nx]-=mp[ind][nx];
+                //q.push(nx);
+            }
+        }
+        printf("%lld\n",res);
+    }
+    return 0;
+}

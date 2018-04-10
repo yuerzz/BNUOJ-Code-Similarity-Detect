@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        size_t n;
+        myis >> n;
+        bool flag = true;
+        for (size_t i = 0; i != n; ++i) {
+            std::string data;
+            myis >> data;
+            if (data != "PERFECT") {
+                flag = false;
+            }
+        }
+        if (flag) {
+            myos << "MILLION Master" << std::endl;
+        } else {
+            myos << "NAIVE Noob" << std::endl;
+        }
+    }
+    return 0;
+}

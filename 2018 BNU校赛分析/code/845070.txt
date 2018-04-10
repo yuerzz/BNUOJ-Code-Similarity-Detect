@@ -1,0 +1,59 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		string s;
+		string re;
+		cin >> s;
+		int count = 0;
+		int last = 0;
+		for (int j = 0; j < s.length()-1; j++)
+		{
+			if (s[j] >= 'A'&&s[j] <= 'Z')
+			{
+				if (s[j + 1] >= 'A'&&s[j + 1] <= 'Z')
+				{
+					count = 0;
+					break;
+				}
+				else
+				{
+					if (j - last >= 2)
+					{
+						count++;
+					}
+				}
+				last = j;
+			}
+		}
+		if (count > 0)
+		{
+			for (int j = 0; j < s.length(); j++)
+			{
+				if (s[j] >= 'A'&&s[j] <= 'Z')
+				{
+					char a = s[j] - 'A' + 'a';
+					if (j != 0)
+						re = re + '_' + a;
+					else
+						re = re + a;
+				}
+				else
+				{
+					re = re + s[j];
+				}
+			}
+		}
+		else
+		{
+			re = s;
+		}
+		cout << re << endl;
+	}
+	return 0;
+}

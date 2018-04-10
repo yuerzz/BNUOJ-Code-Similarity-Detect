@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+typedef std::string str;
+
+str main_part()
+{
+	bool flag=true;
+	int k;
+	str s;
+	std::scanf("%d",&k);
+	while (k--)
+	{
+		std::cin >> s;
+		if (s != "PERFECT") flag = false;
+	}
+	if (flag == false) return "NAIVE Noob";
+	else return "MILLION Master";
+}
+int main()
+{
+	int T;
+	std::scanf("%d",&T);
+	while (T--) std::cout << main_part() << std::endl;
+}

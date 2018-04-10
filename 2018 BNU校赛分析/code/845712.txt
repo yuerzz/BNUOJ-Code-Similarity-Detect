@@ -1,0 +1,90 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<set>
+#include<map>
+#include<queue>
+#include<utility>
+#include<cstdlib>
+using namespace std;
+typedef long long LL;
+#define pb push_back
+#define rep(i,a,b) for(int i=(a);i<(b);i++)
+#define fi first
+#define se second
+#define de(x) cout<<">> "<<#x<<" = "<<x<<endl;
+const int MAXN = 1e5+5;
+const int mod = 1e9+7;
+typedef pair<int,int> P;
+vector<P> G[MAXN];
+LL d[MAXN];
+int n,T,m;
+int x[MAXN],y[MAXN],z[MAXN];
+bool vis[MAXN];
+int que[MAXN];
+bool check(LL mid)
+{
+    memset(vis,0,sizeof vis);
+    memset(d,0,sizeof d);
+    rep(i, 1, m+1)
+    {
+        d[x[i]]+=z[i];
+        d[y[i]]+=z[i];
+    }
+    int e = 0;
+    rep(i,1,n+1)
+    {
+        if (d[i]<=mid)
+        {
+            que[e++]=i; vis[i]=true;;
+        }
+    }
+    int cnt = 0;
+    for (int ee=0;ee<e;)
+    {
+
+        int v=que[ee++];
+//        de(v)
+        cnt++;
+
+        rep(i,0,G[v].size())
+        {
+            int x=G[v][i].fi;d[x]-=G[v][i].se;
+            if (!vis[x] && d[x]<=mid)
+            {
+                que[e++]=x;vis[x]=true;
+            }
+        }
+    }
+    return cnt == n;
+}
+int main()
+{
+//    freopen("in.txt","r",stdin);
+    scanf("%d",&T);
+//    de(T)
+    while(T--)
+    {
+        scanf("%d%d",&n,&m);
+//        de(n)
+        rep(i,1,n+1) G[i].clear();
+        rep(i,1,m+1)
+        {
+            scanf("%d%d%d",x+i,y+i,z+i);
+            G[x[i]].pb(make_pair(y[i],z[i]));
+            G[y[i]].pb(make_pair(x[i],z[i]));
+        }
+        LL l = -1, r = 1ll<<40;
+
+        while(r-l>1)
+        {
+            LL m = l+r>>1;
+            if (check(m)) r=m;
+            else l=m;
+        }
+        printf("%lld\n",r);
+    }
+}

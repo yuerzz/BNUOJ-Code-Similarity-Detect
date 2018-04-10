@@ -1,0 +1,21 @@
+#include<cstdio>
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while (T--)
+    {
+        bool flag=true;
+        int n;
+        scanf("%d",&n);
+        for (int i=0;i<n;i++)
+        {
+            char s[10];
+            scanf("%s",s);
+            if (s[0]!='P')flag=false;
+        }
+        if (flag)printf("MILLION Master\n");
+        else printf("NAIVE Noob\n");
+    }
+    return 0;
+}

@@ -1,0 +1,51 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#define	NAME "C"
+
+using namespace std;
+
+int T, N;
+double ans, fact[102];
+
+void readin() {
+	scanf("%d", &N);
+}
+
+void process() {
+	double mother = N;
+	ans = 0.0;
+	for(int d = 1; d <= N-1; ++d) {
+		/*
+		double tmp = 0.0;
+		for(int i = 0; i <= N; ++i) {
+			tmp += fact[N-2*i]*fact[i];
+		}
+		*/
+		ans += 2.0*(N-d)*d/mother;
+	}
+	printf("%.12lf\n", ans);
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+	fact[0] = 1.0;
+	for(int i = 1; i <= 100; ++i) {
+		fact[i] = fact[i-1]*i;
+	}
+	scanf("%d", &T);
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

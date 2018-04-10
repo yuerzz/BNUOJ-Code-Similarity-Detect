@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+double cnt(int n)
+{
+    double res = 0;
+    for(int i = 1; i < n; i++)
+        res += i*(i+1);
+    return res;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        double res = cnt(n)/n;
+        printf("%.12f\n", res);
+    }
+
+    return 0;
+}

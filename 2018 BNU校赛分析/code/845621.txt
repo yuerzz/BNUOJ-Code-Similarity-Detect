@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+typedef pair<int,ll>pil;
+const int MAX=1e5+5;
+const ll MOD=1e9+7;
+
+#define pb push_back
+#define mp make_pair
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+template<typename T>inline T abs(T a) {return a>0?a:-a;}
+template<class T> inline
+void read(T& num) {
+    bool start=false,neg=false;
+    char c;
+    num=0;
+    while((c=getchar())!=EOF) {
+        if(c=='-') start=neg=true;
+        else if(c>='0' && c<='9') {
+            start=true;
+            num=num*10+c-'0';
+        } else if(start) break;
+    }
+    if(neg) num=-num;
+}
+inline ll powMM(ll a,ll b,ll M){
+    ll ret=1;
+    a%=M;
+    while (b){
+        if (b&1) ret=ret*a%M;
+        b>>=1;
+        a=a*a%M;
+    }
+    return ret;
+}
+int t,n,k;
+ll tot;
+ll a[MAX];
+struct node
+{
+    int num,lo;
+    ll sum;
+};
+queue<node>que;
+bool re;
+ll an;
+int main()
+{
+    read(t);
+    while(t--)
+    {
+        read(n);read(k);
+        tot=0;
+        re=0;
+        an=0;
+        if(k>n-k)
+            re=1;
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%lld",&a[i]);tot+=a[i];
+        }
+        while(!que.empty())que.pop();
+        for(int i=1;i<=n&&n-i+1>=k;i++)
+            que.push(node{0,i,0});
+        while(!que.empty())
+        {
+            node tem=que.front();que.pop();
+            int num=tem.num,lo=tem.lo;
+            ll sum=tem.sum;
+            ++num;
+            sum+=a[lo];
+            if(num==k)
+            {
+                if(re)
+                    an^=(tot-sum)*(tot-sum);
+                else an^=sum*sum;
+                continue;
+            }
+            else
+            {
+                for(int i=lo+1;i<=n&&n-i+1>=k-num;i++)
+                que.push(node{num,i,sum});
+            }
+        }
+        printf("%lld\n",an);
+    }
+    return 0;
+}

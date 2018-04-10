@@ -1,0 +1,60 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+
+using namespace std;
+
+bool isT(string s)
+{
+	int cnt = 0;
+	for (int i = 0; i < s.size() - 1; i++)
+	{
+		if (isupper(s[i]) && islower(s[i + 1]))
+			cnt++;
+		if (isupper(s[i]) && isupper(s[i + 1]))
+			return false;
+	}
+	if (islower(s[0]) && islower(s[1]))
+		cnt++;
+	if (cnt >= 2)
+		return true;
+	else
+		return false;
+}
+
+void change(string s)
+{
+	if (!isT(s))
+	{
+		cout << s;
+		return;
+	}
+	else
+		for (int i = 0; i < s.size(); i++)
+		{
+			if (isupper(s[i]))
+			{
+				s[i] = tolower(s[i]);
+				if (i != 0)
+					s.insert(i, 1, '_');
+			}
+				
+		}
+	cout << s;
+	return;
+}
+int main(void)
+{
+	int t;
+	cin >> t;
+	for (int i = 0; i < t; i++)
+	{
+		string s;
+		cin >> s;
+		change(s);
+		if (i != t - 1)
+			cout << endl;
+	}
+
+	return 0;
+}

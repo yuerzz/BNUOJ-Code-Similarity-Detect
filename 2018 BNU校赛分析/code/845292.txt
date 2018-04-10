@@ -1,0 +1,89 @@
+//copyright dyj (c) 2018
+//BNU校赛留念
+//problems:
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#define	NAME "I"
+
+using namespace std;
+
+int T, N, K;
+int totm, totd, sum;
+int avm[1000006], avd[1000006];
+char av[1000006];
+
+void readin() {
+	char c;
+	scanf("%d%d", &N, &K);
+	totm = totd = sum = 0;
+	scanf(" %s", av+1);
+#ifdef DEBUG
+	printf("%s\n", av+1);
+#endif
+	for(int i = 1; i <= N; ++i) {
+		if(av[i] == 'D') {
+			avd[i] = avd[i-1]+1;
+			avm[i] = avm[i-1];
+			++totd;
+		} else {
+			avd[i] = avd[i-1];
+			avm[i] = avm[i-1]+1;
+			sum += avd[i];
+			++totm;
+		}
+	}
+#ifdef DEBUG
+	printf("task: %d %d %d\n", N, K, sum);
+#endif
+}
+
+void process() {
+	if(K == sum) {
+		printf("0\n");
+	} else if(K > sum) {
+		if((long long)totd*totm < K) {
+			printf("-1\n");
+			return;
+		}
+		int dif = K-sum, cnt = 0;
+		for(int i = N; i >= 1; --i) {
+			if(av[i] == 'D') {
+				dif -= avm[i];
+				cnt++;
+				if(dif <= 0) {
+					printf("%d\n", cnt);
+					return;
+				}
+			}
+		}
+	} else {
+		int dif = sum-K, cnt = 0;
+		for(int i = 1; i <= N; ++i) {
+			if(av[i] == 'D') {
+				dif -= totm-avm[i];
+				cnt++;
+				if(dif <= 0) {
+					printf("%d\n", cnt);
+					return;
+				}
+			}
+		}
+	}
+}
+
+int main() {
+#ifdef DEBUG
+	freopen(NAME".in", "r", stdin);
+#endif
+	scanf("%d", &T);
+	while(T--) {
+		readin();
+		process();
+	}
+
+	return 0;
+}

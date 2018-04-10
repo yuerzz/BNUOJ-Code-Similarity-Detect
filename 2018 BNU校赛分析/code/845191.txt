@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+char s[2000010];
+int isbig(char x)
+{
+	if(x<='Z'&&x>='A')return 1;
+	return 0;
+}
+
+
+void solve()
+{
+	scanf("%s",s+1);int n = strlen(s+1);
+	if(n <= 2||isbig(s[2])||isbig(s[n])){printf("%s\n",s+1);return ;}
+	for(int i=1;i<n;i++)
+	{
+		if(isbig(s[i])&&isbig(s[i+1]))
+		{
+			printf("%s\n",s+1);return;
+		}
+	}
+	for(int i=1;i<=n;i++)
+	{
+		if(i == 1&&isbig(s[i]))printf("%c",s[i]-'A'+'a');
+		else if(isbig(s[i]))printf("_%c",s[i]-'A'+'a');
+		else printf("%c",s[i]);
+	}
+	puts(""); 
+} 
+int main()
+{
+	int t;scanf("%d",&t);
+	while(t--)solve();
+	
+}

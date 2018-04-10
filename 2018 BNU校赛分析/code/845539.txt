@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+#define rep(i,s,t) for(int i = s;i <= t;i ++)
+#define dow(i,t,s) for(int i = t;i >= s;i --)
+
+#define db double
+#define VI vector<int>
+#define LL long long
+
+using namespace std;
+
+int T , n , k ;
+LL sum , now ;
+char s[1000010];
+int main ()
+{
+    //freopen("in.in","r",stdin);
+    scanf("%d",&T);
+    while(T --)
+    {
+    	sum = now = 0;
+    	scanf("%d%d",&n,&k);
+    	scanf("%s",s + 1);
+    	rep(i,1,n)s[i] = (s[i] == 'D' ? 1 : 0) , sum += s[i] , now += 1ll * (s[i] == 0) * sum;
+    	if(1ll * sum * (n - sum) < k)
+    	{
+    		printf("-1\n");
+    		continue;
+		}
+		cout << abs(now - k) << endl;
+	}
+	
+    return 0;
+
+}

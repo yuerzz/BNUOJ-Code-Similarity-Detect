@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string.h>
+#include<stdio.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int a,i;
+        int flag=1;
+        char c[10]="PERFECT";
+        char b[100000][10];
+        cin >> a;
+        for(i=0;i<a;i++){
+            cin >> b[i];
+            if(strcmp(b[i],c)!=0){
+                flag=0;
+            }
+        }
+        if(flag==1)
+            cout<<"MILLION Master"<<endl;
+        else if(flag==0)
+            cout<<"NAIVE Noob"<<endl;
+    }
+    return 0;
+}

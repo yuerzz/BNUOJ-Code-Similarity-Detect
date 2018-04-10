@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int a,i,rw=0;
+	long long int b[100],j;
+//	int strcmp(char *a, char *b);
+	char m[100];
+	char str1[]= "PERFECT";
+	char str2[]="GOOD";
+	char str3[]="BAD";
+	char str4[]="MISS";
+	scanf("%d",&a);//数组数
+//	printf("%d",a);
+	for(i=0;i<a;i++)
+	{
+		scanf("%d",&b[i]);
+		for(j=0;j<b[i];j++)
+		{
+			scanf("%s",&m); 
+			if(strcmp(m,str1)==0) rw+=1;
+			else if(strcmp(m,str2)==0) rw+=0;
+			else if(strcmp(m,str3)==0) rw+=0;
+			else if(strcmp(m,str4)==0) rw+=0;
+			else ;
+		}
+		if(rw==b[i]) printf("MILLION Master\n");
+		else printf("NAIVE Noob\n");
+	} 
+}

@@ -1,0 +1,79 @@
+    #include<iostream>
+    #include<algorithm>
+    #include<cstring>
+    #include<cmath>
+    #include<climits>
+    using namespace std;
+    long long mm = INT_MAX;
+    struct s{
+        long long pos;
+        int num;
+    } arr[1000005];
+    bool cmp(s s1,s s2){
+        return s1.pos<s2.pos;
+    }
+    int main(){
+        int T;
+        cin>>T;
+        while(T--){
+            mm = INT_MAX;
+            int n,m,k;
+            cin>>n>>m>>k;
+            for(int i=0;i<n;i++){
+                cin>>arr[i].pos;
+                arr[i].num = 1;
+            }
+            for(int i=n;i<n+m;i++){
+                cin>>arr[i].pos;
+                arr[i].num = 2;
+            }
+            for(int i=n+m;i<n+m+k;i++){
+                cin>>arr[i].pos;
+                arr[i].num = 3;
+            }
+            sort(arr,arr+n+m+k,cmp);
+            long long a = -1e9;
+            long long b = 1e9;
+            long long c = -1e9;
+            for(int i=0;i<n+m+k;i++){
+
+                if(arr[i].num==2){
+                    int kk=1;
+                    int tempa,tempc;
+                    while(kk++){
+                        if(i+kk<n+m+k&&arr[i+kk].num==1){
+                            tempa = arr[i+kk].pos;
+                            break;
+                        }
+                        if(i-kk>=0&&arr[i-kk].num==1){
+                            tempa = arr[i-kk].pos;
+                            break;
+                        }
+                    }
+                    kk = 1;
+                    while(kk++){
+                        if(i+kk<n+m+k&&arr[i+kk].num==3){
+                            tempc = arr[i+kk].pos;
+                            break;
+                        }
+                        if(i-kk>=0&&arr[i-kk].num==1){
+                            tempc = arr[i-kk].pos;
+                            break;
+                        }
+                    }
+                    int tempb = arr[i].pos;
+                    if(abs(tempa-tempb)+abs(tempc-tempb)<mm){
+                        mm = abs(tempa-tempb)+abs(tempc-tempb);
+
+                    }
+                }
+
+              //   cout<<a<<" "<<b<<" "<<c<<endl;
+            }
+
+          //  cout<<a<<" "<<b<<" "<<c<<endl;
+            cout<<mm+3<<endl;
+
+        }
+    }
+

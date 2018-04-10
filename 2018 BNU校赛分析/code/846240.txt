@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define mem(a,b) memset(a,b,sizeof(a))
+using namespace std;
+ll a[100005];
+ll b[100005];
+long long  c[100005];
+long long  ans[100005];
+int n,m,k;
+void init()
+{
+    memset(ans,0,sizeof(ans));
+    memset(a,0,sizeof(a));
+    memset(b,0,sizeof(b));
+    memset(c,0,sizeof(c));
+}
+int main()
+{
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        init();
+        cin>>n>>m>>k;
+        for(int i=0; i<n; i++)
+        {
+            cin>>a[i];
+        }
+        for(int i=0; i<m; i++)
+        {
+            cin>>b[i];
+        }
+        for(int i=0; i<k; i++)
+        {
+            cin>>c[i];
+        }
+        for(int i=0;i<m;i++)
+        {
+            int tmp1=lower_bound(a,a+n,b[i])-a;
+            if(tmp1!=0)
+            {
+                ans[i]=min(abs(a[tmp1]-b[i]),abs(a[tmp1-1]-b[i]));
+            }else
+            {
+                ans[i]=abs(a[tmp1]-b[i]);
+            }
+        }
+        for(int i=0;i<m;i++)
+        {
+            int tmp1=lower_bound(c,c+k,b[i])-c;
+            if(tmp1!=0)
+            {
+                ans[i]=min(abs(c[tmp1]-b[i]),abs(c[tmp1-1]-b[i]))+ans[i];
+            }else
+            {
+                ans[i]=abs(c[tmp1]-b[i])+ans[i];
+            }
+        }
+        ll ans1=1e10;
+        for(int i=0;i<m;i++)
+        {
+            ans1=min(ans[i],ans1);
+        }
+        //cout<<endl;
+        if(t==0)
+            cout<<ans1+3;
+        else
+        cout<<ans1+3<<endl;
+    }
+}

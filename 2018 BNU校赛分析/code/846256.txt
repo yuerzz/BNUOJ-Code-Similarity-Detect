@@ -1,0 +1,120 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <queue>
+#include <vector>
+#include <stack>
+#include <map>
+#include <algorithm>
+
+using namespace std;
+
+const int maxn = 100005;
+const int INF = 2000000001;
+int a[maxn],b[maxn],c[maxn];
+int n,m,k;
+
+void fb(int i,int &l,int &r){
+    for (int o=0;o<66;o++){
+    	if (r-l==1){
+    		if (r==m)
+    			r = m-1;
+    		break;
+		}
+    	int mid = l + (r-l)/2;
+		if (b[mid]<i){
+			l = mid;
+		} else if (b[mid] == i){
+			l = mid;
+			r = mid;
+			break;
+		}
+		else r = mid;
+	}
+}
+
+void fc(int i,int &l,int &r){
+    for (int o=0;o<66;o++){
+    	if (r-l==1){
+    		if (r==k)
+    			r = k-1;
+    		break;
+		}
+    	int mid = l + (r-l)/2;
+		if (c[mid]<i){
+			l = mid;
+		} else if (c[mid] == i){
+			l = mid;
+			r = mid;
+			break;
+		}
+		else r = mid;
+	}
+}
+
+int main(){
+	int T;
+	scanf("%d",&T);
+	while(T--){
+		int Min = INF;
+		memset(a,0,sizeof(a));
+		memset(b,0,sizeof(b));
+		memset(c,0,sizeof(c));
+		scanf("%d%d%d",&n,&m,&k);
+		for (int i=0;i<n;i++)
+			scanf("%d",&a[i]);
+		for (int i=0;i<m;i++)
+			scanf("%d",&b[i]);
+		for (int i=0;i<k;i++)
+			scanf("%d",&c[i]);
+		int l,r;
+		for (int i=0;i<n;i++){
+			l = 0;r = m;
+			fb(a[i],l,r);
+			int next = 0;
+			if (l==r) 
+				next = b[l];
+			else {
+				if (abs(b[l]-a[i])==abs(a[i]-b[r])){
+					
+					int l1 = 0;
+					int r1 = k;
+					int next1 = b[l],last1 = 0; 
+					//printf("%d")
+					fc(next1,l1,r1);
+					last1 = min(abs(c[r1]-next1),abs(next1-c[l1]));
+					int l2 = 0;
+					int r2 = k;
+					int next2 = b[r],last2 = 0;
+					fc(next2,l2,r2);
+					last2 = min(abs(c[r2]-next2),abs(next2-c[l2]));
+					if (last1<=last2){
+						next = b[l];
+						
+					}else{
+						next = b[r]; 
+					} 
+				}
+				else if (abs(b[l]-a[i])<abs(a[i]-b[r]))
+					next = b[l];
+				else next = b[r];
+			} 
+			l = 0; r = k;
+			fc(next,l,r);
+			int last = 0;
+
+			if (l==r){
+				last = c[l];
+			}
+			else {
+				if (abs(c[r]-next)>=abs(next-c[l])){
+					last = c[l];
+				} else last = c[r];
+			}
+			Min = min(Min,abs(last-next)+abs(next-a[i])+3);
+		}
+		printf("%d\n",Min);
+	}
+	return 0;
+} 

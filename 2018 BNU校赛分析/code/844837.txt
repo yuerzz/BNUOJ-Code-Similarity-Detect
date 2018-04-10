@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cstdio>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+const int INF=0x3f3f3f3f;
+const int maxn=1e6+7;
+typedef long long LL;
+
+int n;
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        scanf("%d",&n);
+        int all,now;
+        all=now=0;
+        int i,j;
+        FOR(i,1,n) FOR(j,i+1,n){
+            all+=j-i;now++;
+        }printf("%.15f\n",1.0*all/now*(n-1));
+    }
+}
+/*
+*/

@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int x, n, flag;
+    char str[10];
+    scanf("%d", &x);
+    for(; x > 0; x--) {
+        scanf("%d", &n);
+        flag = 1;
+        for(; n > 0; n--) {
+            scanf("%s", str);
+            if(str[0] != 'P') flag = 0;
+        }
+        if(flag) printf("MILLION Master\n");
+        else printf("NAIVE Noob\n");
+    }
+    return 0;
+}

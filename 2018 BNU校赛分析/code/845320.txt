@@ -1,0 +1,49 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    for(int j=0;j<t;j++){
+         string a;
+         cin>>a;
+         int i=0;
+        while(a[i]!= NULL)
+            i++;
+        int length = i;
+        int flag[10] = {0};
+        int k = 1;
+        if(length <= 2 || (a[1]>='A' && a[1] <='Z'))
+            cout<<a<<endl;
+        else{
+            for(i=2;i<length;i++){
+                if(a[i]>='A' && a[i]<='Z'){
+                    if(i+1 < length && a[i+1]>='a' && a[i+1]<='z')
+                        flag[k++] = i;
+                    else if(a[i+1]>='A' && a[i+1]<='Z'){
+                        flag[1] = 0;
+                        break;
+                    }
+
+                }
+            }
+            if(flag[1] == 0)
+                cout<<a<<endl;
+            else{
+                flag[k] = length - 1;
+                for(i=0;i<=k-1;i++){
+                    for(int j=flag[i];j<flag[i+1];j++){
+                        if(j >= 2 && a[j] >= 'A' && a[j] <= 'Z')
+                            a[j] = a[j]-'A'+'a';
+                        cout<<a[j];
+                    }
+                    if(i!=k-1)
+                        cout<<'_';
+                }
+                if(i == k)
+                    cout<<a[flag[k]]<<'\n';
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define REP(I,S,N) for (I=S;I<N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+const int INF=0x3f3f3f3f;
+const int maxn=1e6+7;
+typedef long long LL;
+
+LL Abs(LL x){return x>0?x:-x;}
+int n;
+char A[maxn];
+int f[maxn];//suffix
+LL now;
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        int n,k;
+        scanf("%d%d",&n,&k);
+        scanf("%s",A+1);
+        int cnt=0,i;
+        FOR(i,1,n) {
+            if (A[i]=='D') cnt++;
+            if (A[i]=='M') f[cnt]++,now+=cnt;
+        }if (1ll*cnt*(n-cnt)<k) puts("-1");
+        else printf("%lld\n",Abs(k-now));
+    }
+}
+/*
+*/

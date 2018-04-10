@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const int MAXN = 100000 + 5;
+const ll INF = 4 * 10e9;
+
+ll a[MAXN];
+ll b[MAXN];
+ll c[MAXN];
+
+ll bs[MAXN];
+
+ll ans;
+
+int main() {
+
+  int T;
+  int n;
+  int m;
+  int k;
+
+  scanf("%d", &T);
+
+  while (T--) {
+
+    scanf("%d%d%d", &n, &m, &k);
+
+    for (int i = 0; i < n; i++) {
+      scanf("%lld", &a[i]);
+    }
+    for (int i = 0; i < m; i++) {
+      scanf("%lld", &b[i]);
+    }
+    for (int i = 0; i < k; i++) {
+      scanf("%lld", &c[i]);
+    }
+    /// 遍历b
+    int idx;
+    for (int i = 0; i < m; i++) {
+      idx = lower_bound(a, a + n, b[i]) - a;
+      if (idx == 0) {
+        bs[i] = a[i] - b[i];
+      } else if (idx == n) {
+        bs[i] = b[i] - a[i];
+      } else {
+        bs[i] = min( b[i] - a[idx - 1], a[idx] - b[i] );
+      }
+    }
+
+    /// 遍历c
+    ll ans = INF;
+    for (int i = 0; i < k; i++) {
+      idx = lower_bound(b, b + m, c[i]) - b;
+      if (idx == 0) {
+        ans = min(ans, bs[idx] + b[idx] - c[i]);
+      } else if (idx == n) {
+        ans = min(ans, bs[idx - 1] + c[i] - b[idx - 1]);
+      } else {
+        ans = min(ans, min(bs[idx] + b[idx] - c[i], bs[idx - 1] + c[i] - b[idx - 1]) );
+      }
+    }
+
+    cout << ans + 3 << endl;
+  }
+
+
+
+
+  return 0;
+}

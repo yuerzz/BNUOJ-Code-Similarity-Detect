@@ -1,0 +1,34 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+
+using namespace std;
+
+int cmp(int x,int y)
+{
+    return x<y;
+}
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        int n,m,i;
+        cin>>n>>m;
+        int sum[1200];
+        for(i = 0;i<n;i++)
+            cin>>sum[i];
+        for(i = n;i<m+n;i++)
+            cin>>sum[i];
+        sort(sum,sum+n+m,cmp);
+        int k = 0;
+        for(i = (n+m)/2;i<n+m;i++)
+            k+=sum[i];
+        cout<<k<<"\n";
+    }
+    return 0;
+}

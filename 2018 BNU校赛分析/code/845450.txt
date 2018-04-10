@@ -1,0 +1,25 @@
+import re
+
+def change(s):
+    r = re.split(r'([A-Z][a-z]+)', s)
+    l = len(r)
+
+    f = False
+    for i in range(0, l):
+        if r[i] != '':
+            if f:
+                print('_', end='')
+            print('%s' % (r[i].lower()), end='')
+            f = True
+            
+    print()
+    
+
+T = int(input())
+
+for _ in range(T):
+    s = input()
+    if re.match(r'[A-Z|a-z][a-z]+([A-Z][a-z]+){1,10}', s):
+        change(s)
+    else:
+        print(s)

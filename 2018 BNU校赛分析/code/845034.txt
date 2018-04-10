@@ -1,0 +1,107 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+
+struct Node {
+  int y;
+  int i;
+  ll d;
+};
+
+
+bool cmp(const Node &a, const Node &b) {
+  return a.y < b.y;
+}
+
+vector<Node> v1;
+vector<Node> v2;
+
+int main() {
+  int T;
+  int y;
+  int n;
+  int m;
+  int k;
+
+  scanf("%d", &T);
+  while (T--) {
+    v1.clear();
+    v2.clear();
+
+    scanf("%d%d%d", &n, &m, &k);
+
+    for (int i = 1; i <= n; i++) {
+      scanf("%d", &y);
+      v1.push_back(Node{y, 1, 0});
+    }
+    for (int i = 1; i <= m; i++) {
+      scanf("%d", &y);
+      v1.push_back(Node{y, 2, 0});
+      v2.push_back(Node{y, 2, 0});
+    }
+    for (int i = 1; i <= k; i++) {
+      scanf("%d", &y);
+      v2.push_back(Node{y, 3, 0});
+    }
+
+    sort(v1.begin(), v1.end(), cmp);
+    sort(v2.begin(), v2.end(), cmp);
+
+    int sz;
+    ll m1;
+    ll m2;
+    ll ans = INF;
+    // v1
+    sz = v1.size();
+    for (int i = 0; i < sz; i++) {
+      m1 = INF;
+      m2 = INF;
+      if (v1[i].i == 2) {
+        for (int j = i; j >= 0; j--) {
+          if (v1[j].i == 1) {
+            m1 = v1[i].y - v1[j].y;
+            break;
+          }
+        }
+
+        for (int j = i; j < sz; j++) {
+          if (v1[j].i == 1) {
+            m2 = v1[j].y - v1[i].y;
+            break;
+          }
+        }
+        v2[i].d = min(m1, m2);
+      }
+    }
+
+    // v2
+    sz = v2.size();
+    for (int i = 0; i < sz; i++) {
+      m1 = INF;
+      m2 = INF;
+      if (v2[i].i == 3) {
+        for (int j = i; j >= 0; j--) {
+          if (v2[j].i == 2) {
+            m1 = v2[j].d + v2[i].y - v2[j].y;
+            break;
+          }
+        }
+
+        for (int j = i; j < sz; j++) {
+          if (v2[j].i == 2) {
+            m2 = v2[j].d + v2[j].y - v2[i].y;
+            break;
+          }
+        }
+        ans = min(ans, min(m1, m2));
+      }
+    }
+
+    printf("%lld\n", ans + 3);
+
+  }
+  return 0;
+}

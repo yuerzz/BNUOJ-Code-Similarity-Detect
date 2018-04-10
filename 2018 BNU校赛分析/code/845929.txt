@@ -1,0 +1,88 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool isb(char a)
+{
+    return a>='A'&&a<='Z';
+}
+double ans;
+int n;
+int used[105];
+int tem[50];
+int pre;
+double di(int n)
+{
+    double ans=1;
+    for(int i= 2 ;i<=n;i++)
+    {
+        double ii=i;
+        ans*=i;
+    }
+    return ans;
+}
+void dps(int th)
+//int a[50];
+{
+    //printf("th=%d n=%d\n",th,n);
+    if(th>n)
+    {
+        for(int i = 0;i<n-1;i++)
+        {
+            //printf("%d",tem[i]);
+            double a1=tem[i+1],a2=tem[i];
+            ans+=fabs(a1-a2);
+        }
+        //printf("\n");
+    }
+    //printf("th = %d\n",th);
+    for(int i = 1;i<=n;i++)
+    {
+        if(used[i]==1)
+        {
+            continue;
+        }
+        else
+        {
+            if(used[i]==0)
+            {
+               // a[th-1]=i;
+                tem[th-1]=i;
+                //printf("ans=%lf\n",ans)
+                used[i]=1;
+                dps(th+1);
+                used[i]=0;
+            }
+        }
+    }
+    return;
+}
+int main ()
+{
+    int t;
+    //freopen("test.txt","r",stdin);
+    int th =1,i;
+    char s[10]="123";
+    char kk=s[3];
+    scanf("%d",&t);
+    double a[105];
+    memset(a,0,sizeof(a));
+        a[2]=1;
+        a[3]=2;
+        for(int i = 4 ; i<=105;i++)
+        {
+            if((i-1)%3==0)
+            {
+                th+=2;
+            }
+            a[i]=a[i-1]+th;
+        }
+        for(int i = 1; 3*i<105;i++)
+        {
+            a[i*3]+=2.0/3.0;
+        }
+
+    while(t--)
+    {
+        scanf("%d",&n);
+        printf("%.12lf\n",a[n]);
+    }
+}

@@ -1,0 +1,104 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define pb push_back
+using namespace std;
+namespace fastIO{
+	#define BUF_SIZE 100000
+	//fread -> read
+	bool IOerror=0;
+	inline char nc(){static char buf[BUF_SIZE],*p1=buf+BUF_SIZE,*pend=buf+BUF_SIZE;if(p1==pend){p1=buf;pend=buf+fread(buf,1,BUF_SIZE,stdin);if(pend==p1){IOerror=1;return -1;}}return *p1++;}
+	inline bool blank(char ch){return ch==' '||ch=='\n'||ch=='\r'||ch=='\t';}
+	inline void read(ll &x){char ch;ll f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(int &x){char ch;int f=1;while(blank(ch=nc()));while (ch=='-')f=-f,ch=nc();if(IOerror)return;for(x=ch-'0';(ch=nc())>='0'&&ch<='9';x=x*10+ch-'0');x*=f;}
+	inline void read(char* s){char ch;while(blank(ch=nc()));if(IOerror)return;int i=0;for (;!blank(ch);s[i++]=ch,ch=nc());s[i]='\0';}
+	#undef BUF_SIZE
+};
+using namespace fastIO;
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while(ch<'0'||ch>'9'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int n,m;
+int a[100100];
+ll ans;
+inline void dfs(int x,int sum,int tot)
+{
+    if (x==n+1)
+    {
+        if (tot==m)ans^=(ll)sum*sum;
+        return;
+    }
+    if (n-x+1<m-tot)return;
+    if (tot<m)dfs(x+1,sum+a[x],tot+1);
+    dfs(x+1,sum,tot);
+}
+inline void work(int cur)
+{
+    n=read();m=read();ans=0;
+    if (m==1)
+    {
+        for (int i=1;i<=n;i++)
+        {
+            int x=read();
+            ans^=(ll)x*x;
+        }
+        printf("%lld\n",ans);
+        return;
+    }
+    if (m==2)
+    {
+        for (int i=1;i<=n;i++)a[i]=read();
+        for (int i=1;i<=n;i++)
+            for (int j=i+1;j<=n;j++)
+                ans^=(ll)(a[i]+a[j])*(a[i]+a[j]);
+        printf("%lld\n",ans);
+        return;
+    }
+    if (m==3)
+    {
+        for (int i=1;i<=n;i++)a[i]=read();
+        for (int i=1;i<=n;i++)
+            for (int j=i+1;j<=n;j++)
+                for (int k=j+1;k<=n;k++)
+                ans^=(ll)(a[i]+a[j]+a[k])*(a[i]+a[j]+a[k]);
+        printf("%lld\n",ans);
+        return;
+    }
+    if (m==4)
+    {
+        for (int i=1;i<=n;i++)a[i]=read();
+        for (int i=1;i<=n;i++)
+            for (int j=i+1;j<=n;j++)
+                for (int k=j+1;k<=n;k++)
+                    for (int l=k+1;l<=n;l++)
+                ans^=(ll)(a[i]+a[j]+a[k]+a[l])*(a[i]+a[j]+a[k]+a[l]);
+        printf("%lld\n",ans);
+        return;
+    }
+    if (m==5)
+    {
+        for (int i=1;i<=n;i++)a[i]=read();
+        for (int i=1;i<=n;i++)
+            for (int j=i+1;j<=n;j++)
+                for (int k=j+1;k<=n;k++)
+                    for (int l=k+1;l<=n;l++)
+                        for (int p=l+1;p<=n;p++)
+                            ans^=(ll)(a[i]+a[j]+a[k]+a[l]+a[p])*(a[i]+a[j]+a[k]+a[l]+a[p]);
+        printf("%lld\n",ans);
+        return;
+    }
+    for (int i=1;i<=n;i++)scanf("%d",a+i);
+    dfs(1,0,0);
+    printf("%lld\n",ans);
+}
+int main()
+{
+    int T,cnT=0;
+    T=read();
+    //T=1;
+    while (T--)work(++cnT);
+    return 0;
+}

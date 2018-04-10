@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+long long a[100001];
+long long ans;
+int n,k;
+void dfs(int dep,int pos,long long sum)
+{
+	if(dep==k+1) {ans=ans^(sum*sum);return;}
+	for(int i=pos+1;i<=n-k+dep;i++) dfs(dep+1,i,sum+a[i]);
+}
+int main()
+{
+	int t;
+	int i;
+	
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>k;
+		for(i=1;i<=n;i++) scanf("%lld",a+i);
+		ans=0;dfs(1,0,0);
+		cout<<ans<<endl;
+	}
+}

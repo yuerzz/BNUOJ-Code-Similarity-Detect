@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main()
+{
+	int number;
+	int time;
+	scanf("%d",&time);
+	int result;
+	int flag=1;
+	for(int j=0;j<time;j++)
+	{
+	scanf("%d",&number);
+	char s[100];
+	int i=0;
+	for(i=0;i<number;i++)
+	{
+		scanf("%s",&s);
+		if(strcmp(s,"PERFECT")!=0) 
+			{
+				flag=0;
+				result=0;
+		}
+	}
+	if(i>=number&&flag==1) 
+		{
+			result=1;
+			printf("MILLION Master\n");
+	}
+	if(result==0)
+		printf("NAIVE Noob\n");
+	}
+	return 0;
+}

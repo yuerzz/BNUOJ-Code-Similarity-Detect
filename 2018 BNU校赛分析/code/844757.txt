@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int m;
+	cin>>m;
+	while(m--)
+	{
+	int n;
+	cin>>n;
+	char a[10001];
+	bool f=false;
+	while(n--)
+	{
+		cin>>a;
+		if(strcmp(a,"PERFECT")!=0) f=true;
+	}
+	if(f==false) cout<<"MILLION Master"<<endl;
+	else cout<<"NAIVE Noob"<<endl;
+    }
+}

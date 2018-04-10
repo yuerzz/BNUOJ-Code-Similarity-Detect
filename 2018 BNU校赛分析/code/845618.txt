@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+
+#define rep(i,s,t) for(int i = s;i <= t;i ++)
+#define dow(i,t,s) for(int i = t;i >= s;i --)
+
+#define db double
+#define VI vector<int>
+#define LL long long
+
+using namespace std;
+
+
+
+
+int n , m , T , f[1010][110][110][2] , a[1100] , b[1100] , ans;
+bool comp(const int & a , const int & b)
+{
+	return a > b;
+}
+void up(int & x , int y)
+{
+	x = max(x , y);
+}
+int main ()
+{
+    //freopen("in.in","r",stdin);
+    scanf("%d",&T);
+    while(T --)
+    {
+    	scanf("%d%d",&n,&m);
+    	rep(i,0,n)rep(j,0,m)rep(k,0,m - j)rep(p,0,1)f[i][j][k][p] = -(int)1e9;
+		f[0][0][0][0] = 0;
+		rep(i,1,n)scanf("%d",&a[i]);
+		rep(i,1,m)scanf("%d",&b[i]);
+		sort(b + 1 , b + 1 + m , comp);
+		rep(i,0,n)rep(j,0,m)rep(k,0,m - j)
+		{
+			up(f[i][j + 1][k][1] , f[i][j][k][0]);
+			up(f[i + 1][j][k][1] , f[i][j][k][0] + a[i + 1]);
+			up(f[i + 1][j][k][0] , f[i][j][k][0]);
+			up(f[i][j][k + 1][0] , f[i][j][k][0]);
+			up(f[i + 1][j][k][0] , f[i][j][k][1]);
+			up(f[i][j][k + 1][0] , f[i][j][k][1]);
+		}
+		rep(i,1,m)b[i] += b[i - 1];
+		ans = -1;
+		rep(j,0,m)rep(k,0,m - 1)rep(p,0,1)
+		{
+			ans = max(ans , f[n][j][k][p] + b[j]);
+		}
+		cout << ans << endl;
+	}
+	
+    return 0;
+
+}

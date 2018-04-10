@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int n,t;
+char c[111];
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		scanf("%d",&n);
+		bool flag=1;
+		while (n--)
+		{
+			scanf("%s",c);
+			if (c[0]!='P'||c[1]!='E') flag=0;
+		}
+		if (flag) puts("MILLION Master");
+		else puts("NAIVE Noob");
+	}
+	return 0;
+}

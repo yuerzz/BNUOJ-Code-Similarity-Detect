@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <utility>
+#include <queue>
+#include <algorithm>
+#include <cmath>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define REP(I,N) for (I=0;I<N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+typedef long long LL;
+const int INF=0x3f3f3f3f;
+const LL INFF=0x3f3f3f3f3f3f3f3f;
+const int maxn=1e6+7;
+
+LL Abs(LL x){return x>0?x:-x;}
+LL A[maxn];
+LL ans,all;
+vector<LL> have[maxn],nxt;
+vector<LL> nowhave;
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        int n,m;
+        int i,j,k;
+        scanf("%d%d",&n,&k);
+        FOR(i,1,n) scanf("%lld",&A[i]);
+        bool mark=0;
+        if (k>sqrt(n)) k=n-k;mark=1;
+        FOR(i,0,n) have[i].clear();
+        have[0].push_back(0);
+        FOR(i,1,k){
+            nowhave.clear();
+            FOR(j,i-1,n){
+                nxt.clear();
+                nxt.swap(have[j]);
+                for (LL v:nowhave) have[j].push_back(v+A[j]);
+                for (LL v:nxt) nowhave.push_back(v);
+            }
+//            FOR(j,i-1,n){
+//                printf("%d %d : ",i,j);
+//                for (LL v:have[j]) printf("%lld ",v);puts("");
+//            }
+        }nowhave.clear();
+        FOR(j,k,n){
+            for (LL v:have[j]) nowhave.push_back(v);
+        }ans=0;
+        LL all=0;
+        FOR(i,1,n) all+=A[i];
+        for (LL v:nowhave){
+            if (mark) ans^=(all-v)*(all-v);
+            else ans^=v*v;
+//            if (mark) printf("%lld ",(all-v)*(all-v));
+//            else printf("%lld ",v*v);
+        }
+//        for (LL v:nowhave) printf("%lld ",v);
+        printf("%lld\n",ans);
+    }
+}
+/*
+1
+4 3
+1 2 3 4
+*/

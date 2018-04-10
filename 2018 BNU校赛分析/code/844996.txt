@@ -1,0 +1,85 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+using ull = unsigned long long;
+using vull = std::vector<ull>;
+const ull M = 1000000007;
+
+ull get(const vull& v, size_t i, size_t j)
+{
+    return i <= j ? v[j - i] : 0ull;
+}
+
+vull operator*(const vull& lhs, const vull& rhs)
+{
+    vull ret(lhs.size(), 0ull);
+    for (size_t i = 0; i != ret.size(); ++i) {
+        for (size_t j = 0; j != rhs.size(); ++j) {
+            ret[i] += lhs[j] * get(rhs, j, i) % M;
+            ret[i] %= M;
+        }
+    }
+    return ret;
+}
+
+vull pow(const vull&lhs, ull rhs)
+{
+    vull ret(lhs.size(), 0ull);
+    ret[0] = 1ull;
+    if (!rhs) {
+        return ret;
+    }
+    ret = pow(lhs, rhs >> 1);
+    ret = ret * ret;
+    if (rhs & 1ull) {
+        ret = ret * lhs;
+    }
+    return ret;
+}
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        size_t n;
+        ull k;
+        myis >> n >> k;
+        bool flag = true;
+        std::vector<ull> guabi(n, 0ull);
+        for (size_t i = 0; i != n; ++i) {
+            myis >> guabi[i];
+        }
+        std::vector<ull> begin(n, 0ull);
+        begin[0] = 1ull;
+        begin[1] = M - 1ull;
+        guabi = guabi * pow(begin, k);
+        for (size_t i = 0; i != n; ++i) {
+            if (i) {
+                myos << ' ';
+            }
+            myos << guabi[i];
+        }
+        myos << std::endl;
+    }
+    return 0;
+}

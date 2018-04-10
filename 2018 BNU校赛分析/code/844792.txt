@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+
+int main(void)
+{
+
+    string s[4]={"PERFECT","GOOD","BAD","MISS"};
+
+    int T;
+
+    cin>>T;
+    int num;
+
+
+    while(T--)
+    {
+        cin>>num;
+
+        string x;
+
+        int flag=1;
+
+        for(int i=0;i<num;i++)
+        {
+            cin>>x;
+            if(x!=s[0])
+            {
+                flag=0;
+            }
+
+        }
+
+        if(flag==1)
+        {
+
+            cout<<"MILLION Master"<<endl;
+
+        }
+        else
+        {
+
+            cout<<"NAIVE Noob"<<endl;
+        }
+
+    }
+
+
+}

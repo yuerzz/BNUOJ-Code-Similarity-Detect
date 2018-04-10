@@ -1,0 +1,49 @@
+#include <iostream>
+const int maxN = 1e5 + 3;
+typedef std::string str;
+typedef long long ll;
+typedef ll llvec[maxN];
+ll mod = 1e9 + 7;
+ll pow(ll x,ll n)
+{
+	if (n<0) return pow(x,n*(2-mod));
+	ll ans=1,tmp=x;
+	while (n)
+	{
+		if (n&1) ans = ans*tmp%mod;
+		tmp=tmp*tmp%mod;
+		n>>=1;
+	}
+	return ans;
+}
+
+int N,k;
+llvec nums,nums_pre,kx;
+void main_part()
+{
+	std::scanf("%d %d",&N,&k);
+	for (int i=0;i<N;++i) std::scanf("%lld",nums+i);
+	nums_pre[0] = nums[0];
+	kx[0] = 1;
+	for (int i=1;i<N;++i)
+	{
+		kx[i] = kx[i-1]*(k+i-1)%mod*pow(i,-1)%mod;
+		nums_pre[i] = nums[i];
+		for (int j=0;j<i;++j)
+		{
+			nums_pre[i] = ((nums_pre[i]-kx[i-j]*nums_pre[j]%mod)%mod+mod)%mod;
+		}
+	}
+	for (int i=0;i<N;++i)
+	{
+		std::printf("%lld",nums_pre[i]);
+		if (i!=N-1) std::printf(" ");
+		else std::printf("\n");
+	}
+}
+int main()
+{
+	int T;
+	std::scanf("%d",&T);
+	while (T--) main_part();
+}

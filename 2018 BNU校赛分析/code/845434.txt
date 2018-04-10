@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int t,n,k;
+long long a,b;
+char c;
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		scanf("%d%d",&n,&k);
+		getchar();a=b=0;
+		for (int i=1;i<=n;i++)
+		{
+			c=getchar();
+			if (c=='D') a++;
+			else b+=a;
+		}
+		if (k>a*(n-a)) puts("-1");
+		else printf("%lld\n",abs(b-k));
+	}
+	return 0;
+}

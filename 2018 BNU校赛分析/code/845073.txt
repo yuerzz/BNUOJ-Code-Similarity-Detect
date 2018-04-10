@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int T;
+    cin >> T;
+    while(T--){
+        double n;
+        cin >> n;
+        printf("%.9f\n", (n*(n+2))/3);
+    }
+}

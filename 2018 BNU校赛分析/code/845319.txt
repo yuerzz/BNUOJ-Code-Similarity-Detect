@@ -1,0 +1,19 @@
+#include <stdio.h>
+int main(){
+int t;
+scanf("%d",&t);
+while(t--){
+int n;
+scanf("%d",&n);
+double _s;
+int s;
+_s=0;
+for(int i=1;i<n;i++){
+s=i*(n-i);
+_s=_s+(double)s;
+}
+_s=(double)2*_s/n;
+printf("%.9f\n",_s);
+}
+return 0;
+}

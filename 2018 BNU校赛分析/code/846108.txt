@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <utility>
+#include <queue>
+#include <map>
+#include <set>
+#include <algorithm>
+
+//#define TEST
+
+#ifdef TEST
+std::ifstream ifs("D:/input.txt");
+std::ofstream ofs("D:/output.txt");
+std::ifstream& myis = ifs;
+std::ofstream& myos = ofs;
+#endif
+
+#ifndef TEST
+std::istream& myis = std::cin;
+std::ostream& myos = std::cout;
+#endif
+
+using ull = unsigned long long;
+using pulls = std::pair<ull, size_t>;
+
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    size_t T;
+    myis >> T;
+    for (size_t Case = 1; Case <= T; ++Case) {
+        size_t n, m;
+        myis >> n >> m;
+        std::vector<std::map<size_t, ull>> edges(n + 1);
+        std::vector<ull> sum(n + 1, 0ull);
+        std::set<pulls> vertexs;
+        for (size_t i = 0; i != m; ++i) {
+            size_t x, y;
+            ull z;
+            myis >> x >> y >> z;
+            edges[x][y] = z;
+            edges[y][x] = z;
+            sum[x] += z;
+            sum[y] += z;
+        }
+        for (size_t i = 1; i <= n; ++i) {
+            vertexs.insert(pulls(sum[i], i));
+        }
+        ull ans = 0;
+        while (!vertexs.empty()) {
+            auto curr = *vertexs.begin();
+            vertexs.erase(vertexs.begin());
+            ans = std::max(ans, curr.first);
+            for (auto next : edges[curr.second]) {
+                edges[next.first].erase(curr.second);
+                vertexs.erase(pulls(sum[next.first], next.first));
+                sum[next.first] -= next.second;
+                vertexs.insert(pulls(sum[next.first], next.first));
+            }
+        }
+        myos << ans << std::endl;
+    }
+    return 0;
+}

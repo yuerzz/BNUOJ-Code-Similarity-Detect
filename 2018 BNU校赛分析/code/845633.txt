@@ -1,0 +1,23 @@
+import time
+T = int(input())
+#y=[1]*T
+#y1=['MILLION Master','NAIVE Noob']
+a=[[]]*T
+for i in range(T):
+    n = int(input())
+    a[i]=[]
+
+    for ii in range(n):
+        a[i].append(input(''))
+for i in range(T):
+    x=0
+    for ii in a[i]:
+        if ii[0] != 'P':
+            print('NAIVE Noob')
+            break
+
+        else :
+            x += 1
+            pass
+    if len(a[i]) ==x:    
+        print('MILLION Master')

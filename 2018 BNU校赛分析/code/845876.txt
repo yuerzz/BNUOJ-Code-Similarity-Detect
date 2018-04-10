@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<math.h>
+
+int a[100];
+int mark[100]={0};
+int sum=0;
+void park(int pos,int n)
+{
+	if(pos==n)
+	{
+		int num=0;
+		for(int i=1;i<n;i++)
+			num=num+fabs(a[i]-a[i-1]);
+		sum=sum+num;
+		printf("%d ",num);
+	}
+	else
+	{
+		for(int i=1;i<=n;i++)
+		{
+			if(!mark[i])
+			{
+				mark[i]=1;
+				a[pos]=i;
+				park(pos+1,n);
+				mark[i]=0;
+			}
+		}
+	}
+}
+
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+		int n,m=1;
+		scanf("%d",&n);
+		park(0,n);
+		for(int i=1;i<=n;i++)
+		{
+			mark[i]=0;
+			m=m*i;
+		}
+		printf("%.12f\n",1.0*sum/m);
+		sum=0;
+	}
+	return 0;
+}

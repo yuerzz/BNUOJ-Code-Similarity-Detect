@@ -1,0 +1,40 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+typedef long long LL;
+LL add[120];
+LL bdd[120];
+LL cdd[120];
+void init()
+{
+	add[2] = 2;
+	add[3] = 8;
+	cdd[1] = 1;
+	cdd[2] = 2;
+	cdd[3] = 6;
+	for(int i = 4;i<=101;i++)
+	{
+		add[i] = add[i-1]*(i+1);
+		cdd[i] = cdd[i-1]*i;
+	}
+	for(int i = 2;i<=101;i++)
+	{
+		bdd[i] = (i-1)*add[i];
+	}
+}
+int main()
+{
+	int T;
+	cin>>T;
+	init();
+	while(T--)
+	{
+		int n;
+		cin>>n;
+		printf("%.12lf\n",(double)bdd[n]/(1.0*(double)cdd[n]));
+	}
+}

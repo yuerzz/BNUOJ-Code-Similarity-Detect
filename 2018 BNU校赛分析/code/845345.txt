@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string.h>
+#include<stdio.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        int i,flag=0;
+        char a[20];
+        char b[30];
+        cin >> a;
+        b[0]=a[0];
+        b[1]=a[1];
+        int j=2;
+        for(i=2;i<strlen(a);i++){
+            if(a[i]>='A'&&a[i]<='Z' && a[i+1]>='a' && a[i+1]<='z' && a[i-1]>='a' && a[i-1]<='z'){
+                b[j++]='_';
+                b[j++]=a[i]+32;
+                flag=1;
+            }
+            else b[j++]=a[i];
+
+        }
+        if(flag=1&&a[0]>='A'&&a[0]<='Z'){
+                b[0]=a[0]+32;
+            }
+            cout<<b;
+        cout << endl;
+    }
+    return 0;
+
+}

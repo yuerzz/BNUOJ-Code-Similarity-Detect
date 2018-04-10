@@ -1,0 +1,56 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<set>
+#include<map>
+#include<queue>
+#include<utility>
+#include<cstdlib>
+using namespace std;
+typedef long long LL;
+#define pb push_back
+#define rep(i,a,b) for(int i=(a);i<(b);i++)
+#define de(x) cout<<">> "<<#x<<" = "<<x<<endl;
+
+#define fi first
+#define se second
+const int MAXN = 1e6+5;
+const int mod = 1e9+7;
+int T,n,m,p;
+LL a[MAXN],b[MAXN],c[MAXN];
+LL _abs(LL x)
+{
+    if (x<0) return -x;
+    return x;
+}
+int main()
+{
+    freopen("in.txt","r",stdin);
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d%d%d",&n,&m,&p);
+        rep(i,1,n+1) scanf("%lld",a+i);
+        rep(i,1,m+1) scanf("%lld",b+i);
+        rep(i,1,p+1) scanf("%lld",c+i);
+        LL ans = 1ll<<40;
+        int i=1, j=1, k=1;
+        for (;j<=m;j++)
+        {
+            while(a[i]<=b[j] && i<=n) i++;
+            while(c[k]<=b[j] && k<=p) k++;
+            rep(ii,-3,3)
+            rep(kk,-3,3)
+            {
+                int ti=ii+i, tk =kk+k;
+                if (ti>=1&&ti<=n&&tk>=1&&tk<=p) ans = min(ans, _abs(a[ti]-b[j])+_abs(b[j]-c[tk]));
+            }
+//            de(ans)
+        }
+        printf("%lld\n",ans+3);
+//        de(1)
+    }
+}

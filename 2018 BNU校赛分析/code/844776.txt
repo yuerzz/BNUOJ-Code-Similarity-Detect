@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+#define rep(i,s,t) for(int i = s;i <= t;i ++)
+#define dow(i,t,s) for(int i = t;i >= s;i --)
+
+#define db double
+#define VI vector<int>
+#define LL long long
+
+using namespace std;
+
+
+LL ans;
+int T , n;
+
+int main ()
+{
+    //freopen("in.in","r",stdin);
+    scanf("%d",&T);
+    while(T --)
+    {
+    	scanf("%d",&n);
+    	ans = 0;
+    	rep(i,1,n)rep(j,1,n)if(i != j)
+    	{
+    		ans += abs(i - j) * (n - 1);
+		}
+		printf("%.20f",(double)ans / n / (n - 1));
+    }
+    return 0;
+
+}

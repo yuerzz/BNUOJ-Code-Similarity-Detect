@@ -1,0 +1,34 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+
+using namespace std;
+
+int main()
+{
+//    freopen("a.txt","r",stdin);
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int n;
+        string s;
+        cin>>n;
+        int f=1;
+        while (n--)
+        {
+            cin>>s;
+            if (s!="PERFECT")
+            {
+                cout<<"NAIVE Noob"<<endl;
+                f=0;
+                break;
+            }
+        }
+        if (f) cout<<"MILLION Master"<<endl;
+    }
+}

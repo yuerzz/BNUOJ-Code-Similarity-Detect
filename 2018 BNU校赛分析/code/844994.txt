@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+
+const int MAX=1e5+5;
+const ll MOD=1e9+7;
+
+#define pb push_back
+#define mp make_pair
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+template<typename T>inline T abs(T a) {return a>0?a:-a;}
+template<class T> inline
+void read(T& num) {
+    bool start=false,neg=false;
+    char c;
+    num=0;
+    while((c=getchar())!=EOF) {
+        if(c=='-') start=neg=true;
+        else if(c>='0' && c<='9') {
+            start=true;
+            num=num*10+c-'0';
+        } else if(start) break;
+    }
+    if(neg) num=-num;
+}
+inline ll powMM(ll a,ll b,ll M){
+    ll ret=1;
+    a%=M;
+    while (b){
+        if (b&1) ret=ret*a%M;
+        b>>=1;
+        a=a*a%M;
+    }
+    return ret;
+}
+int t;
+char a[105];
+bool ck(char x)
+{
+    return x>='A'&&x<='Z';
+}
+int cnt;
+int main()
+{
+    scanf("%d",&t);
+    while(t--)
+    {
+        cnt=0;
+        scanf("%s",a);
+        int len=strlen(a);
+        bool st=1;
+        if(len<2)st=0;
+        else if(!ck(a[0])&&ck(a[1]))st=0;
+        if(ck(a[0])||(len>=2&&!ck(a[0])&&!ck(a[1])))cnt=1;
+        for(int i=1;i<len;i++)
+        {
+            if(a[i]>='A'&&a[i-1]>='A'&&a[i]<='Z'&&a[i-1]<='Z')
+                st=false;
+            if(a[i]>='A'&&a[i]<='Z'&&i==len-1)st=0;
+            if(ck(a[i]))++cnt;
+        }
+        if(st&&cnt>=2)
+        {
+            bool pre=0;
+            for(int i=0;i<len;i++)
+            {
+                if(a[i]>='A'&&a[i]<='Z')
+                {
+                    if(pre)printf("_%c",a[i]+'a'-'A');
+                    else
+                    {
+                        pre=1;
+                        printf("%c",a[i]+'a'-'A');
+                    }
+                }
+                else printf("%c",a[i]);
+                pre=1;
+            }
+            printf("\n");
+        }
+        else puts(a);
+    }
+    return 0;
+}

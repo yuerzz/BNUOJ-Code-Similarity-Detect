@@ -1,0 +1,68 @@
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+long long a[100001],b[100001],c[100001];
+int main()
+{
+    long long T,n,m,k,p1,p2,q1,q2,q3,q4;
+    long long pa,pb,pc,ans;
+    scanf("%lld",&T);
+    while(T--)
+    {
+        scanf("%lld%lld%lld",&n,&m,&k);
+        ans=1000000000000LL;
+        for(long long i=0;i<n;i++)
+            scanf("%lld",&a[i]);
+        for(long long i=0;i<m;i++)
+            scanf("%lld",&b[i]);
+        for(long long i=0;i<k;i++)
+            scanf("%lld",&c[i]);
+        for(long long i=0;i<n;i++)
+        {
+            p1=upper_bound(b,b+m,a[i])-b;
+            if(p1==m)
+                p1--;
+            if(b[p1]==a[i]||p1==0)
+            {
+                q1=upper_bound(c,c+k,b[p1])-c;
+                if(q1==k)
+                    q1--;
+                if(c[q1]==b[p1]||q1==0)
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q1]));
+                else
+                {
+                    q2=q1-1;
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q1]));
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q2]));
+                }
+            }
+            else
+            {
+                q1=upper_bound(c,c+k,b[p1])-c;
+                if(q1==k)
+                    q1--;
+                if(c[q1]==b[p1]||q1==0)
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q1]));
+                else
+                {
+                    q2=q1-1;
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q1]));
+                    ans=min(ans,abs(a[i]-b[p1])+abs(b[p1]-c[q2]));
+                }
+                p2=p1-1;
+                q3=upper_bound(c,c+k,b[p2])-c;
+                if(c[q3]==b[p2]||q3==0)
+                    ans=min(ans,abs(a[i]-b[p2])+abs(b[p2]-c[q3]));
+                else
+                {
+                    q4=q3-1;
+                    ans=min(ans,abs(a[i]-b[p2])+abs(b[p2]-c[q3]));
+                    ans=min(ans,abs(a[i]-b[p2])+abs(b[p2]-c[q4]));
+                }
+            }
+        }
+        printf("%lld\n",ans+3);
+    }
+    return 0;
+}

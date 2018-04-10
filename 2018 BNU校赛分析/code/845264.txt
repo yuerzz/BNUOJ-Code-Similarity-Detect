@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	int aa=1;
+	int number;
+	int time;
+	cin>>time;
+	for(int j=0;j<time;j++)
+	{
+	cin>>number;
+	char s[50][10];
+	for(int i=0;i<number;i++)
+	{
+		cin>>s[i];
+	}
+	int i=0;
+	for(i=0;i<number;i++)
+	{
+		if(strcmp(s[i],"PERFECT")!=0) 
+			{
+				cout<<"NAIVE Noob"<<endl;
+				break;
+		}
+	}
+	if(i>=number) cout<<"MILLION Master"<<endl;
+	aa++;
+	}
+	return 0;
+}

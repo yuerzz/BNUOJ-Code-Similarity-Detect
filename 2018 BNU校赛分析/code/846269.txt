@@ -1,0 +1,30 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int a[100];
+
+int main(void)
+{
+	int m,n;int r;
+	int fenmu;
+	double dr;
+	cin>>m;
+	while(m--){
+		cin>>n;
+		fenmu=1;
+		r=0;
+		for(int i=0;i<n;i++){
+			fenmu*=(i+1);
+			a[i]=i+1;
+		}
+		do{
+			for(int i=1;i<n;i++){
+				r+=(abs(a[i-1]-a[i]));
+			}
+		}while(next_permutation(a,a+n));
+		dr=r/1.0/fenmu;
+		printf("%.12lf\n",dr);
+	}
+	return 0;
+}

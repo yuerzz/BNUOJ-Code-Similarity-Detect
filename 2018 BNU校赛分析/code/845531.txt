@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n,k,sum=0,sumd=0,summ=0;
+		char x;
+		cin>>n>>k;
+		char a[n];
+		int s[n]={0};
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+			if(a[i]=='D')
+				sumd++;
+			else
+				sum=sum+sumd;
+		}
+		if(sum<=k)
+			cout<<"-1"<<endl;
+		else
+		{
+			int p=0;
+			while(sum>k)
+			{
+				int i,j,numd=0;
+				for(i=0;i<n;i++)
+					if(a[i]=='D')
+						break;
+				for(j=n-1;j>=0;j--)
+				{
+					if(a[j]=='M')
+						break;
+					else
+						numd++;
+				}
+				sum=sum-(sumd-numd);
+				p++;
+			}
+			cout<<p<<endl;
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,54 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main()
+{
+	int t;
+	string s;
+	
+	cin>>t;
+	while(t--)
+	{
+		cin>>s;
+		char snew[300000];
+		bool b;
+		int i,j;
+		i=0;j=0;
+		snew[0]=s[0];
+		if (s[1]<'a'||s[1]>'z')
+		  cout<<s<<endl;
+		else
+		  {
+		  	b=true;
+		  	snew[1]=s[1];
+		  	i=2; j=2;
+		  	while (i<s.length())
+		  	{
+		  		if (s[i]>'A'&&s[i]<'Z')
+		  		{
+		  			
+		  		  if  (s[i+1]>'A'&&s[i+1]<'Z')
+		  		    {cout<<s<<endl; break; b=false;}
+		  		  else 
+		  		  {
+		  		  snew[j]='_';
+		  		  j+=1;
+		  		  snew[j]=s[i];
+		  	      }
+		  	    }
+				else 
+				{
+					snew[j]=s[i];
+				}	
+				j+=1;i+=1;
+		  		  
+			}
+			if (b==true)
+			{ 
+			for (int k=0;k<=j-1;k++)
+		  cout<<snew[k];
+		  cout<<endl;
+	      }
+	      }
+	}
+}

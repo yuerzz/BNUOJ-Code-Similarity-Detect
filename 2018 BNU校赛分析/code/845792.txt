@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const int maxn = 1e6 + 10;
+char s[maxn];
+int bit[maxn];
+int Mpos[maxn];
+
+int lowbit(int x){
+    return x&-x;
+}
+void update(int v,int val,int n){
+    while(v <= n){
+        bit[v] += val;
+        v += lowbit(v);
+    }
+}
+
+int sum(int v,int n){
+    int res =0 ;
+    while(v){
+        res += bit[v];
+        v -= lowbit(v);
+    }
+    return res;
+}
+
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        int n,k,Dcnt = 0;
+        ll up = 0;
+        scanf("%d%d",&n,&k);
+        scanf("%s",s);
+
+        for(int i = 0;i < n;i++) if(s[i] == 'D') Dcnt++;
+        up = Dcnt * (n - Dcnt);
+
+        if(k > up) {
+            printf("-1\n");
+            continue;
+        }
+
+        memset(bit,0,sizeof bit);
+        ll cnr_g = 0,cnr_cnt = 0;
+        int ans = 0,pre = 0,suf = 0;
+
+        for(int i = 0;i < n;i++){
+            if(s[i] == 'D') {
+                cnr_cnt++;
+            }
+            else {
+                cnr_g += cnr_cnt;
+                update(i+1,1,n);
+                Mpos[suf++] = i;
+            }
+        }
+
+        //printf("%lld\n",cnr_g);
+        if(cnr_g == k) printf("0\n");
+        else if(cnr_g > k){
+            for(int i = 0;i < n;i++){
+                if(s[i] == 'D'){
+                    int temp = sum(n,n);
+                    cnr_g -= temp;
+                    ans++;
+                    //printf("%d %d\n",cnr_g,k);
+                    if(cnr_g <= k){
+                        printf("%d\n",ans);
+                        break;
+                    }
+                    update(i+1,1,n);
+                    update(Mpos[--suf]+1,-1,n);
+                }
+            }
+        }
+        else{
+            for(int i = n-1;i >= 0;i--){
+                if(s[i] == 'D'){
+                    int temp = sum(i+1,n);
+                    cnr_g += temp;
+                    ans++;
+                    if(cnr_g >= k){
+                        printf("%d\n",ans);
+                        break;
+                    }
+                    update(i+1,1,n);
+                    update(Mpos[pre++]+1,-1,n);
+                }
+            }
+        }
+    }
+    return 0;
+}

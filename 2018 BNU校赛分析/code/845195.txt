@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+int f(int n)
+{
+    char a[8];
+    int i,m=0;
+
+    for(i=0;i<n;i++)
+    {
+        scanf("%s",a);
+        if(strcmp(a, "PERFECT") != 0)
+        {
+            m++;
+        }
+    }
+    if(m==0)
+        printf("MILLION Master\n");
+    if(m!=0)
+        printf("NAIVE Noob\n");
+
+    return 0;
+}
+
+int main()
+{
+    int b,T,n;
+    scanf("%d",&T);
+    for(b=0;b<T;b++)
+    {
+        scanf("%d",&n);
+        f(n);
+    }
+    return 0;
+}

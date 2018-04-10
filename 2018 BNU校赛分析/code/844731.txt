@@ -1,0 +1,21 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+    int T;
+    cin>>T;
+    while(T--){
+        int num;
+        string s;
+        bool flag = true;
+        while(num--){
+            cin>>s;
+            if(s!="PERFECT")
+                flag = false;
+        }
+        if(flag)
+            cout<<"MILLION Master"<<endl;
+        else
+            cout<<"NAIVE Noob"<<endl;
+    }
+}

@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include<math.h>
+
+using namespace std;
+int main()
+{
+	int t,n,m,k;
+	cin>>t;
+	while(t--)
+	{
+		int minm=1<<30;
+		cin>>n>>m>>k;
+		vector <int> a(n);
+		vector<int> b(m);
+		vector<int> c(k);
+		for(int i=0;i<n;i++)
+		{cin>>a[i];}
+		for(int i=0;i<m;i++)
+		{cin>>b[i];}
+		for(int i=0;i<k;i++)
+		{cin>>c[i];}
+		for(int i=0;i<n;i++)
+		for(int j=0;j<m;j++)
+		for(int w=0;w<k;w++)
+		{
+			if(abs(a[i]-b[j])+abs(b[j]-c[w])+3<minm)
+				minm=abs(a[i]-b[j])+abs(b[j]-c[w])+3;
+		}
+		cout<<minm<<endl;
+	}
+	return 0;
+}

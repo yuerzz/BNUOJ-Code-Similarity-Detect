@@ -1,0 +1,83 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> pii;
+typedef pair<int,ll>pil;
+const int MAX=1e5+5;
+const ll MOD=1e9+7;
+
+#define pb push_back
+#define mp make_pair
+int gcd(int a,int b){return b?gcd(b,a%b):a;}
+template<typename T>inline T abs(T a) {return a>0?a:-a;}
+template<class T> inline
+void read(T& num) {
+    bool start=false,neg=false;
+    char c;
+    num=0;
+    while((c=getchar())!=EOF) {
+        if(c=='-') start=neg=true;
+        else if(c>='0' && c<='9') {
+            start=true;
+            num=num*10+c-'0';
+        } else if(start) break;
+    }
+    if(neg) num=-num;
+}
+inline ll powMM(ll a,ll b,ll M){
+    ll ret=1;
+    a%=M;
+    while (b){
+        if (b&1) ret=ret*a%M;
+        b>>=1;
+        a=a*a%M;
+    }
+    return ret;
+}
+int t,n,m;
+int dp[1005][105][3];
+int a[1005],b[105];
+int an;
+int main()
+{
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&n,&m);
+        for(int i=1;i<=n;i++)scanf("%d",&a[i]);
+        for(int i=1;i<=m;i++)scanf("%d",&b[i]);
+        sort(b+1,b+1+m);
+        for(int i=1;i<=n;i++)
+            for(int j=0;j<=m;j++)
+            {
+                dp[i][j][0]=max(dp[i-1][j][1],dp[i-1][j][0]);
+                if(!j)
+                    dp[i][j][1]=dp[i-1][j][0]+a[i];
+                else dp[i][j][1]=max(dp[i-1][j-1][1]+a[i],dp[i-1][j][0]+a[i]);
+            }
+        for(int i=0;i<=m;i++)
+        {
+            int st=i+2,en=m;
+            int now=dp[n][i][1];
+//            int now=max(dp[n][i][1],dp[n][i][0]);
+            while(st<=en)
+            {
+                now+=b[en];
+                --en;++st;
+            }
+            an=max(an,now);
+//            printf("now=%d!\n",now);
+            st=i+1;en=m;
+            now=dp[n][i][0];
+            while(st<=en)
+            {
+                now+=b[en];
+                --en;++st;
+            }
+            an=max(an,now);
+        }
+        printf("%d\n",an);
+    }
+    return 0;
+}

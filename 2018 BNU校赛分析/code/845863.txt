@@ -1,0 +1,20 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+
+int main()
+{
+	int T;
+	cin>>T;
+	
+	while(T--)
+	{
+		double n;
+		cin>>n;
+		printf("%.12lf\n",double(n*n-1)/3.0);
+	}
+}

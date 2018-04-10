@@ -1,0 +1,64 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+
+int T,n,m,k;
+int a[10000];
+int b[10000];
+int c[10000];
+int nan[10000];
+int kak[10000];
+int finala[10000];
+
+
+int main()
+{
+	cin>>T;
+	while(T)
+	{
+		cin>>n;
+		cin>>m;
+		cin>>k;
+
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+		}
+		for(int i=0;i<m;i++)
+		{
+			cin>>b[i];
+		}
+		for(int i=0;i<k;i++)
+		{
+			cin>>c[i];
+		}
+		for(int i=0;i<m;i++)
+		{
+		   for(int j=0;j<n;j++)
+		   {
+			    if(b[i]>a[j])
+			     nan[j]=b[i]-a[j];
+			   else
+				 nan[j]=a[j]-b[i];
+		   }
+
+		   for(int j=0;j<k;j++)
+		   {
+			   if(b[i]>c[j])
+			     kak[j]=b[i]-c[j];
+			   else
+				 kak[j]=c[j]-b[i];
+		   }
+		    sort(nan,nan+n-1);
+		    sort(kak,kak+k-1);
+			finala[i]=nan[0]+kak[0];
+		}
+		sort(finala,finala+m-1);
+		cout<<finala[0]+3<<endl;
+		T--;
+	}
+		
+
+  return 0;
+}

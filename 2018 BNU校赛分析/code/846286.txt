@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<math.h>
+
+int main(void){
+    int T,i;
+    int dn,mn;
+    char duilie[1000000];
+    int n,k,j;
+    int know,disk,m;
+
+    scanf("%d",&T);
+
+    for(i=0;i<T;i++){
+        scanf("%d%d",&n,&k);
+        mn=dn=0;
+        know=0;
+        scanf("%s",duilie);
+        j=0;
+
+        while(duilie[j]!=0){
+            if(duilie[j]=='D'){
+                dn++;
+            }else{
+                know = know + dn;
+                mn++;
+            }
+            j++;
+        }
+
+
+        if(k>mn*dn){
+            printf("-1\n");
+        }else{
+            disk = abs(k,know);
+            if(disk < n){
+                printf("1\n");
+            }
+        }
+
+    }
+}

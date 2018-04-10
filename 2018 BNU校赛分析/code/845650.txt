@@ -1,0 +1,52 @@
+#include<stdio.h>
+
+int main(void){
+    int T,i,j;
+    char tw[21];
+    int ccount=0,wdcount=0;
+
+    scanf("%d",&T);
+
+    for(i=0;i<T;i++){
+        scanf("%s",tw);
+        wdcount=0;
+        ccount=0;
+        j=0;
+        while(tw[j]!=0){
+            if((tw[j]>='A'&&tw[j]<='Z')||(j==0)){
+                if(ccount!=1){
+                    wdcount++;
+                    ccount=1;
+                }else{
+                    wdcount = 0;
+                    break;
+                }
+            }else if(tw[j]>='a'&&tw[j]<='z'){
+                ccount++;
+            }else{
+                wdcount = 0;
+                break;
+            }
+            j++;
+        }
+
+        if(wdcount>1&&ccount!=1){
+            j=0;
+            while(tw[j]!=0){
+                if(j==0&&(tw[j]>='a'&&tw[j]<='z')){
+                    printf("%c",tw[j]);
+                }else if(j==0&&(tw[j]>='A'&&tw[j]<='Z')){
+                    printf("%c",tw[j]+32);
+                }else if(tw[j]>='a'&&tw[j]<='z'){
+                    printf("%c",tw[j]);
+                }else{
+                    printf("_%c",tw[j]+32);
+                }
+                j++;
+            }
+            printf("\n");
+        }else{
+            printf("%s\n",tw);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        int n;
+        scanf("%d",&n);
+        int flag=1;
+        char a[10];
+        //int i=0;
+        for(int i=0;i<n;i++)
+        {
+            scanf("%s",a);
+            if(a[0]!='P')
+                flag=0;
+        }
+        if(flag)
+            printf("MILLION Master\n");
+        else
+            printf("NAIVE Noob\n");
+    }
+    return 0;
+}

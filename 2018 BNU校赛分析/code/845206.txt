@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int main() {
+    int t, n, m, i, sum, temp, ans;
+    int x, y, a[500000];
+    char str;
+    scanf("%d", &t);
+    for(; t > 0; t--) {
+        scanf("%d%d", &n, &m);
+        getchar();
+        for(i = 0; i < n; i++) {
+            scanf("%c", &str);
+            if(str == '(') a[i] = 1;
+            else a[i] = -1;
+        }
+        getchar();
+        for(; m > 0; m--) {
+            scanf("%d%d", &x, &y);
+            if(x == 1) a[y-1] = -a[y-1];
+            else {
+                sum = 0;
+                temp = 0;
+                ans = 0;
+                for(i = y-1; i < n; i++) {
+                    sum += a[i];
+                    temp++;
+                    if(sum == 0) ans = temp;
+                    if(sum < 0) break;
+                }
+                printf("%d\n", ans);
+            }
+        }
+    }
+    return 0;
+}

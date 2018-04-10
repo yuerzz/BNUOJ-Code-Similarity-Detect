@@ -1,0 +1,31 @@
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+double d;
+int main()
+{
+    int t,i,j,k;
+    cin>>t;
+    for(i=0;i<t;i++)
+    {
+        int n;
+        cin>>n;
+        double a[n],p=1;
+        d=0;
+        for(j=0;j<n;j++)
+            a[j]=j+1;
+        for(j=1;j<=n;j++)
+            p*=j;
+        do
+    {
+            double di=0;
+            for(k=1;k<n;k++)
+                di+=fabs(a[k]-a[k-1]);
+            d+=di;
+    }while(next_permutation(a,a+n));
+        cout<<setprecision(12)<<d/p<<endl;
+    }
+    return 0;
+}

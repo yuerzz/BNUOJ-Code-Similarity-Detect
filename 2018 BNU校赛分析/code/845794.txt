@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int T;
+  string s;
+  int l;
+  bool f;
+  string a;
+  char t[3];
+  t[1] = '\0';
+  int cnt;
+
+  cin >> T;
+
+  while (T--) {
+    f = true;
+    a = "";
+    cnt = 0;
+    cin >> s;
+
+    l = s.length();
+
+
+    if (l <= 3) { /// 长度小于等于3
+      f = false;
+    } else if (!isupper(s[0]) && isupper(s[1])) { /// 1个小写开头
+      f = false;
+    } else {
+      if (isupper(s[0])) {
+        cnt++;
+      }
+
+      for (int i = 1; i < l; i++) {
+        if (isupper(s[i])) {
+          cnt++;
+          if (isupper(s[i - 1])) { /// 连续大写
+            f = false;
+            break;
+          }
+        }
+      }
+      if (isupper(s[l - 1])) { /// 大写结尾
+        f = false;
+      }
+    }
+
+
+    if (!f || (isupper(s[0]) && cnt == 1) )  { /// 不足2词
+      cout << s << endl;
+      continue;
+    }
+
+    /// 符合驼峰，改写
+
+    for (int i = 0; i < l; i++) {
+      if ( isupper(s[i]) ) {
+        if (i != 0) {
+          a.append("_");
+        }
+        t[0] = 'a' + s[i] - 'A';
+        a.append( t );
+      } else {
+        t[0] = s[i];
+        a.append( t );
+      }
+    }
+
+    cout << a << endl;
+  }
+}

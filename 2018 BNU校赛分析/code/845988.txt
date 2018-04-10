@@ -1,0 +1,68 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        char A[30];
+        char B[30];
+        cin>>A;
+        int i,len = strlen(A);
+        int flag = 0;
+        int Y = 30;
+        int j = 0;
+        int flag1 = 0;
+        if(A[0]>=97 && A[0]<=122 && A[1]>=97 && A[1]<=122)
+            flag = 1;
+        for(i = 0;i<len;i++)
+        {
+            if(A[i]>='A' && A[i]<='Z' && A[i+1]>=97 && A[i+1]<=122)
+            {
+                if(flag == 1)
+                {
+                    if(B[Y]>=65 && B[Y]<=90)
+                    {
+                        B[Y]=B[Y]+32;
+                    }
+                    B[j++]='_';
+                    B[j++]=A[i]+32;
+                    continue;
+                }
+                else
+                {
+                    flag = 1;
+                    Y = i;
+                    B[j++]=A[i];
+                    continue;
+                }
+            }
+            if(A[i]>='A' && A[i]<='Z' && A[i+1]>='A' && A[i+1]<='Z')
+            {
+                flag = 0;
+                flag1 = 1;
+                break;
+                Y = i+1;
+                B[j++]=A[i];
+                continue;
+            }
+            B[j++]=A[i];
+        }
+        if(flag1 == 1)
+        {
+            cout<<A<<"\n";
+            continue;
+        }
+        for(i = 0;i<j;i++)
+            cout<<B[i];
+        cout<<"\n";
+    }
+    return 0;
+}

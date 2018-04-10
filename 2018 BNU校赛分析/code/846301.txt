@@ -1,0 +1,39 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    int T,i,a=0,j=0,n,k;
+    cin>>T;
+    char L[T][20];
+    for(i=0;i<T;i++)
+    {
+        cin>>L[i];
+        while(L[i][j]!='\0')
+        {
+            j++;
+        }
+        n=j;
+        for(j=0;j<n;j++)
+         {
+             if(L[i][j]<=90)
+            {
+                a=j;
+             if(L[i][a+1]>90)
+             {
+                   n=n+1;
+                for(k=n-1;k>=j;k--)
+               {
+                  L[i][k+1]=L[i][k];
+               }
+                L[i][j]='_';
+             }
+            }
+         }
+     }
+     for(i=0;i<T;i++)
+     {
+        cout<<L[i]<<endl;
+     }
+     return 0;
+}

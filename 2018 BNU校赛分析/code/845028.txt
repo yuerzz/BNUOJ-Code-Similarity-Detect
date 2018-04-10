@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<algorithm>
+#include<stdlib.h>
+
+int x[105];
+int sum, n;
+
+int f(int k)
+{
+    int i, t;
+    if(k==n)
+    {
+        for(i=1; i<n; i++)
+            sum += abs(x[i+1]-x[i]);
+    }
+    else
+    {
+        for(i=k; i<=n; i++)
+        {
+            t=x[k];
+            x[k]=x[i];
+            x[i]=t;
+            f(k+1);
+            t=x[k];
+            x[k]=x[i];
+            x[i]=t;
+        }
+    }
+}
+
+int main()
+{
+    int t, i, j, k;
+    scanf("%d",&t);
+
+    double ans;
+    for(i=0; i<t; i++)
+    {
+
+        scanf("%d",&n);
+        k = n*(n-1);
+        for(j=1; j<=n; j++)
+            x[j]=j;
+        sum = 0;
+        f(1);
+        ans = 1.0*sum/k;
+        printf("%f\n",ans);
+    }
+
+
+    return 0;
+}

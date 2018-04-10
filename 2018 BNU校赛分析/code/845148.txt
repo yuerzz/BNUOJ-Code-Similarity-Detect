@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+#include<math.h>
+
+using namespace std;
+
+int used[100];
+int sum=0;
+int n;
+int mark[100];
+int countn=0;
+
+void init(int a[])
+{
+    sum=0;
+    n=0;
+    countn=0;
+    for(int i=0;i<100;i++)
+    {
+        a[i]=0;
+
+    }
+}
+
+void init1(int b[])
+{
+
+    for(int i=0;i<100;i++)
+    {
+
+        b[i]=i+1;
+    }
+}
+
+
+void countit()
+{
+
+    //for(int i=0;i<n;i++)
+    //{
+       // cout<<mark[i]<<" ";
+   // }
+    //cout<<endl;
+
+    for(int i=0;i<n-1;i++)
+    {
+        int mi=mark[i]-mark[i+1];
+
+        if(mi>=0)
+        {
+            sum=sum+mi;
+        }
+        else{
+            sum=sum-mi;
+        }
+
+    }
+    //cout<<sum<<endl;
+}
+
+void digui(int arr[], int index,int num,int length)
+{
+    //int a[100];
+
+    if(num==0)
+    {
+        countn++;
+        countit();
+        return ;
+    }
+
+    else{
+            for(int i=0;i<num;i++)
+            {
+                 swap(arr[index],arr[index+i]);
+                 digui(arr,index+1,num-1,length);
+                 swap(arr[index],arr[index+i]);
+            }
+
+    }
+
+
+}
+
+int main(void)
+{
+    int T;
+
+    cin >>T;
+
+    while(T--)
+    {
+        init(used);
+        init1(mark);
+        //int n;
+        cin>>n;
+
+        digui(mark,0,n,n);
+
+        double result1;
+        result1=sum*1.0/countn;
+
+        printf("%.12f",result1);
+        cout<<endl;
+        //cout<<result1<<endl;
+
+
+
+    }
+
+}

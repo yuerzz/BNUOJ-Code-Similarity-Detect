@@ -1,0 +1,59 @@
+    #include<cstdio>  
+    #include <cstdlib>
+	#include<iostream>
+	#include<math.h>  
+    using namespace std;  
+    double count=0.0;  
+   int ac=0;
+    int jiecheng(int n)
+    {
+    	int x=1;
+    	for(int i=3;i<=n;i++)
+    	x=x*i;
+    	return x;
+	}
+    void permutation(int *a,int n,int cur){  
+       
+	    if(cur==n){  //生成了全排序
+		ac++; 
+          
+           for(int i=0;i<n-1;i++)
+           {
+		   count=abs(a[i+1]-a[i])+count; 
+		 
+		   }
+		   if(n>=3&&ac==jiecheng(n)) return; 
+        }  
+        else {  
+            for(int j=1;j<=n;j++){  
+                int ok=1;  
+                for(int k=0;k<cur;k++){            
+                    if(a[k]==j){  
+                        ok=0;break;  
+                    }  
+                }  
+                if(ok){  
+                    a[cur]=j;  
+                    permutation(a,n,cur+1);  
+                }             
+            }  
+        }  
+    }  
+    int main(){  
+        int n;  
+        int t;
+        scanf("%d",&t); 
+        for(int i=1;i<=t;i++)
+        {
+	 count=0.0;  
+   ac=0.0;
+        scanf("%d",&n);  
+        int *a=new int[n];   
+        permutation(a,n,0);  
+        double b=count/ac*1.0;
+         //printf("%lf\n",count);
+         //printf("ac:%lf\n",ac);
+        printf("%.12lf\n",b);
+        }
+		return 0; 
+    }  

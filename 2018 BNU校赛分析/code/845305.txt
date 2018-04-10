@@ -1,0 +1,137 @@
+#include<cstdio>
+#include<iostream>
+#include<string>
+#include<vector>
+#include<set>
+#include<map>
+#include<queue>
+
+using namespace std;
+
+vector<string> v;
+
+int main()
+{
+   // freopen("a.txt","r",stdin);
+    int t;
+    cin>>t;
+
+    for (int tt=0;tt<t;tt++)
+    {
+        string s;
+        v.clear();
+        cin>>s;
+        if (s.size()<4) cout<<s<<endl;
+        else
+        {
+            int len=s.size();
+            if (s[0]>=65 && s[0]<=90)
+            {
+                int last=0,f=0;
+                for (int i=1;i<len;i++)
+                {
+                    if (s[i]>=65 && s[i]<=90)
+                    {
+                        if (i-last==1)
+                        {
+                            cout<<s<<endl;
+                            f=1;
+                            break;
+                        }
+                        else
+                        {
+                            string ss=s.substr(last,i-last);
+                            ss[0]+=32;
+                            v.push_back(ss);
+                            last=i;
+                        }
+                    }
+                }
+                if (f);
+                else
+                {
+                    if (s[len-1]>=65 && s[len-1]<=90)
+                    {
+                        v.clear();
+                        cout<<s<<endl;
+                    }
+                    else
+                    {
+                        if (last!=0){
+                            string ss=s.substr(last);
+                            ss[0]+=32;
+                            v.push_back(ss);
+                        }
+                        else cout<<s<<endl;
+                    }
+                    if (!v.empty())
+                    {
+
+                        for (int i=0;i<v.size()-1;i++)
+                        {
+                            cout<<v[i]<<"_";
+                        }
+                        cout<<v[v.size()-1]<<endl;
+                    }
+                }
+
+
+
+            }
+            else
+            {
+                int last=0,f=0;
+                for (int i=1;i<len;i++)
+                {
+                    if (s[i]>=65 && s[i]<=90)
+                    {
+                        if (i-last==1)
+                        {
+                            cout<<s<<endl;
+                            f=1;
+                            break;
+                        }
+                        else
+                        {
+                            string ss=s.substr(last,i-last);
+                            if (last!=0)ss[0]+=32;
+                            v.push_back(ss);
+                            last=i;
+                        }
+                    }
+                }
+                if (f);
+                else
+                {
+                    if (s[len-1]>=65 && s[len-1]<=90)
+                    {
+                        v.clear();
+                        cout<<s<<endl;
+                    }
+                    else
+                    {
+                        if (last!=0)
+                        {
+                            string ss=s.substr(last);
+                            ss[0]+=32;
+                            v.push_back(ss);
+                        }
+                        else cout<<s<<endl;
+
+                    }
+                    if (!v.empty())
+                    {
+
+                        for (int i=0;i<v.size()-1;i++)
+                        {
+                            cout<<v[i]<<"_";
+                        }
+                        cout<<v[v.size()-1]<<endl;
+                    }
+                }
+            }
+
+
+        }
+    }
+}

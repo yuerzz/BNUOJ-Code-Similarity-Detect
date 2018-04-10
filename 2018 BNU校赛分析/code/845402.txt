@@ -1,0 +1,39 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	string s,ns;
+	bool isP;
+	int len;
+	cin>>n;
+	while(n--){
+		cin>>s;
+		len=s.length();
+		ns="";
+		isP=false;
+		for(int i=0;i<len;i++){
+			if(s[i]<='Z'&&s[i]>='A'&&i>=2&&i<len-1){
+				if(s[i+1]<='z'&&s[i+1]>='a'){
+					ns+='_';
+					ns+=(s[i]+32);
+					isP=true;
+				}
+				else{
+					ns+=s[i];
+					i++;
+					ns+=s[i];
+				}
+			}else{
+				ns+=s[i];
+			}
+			
+		}
+		if(isP)
+		for(int i=0;i<ns.length();i++){
+			if(ns[i]<='Z'&&ns[i]>='A')ns[i]+=32;
+		}
+		cout<<ns<<endl;
+	}
+}

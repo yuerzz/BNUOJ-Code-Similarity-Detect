@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+#define rep(i,s,t) for(int i = s;i <= t;i ++)
+#define dow(i,t,s) for(int i = t;i >= s;i --)
+
+#define db double
+#define VI vector<int>
+#define LL long long
+
+using namespace std;
+
+
+int T , n;
+char str[100010];
+int main ()
+{
+    //freopen("in.in","r",stdin);
+    scanf("%d",&T);
+    while(T --)
+    {
+        bool flag = 1;
+        scanf("%d",&n);
+        rep(i,1,n)
+        {
+            scanf("%s",str);
+            if(str[0] != 'P')flag = 0;
+        }
+        if(flag)printf("MILLION Master\n");
+        else printf("NAIVE Noob\n");
+    }
+    return 0;
+
+}

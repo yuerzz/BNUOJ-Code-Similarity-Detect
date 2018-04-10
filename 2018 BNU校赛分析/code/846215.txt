@@ -1,0 +1,37 @@
+#include<stdio.h>
+void paixu(int n,int *s)
+{
+    for(int i=0;i<n;i++)
+        {for(int j=0;j<n;j++)
+        {
+            if(s[i]>s[j]){int t=s[i];s[i]=s[j];s[j]=t;}
+        }}
+}
+int main(void)
+{
+    int t;
+    scanf("%d",&t);
+    int re[12];
+    for(int i=0;i<t;i++)
+    {
+        int n,m;
+        int a,b=0;
+        scanf("%d%d",&n,&m);
+        int s[1200];
+        int x=n+m;
+        for(int j=0;j<x;j++)
+            scanf("%d",&s[j]);
+        paixu(x,s);
+
+        if(x%2==1)a=(x/2)+1;
+        else a=x/2;
+
+        for(int j=0;j<a;j++)
+            b+=s[j];
+        re[i]=b;
+    }
+    for(int i=0;i<t;i++)
+        {printf("%d",re[i]);
+        if(i!=t-1)printf("\n");
+           }
+}

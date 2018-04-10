@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const int maxn = 1e5 + 10,mod = 1e9+7;
+ll fac[maxn],inv[maxn];
+int a[maxn],ans[maxn];
+ll xi[maxn];
+
+ll fastpow(ll x,int n){
+    ll res = 1;
+    while(n){
+        if(n&1) res = res * x % mod;
+        x = x*x % mod;
+        n >>= 1;
+    }
+    return res;
+}
+
+int main()
+{
+    int T;
+    scanf("%d",&T);
+    while(T--){
+        int n,k;
+        scanf("%d%d",&n,&k);
+        for(int i = 0;i < n;i++) scanf("%d",&a[i]);
+        if(!k){
+            for(int i = 0;i < n-1;i++) printf("%d ",a[i]);
+            printf("%d\n",a[n-1]);
+            continue;
+        }
+
+        ll tot = 0;
+        ans[0] = a[0];
+        xi[0] = 1;
+        for(int i = 1;i < n;i++) xi[i] = xi[i-1] * (ll)(k-1+i) % mod * fastpow(i,mod - 2) % mod;
+        for(int i = 1;i < n;i++) {
+            tot = 0;
+            for(int j = i;j > 0;j--){
+                tot = tot + ans[i-j] * xi[j] % mod;
+                tot %= mod;
+            }
+            //printf("%lld\n",tot);
+            if(tot <= a[i]) ans[i] = a[i] - tot;
+            else ans[i] = (a[i] + mod - tot) % mod;
+        }
+        for(int i = 0;i < n-1;i++) printf("%d ",ans[i]);
+        printf("%d\n",ans[n-1]);
+    }
+    return 0;
+}

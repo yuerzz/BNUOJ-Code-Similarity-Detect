@@ -1,0 +1,49 @@
+#include<iostream>
+#include<string.h>
+#include<string>
+
+using namespace std;
+string a,b;
+int main()
+{
+	int T;
+	cin>>T;
+	while(T--)
+	{
+		cin>>a;
+		b = "";
+		if(a[0]<='z'&&a[0]>='a'){b+= a[0];}
+		else b += a[0]+32;
+		int number = 1;
+		int wn = 1;
+		bool fa = true;
+		for(int i = 1;i<a.length();i++)
+		{
+			if(a[i]<='z'&&a[i]>='a'){b+= a[i];number++;}
+			else
+			{
+				if(number<2)
+				{
+					fa = false;
+					break;
+				}
+				else
+				{
+					wn++;
+					number = 1;
+					b += '_';
+					b += a[i]+32;
+				}
+			}
+		}
+		if(number<2||wn<2)fa =false;
+		if(!fa)
+		{
+			cout<<a<<endl;
+		}
+		else
+		{
+			cout<<b<<endl;
+		}
+	}
+}

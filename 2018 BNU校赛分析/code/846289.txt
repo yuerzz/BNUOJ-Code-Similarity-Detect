@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	int t;
+	string s;
+	
+	cin>>t;
+	while(t--)
+	{
+		cin>>s;
+		char snew[300000];
+		bool b;
+		unsigned int i,j,num;
+		i=0;j=0;
+		if (s[0]>='A'&&s[0]<='Z')
+		snew[0]=s[0]+32;
+		else
+		snew[0]=s[0];
+		if (s[1]>='A'&&s[1]<='Z')
+		  cout<<s<<endl;
+		else
+		  {
+		  	b=true;
+		  	num=1;
+		  	snew[1]=s[1];
+		  	i=2; j=2;
+		  	while (i<s.length())
+		  	{
+		  		if (s[s.length()-1]>='A'&&s[s.length()-1]<='Z')
+		  		{cout<<s<<endl; b=false; break; }
+		  		if (s[i]>='A'&&s[i]<='Z'&&i<s.length()-1)
+		  		{
+		  			
+		  		  if  (s[i+1]>='A'&&s[i+1]<='Z')
+		  		    {cout<<s<<endl; b=false; break; }
+		  		  else 
+		  		  {
+		  		   num=num+1;
+		  		  snew[j]='_';
+		  		  j+=1;
+		  		  snew[j]=s[i]+32;
+		  	      }
+		  	    }
+                else
+                {
+			     
+					snew[j]=s[i];
+				}
+				j+=1;i+=1;
+		  		  
+			}
+			if (num==1&&b==true)
+			   cout<<s<<endl;
+			else
+			{
+			if (b==true)
+			{ 
+			for (unsigned int k=0;k<=j-1;k++)
+		  cout<<snew[k];
+		  cout<<endl;
+	       }
+	      }
+	      }
+	}
+	return 0;
+}

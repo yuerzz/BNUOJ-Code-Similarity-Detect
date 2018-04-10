@@ -1,0 +1,32 @@
+#include<cstdio>
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        int n,i,flag = 0;
+        scanf("%d",&n);
+        char A[20];
+        for(i = 0;i<n;i++)
+        {
+            cin>>A;
+            if(A[0]!='P')
+            {
+                flag = 1;
+            }
+        }
+        if(flag == 1)
+            cout<<"NAIVE Noob"<<"\n";
+        else
+            cout<<"MILLION Master"<<"\n";
+    }
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <math.h>
+#include <stack>
+#include <cstdio>
+#include <string>
+using namespace std;
+
+typedef struct
+{
+	int to,zh;
+}t;
+
+int main()
+{
+	int k,m,n;
+	cin>>k;
+	while(k--){
+		int minm=1<<30;
+		cin>>n>>m;
+		vector <vector<t>> ty(n+1);
+		for(int i=0;i<m;i++)
+		{
+			int a,b,c;
+			cin>>a>>b>>c;
+			t tmp;
+			tmp.to=b;
+			tmp.zh=c;
+			ty[a].push_back(tmp);
+			tmp.to=a;
+			tmp.zh=c;
+			ty[b].push_back(tmp);
+		}
+		for(int i=1;i<=n;i++)
+		{
+			int r=0;
+			for(int j=0;j<ty[i].size();j++)
+			{
+				r+=ty[i][j].zh;
+			}
+			if(r<minm) minm=r;
+		}
+		cout<<minm<<endl;
+	}
+	return 0;
+}

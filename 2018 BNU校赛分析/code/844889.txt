@@ -1,0 +1,21 @@
+#include<stdio.h>
+using namespace std;
+int main()
+{
+    int num;
+    scanf("%d",&num);
+    while(num--)
+    {
+        int n;
+        scanf("%d",&n);
+        double x=(double)n;
+        double k=0;
+        for(int i=1;i<=n;i++)
+        {
+            k+=(double)i*(double)(n-i);
+        }
+        x=k*2.0d/x;
+        printf("%.11f\n",x);
+    }
+return 0;
+}

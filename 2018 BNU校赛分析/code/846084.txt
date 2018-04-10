@@ -1,0 +1,79 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	int T,i;
+	cin>>T;
+	for(i=0;i<T;i++)
+    {
+        string s;
+        cin>>s;
+        int l=s.size();
+        int j;
+        int k=0;
+        int m;
+        int flag=0;
+        string s1=s;
+        for(j=0;j<l;j++)
+        {
+            if(s[j]>='A'&&s[j]<='Z')
+            {
+                if(j==1||j==l-1)
+                {
+                    cout<<s1<<endl;
+                    flag=1;
+                    break;
+                }
+                else if(j==0)
+                {
+                    for(m=1;m<l;m++)
+                    {
+                        if(s[m]>='A'&&s[m]<='Z')
+                        {
+                            cout<<s1<<endl;
+                            flag=1;
+                            break;
+                        }
+                    }
+                    if(m==l)
+                    {
+                        cout<<s1<<endl;
+                        flag=1;
+                        break;
+                    }
+                    else
+                    {
+                        if(s[j+1]>='a'&&s[j+1]<='z')
+                        {
+                            s[j]=s[j]-'A'+'a';
+                        }
+                        else
+                        {
+                            cout<<s1<<endl;
+                            flag=1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    if(s[j+1]>='a'&&s[j+1]<='z')
+                    {
+                        s[j]=s[j]-'A'+'a';
+                        s.insert(j,"_");
+                    }
+                    else
+                    {
+                        cout<<s1<<endl;
+                        flag=1;
+                        break;
+                    }
+                }
+            }
+        }
+        cout<<s<<endl;
+    }
+    return 0;
+}

@@ -1,0 +1,47 @@
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+pair<long long,long long> p[300001];
+int main()
+{
+    long long T,n,m,k;
+    long long pa,pb,pc,ans;
+    scanf("%lld",&T);
+    while(T--)
+    {
+        scanf("%lld%lld%lld",&n,&m,&k);
+        for(long long i=0;i<n;i++)
+        {
+            scanf("%lld",&p[i].first);
+            p[i].second=1;
+        }
+        for(long long i=0;i<m;i++)
+        {
+            scanf("%lld",&p[i+n].first);
+            p[i+n].second=2;
+        }
+        for(long long i=0;i<k;i++)
+        {
+            scanf("%lld",&p[i+n+m].first);
+            p[i+n+m].second=3;
+        }
+        sort(p,p+n+m+k);
+        pa=-1;
+        pb=-1;
+        pc=-1;
+        ans=10000000000LL;
+        for(long long i=0;i<n+m+k;i++)
+        {
+            if(p[i].second==1)
+                pa=i;
+            else if(p[i].second==2)
+                pb=i;
+            else pc=i;
+            if(pa>=0&&pb>=0&&pc>=0&&ans>abs(p[pa].first-p[pb].first)+abs(p[pb].first-p[pc].first))
+                ans=abs(p[pa].first-p[pb].first)+abs(p[pb].first-p[pc].first);
+        }
+        printf("%lld\n",ans+3);
+    }
+    return 0;
+}

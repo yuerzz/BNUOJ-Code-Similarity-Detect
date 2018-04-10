@@ -1,0 +1,32 @@
+#include<stdio.h>
+
+#define MONEY 1000000007
+
+int main(void){
+    int T,i;
+    int n,j;
+    int k,nk;
+    int moneynow[1000];
+
+    scanf("%d",&T);
+
+    for(i=0;i<T;i++){
+        scanf("%d%d",&n,&k);
+
+        for(j=0;j<n;j++){
+            scanf("%d",&moneynow[j]);
+        }
+
+        for(nk=0;nk<k;nk++){
+
+                    moneynow[j+1]=(moneynow[j+1]+MONEY-moneynow[j])%MONEY;
+
+        }
+
+        for(j=0;j<n-1;j++){
+            printf("%d ",moneynow[j]);
+        }
+        printf("%d\n",moneynow[j]);
+
+    }
+}

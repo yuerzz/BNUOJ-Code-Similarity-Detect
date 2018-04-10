@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#define FOR(I,S,N) for (I=S;I<=N;I++)
+#define REP(I,S,N) for (I=S;I<N;I++)
+#define rFOR(I,S,N) for (I=N;I>=S;I--)
+using namespace std;
+const int INF=0x3f3f3f3f;
+const int maxn=1e6+7;
+typedef long long LL;
+
+int n;
+char A[maxn];
+int main(){
+    int T;
+    scanf("%d",&T);
+    while (T--){
+        scanf("%s",A);
+        int len=strlen(A),i,cnt=0;
+        bool mark=1;
+        REP(i,0,len){
+            if (((A[i]<='Z'&&A[i]>='A')||i==0)&&
+                ((A[i+1]<='Z'&&A[i+1]>='A')||i==len-1)) mark=0;
+            if ((A[i]<='Z'&&A[i]>='A')||i==0) cnt++;
+        }if (cnt<2) mark=0;
+        if (!mark) {puts(A);continue;}
+        REP(i,0,len){
+            if (A[i]<='Z'&&A[i]>='A'){
+                if (i) putchar('_');
+                putchar(A[i]-'A'+'a');
+            }else putchar(A[i]);
+        }puts("");
+    }
+}
+/*
+10
+mystring
+myString
+String
+SS
+my
+mySString
+mString
+STRING
+StrinG
+IndexOfString
+*/

@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+#define ll long long
+const ll mod=1e9+7;
+using namespace std;
+
+int main()
+{
+     int t;   cin>>t;
+     while(t--)
+     {
+         string a,b="",c;
+         cin>>a;   c=a;
+         int ff=0;  int cc=0;
+         int k=a.size();
+         if(k<4) {cout<<a<<endl; continue; }
+         if(k>1&&a[1]<'a') {cout<<a<<endl; continue; }
+         for(int i=2;i<k;i++)
+         {
+             if(a[i]<'a')
+             {
+                 cc++;
+                 if(a[i-1]<'a'||i==k-1) ff=1;
+             }
+         }
+            if(ff||cc<2) cout<<a;
+         else
+        for(int i=0;i<k;i++)
+           if(a[i]<'a')
+            {
+             if(i) cout<<"_";cout<<(char)(a[i]+'a'-'A');
+             }
+           else  cout<<a[i];
+         cout<<endl;
+     }
+
+return 0;
+}

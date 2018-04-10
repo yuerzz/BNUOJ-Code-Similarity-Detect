@@ -1,0 +1,71 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<set>
+#include<map>
+#include<queue>
+#include<utility>
+#include<cstdlib>
+#define de(x) cout<<">> "<<#x<<" = "<<x<<endl;
+using namespace std;
+typedef long long LL;
+#define pb push_back
+#define rep(i,a,b) for(int i=(a);i<(b);i++)
+#define fi first
+#define se second
+const int MAXN = 1e6+5;
+const int MAXM = 1e8+1005;
+const int mod = 1e9+7;
+int a[MAXN],n,k,T;
+int b[MAXN];
+
+LL powmod(LL x, LL n, LL mod)
+{
+    LL res = 1;
+    while(n)
+    {
+        if (n&1) res=res*x%mod;
+        x=x*x%mod;
+        n>>=1;
+    }return res;
+}
+LL fact[MAXM];
+LL inv[MAXM];
+LL Comb(int n, int m)
+{
+    if (n<0 || m <0||m>n) return 0;
+    return 1ll*fact[n]*inv[m]%mod*inv[n-m]%mod;
+}
+int main()
+{
+
+//    freopen("in.txt","r",stdin);
+    fact[0]=1;
+//    cout<<1<<endl;
+    rep(i,1,MAXM) fact[i]=fact[i-1]*i%mod;
+    inv[MAXM-1]=powmod(fact[MAXM-1],mod-2,mod);
+    for (int i=MAXM-2;i>=0;i--) inv[i]=inv[i+1]*(i+1)%mod;
+//    de(Comb(5,3))
+    cin>>T;
+    while(T--)
+    {
+        cin>>n>>k;
+        rep(i,1,n+1) cin>>a[i];
+        b[1]=a[1];
+        int s=b[1];
+        rep(i,2,n+1)
+        {
+            b[i]=a[i];
+            rep(j,1,i)
+            {
+                b[i] = (1ll*b[i]-1ll*b[j]*Comb(k+i-j-1,(i-j))+mod)%mod;
+
+
+            }
+        }
+        rep(i, 1, n+1) printf("%d%c",b[i]," \n"[i==n]);
+    }
+}

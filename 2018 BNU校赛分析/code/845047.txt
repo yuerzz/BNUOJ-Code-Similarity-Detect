@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define me(a,b) memset(a,b,sizeof(a))
+#define mkp make_pair
+#define fi first
+#define se second
+#define inf 0x3f3f3f3f
+#define P 1000000007
+#define pi 3.1415926535
+inline int read()
+{
+	int x=0,f=1;char ch=getchar();
+	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int t,n,m,k,a[100010],b[100010],c[100010],d,e;
+long long ans1[100010],ans2[100010],ans;
+int main()
+{
+	//srand(time(0));
+	cin>>t;
+	while (t--)
+	{
+		scanf("%d%d%d",&n,&m,&k);
+		for (int i=1;i<=n;i++)
+			scanf("%d",&a[i]);
+		for (int i=1;i<=m;i++)
+			scanf("%d",&b[i]);
+		for (int i=1;i<=k;i++)
+			scanf("%d",&c[i]);
+		ans=99999999999999;
+		for (int i=1;i<=m;i++)
+		{
+			d=lower_bound(c+1,c+1+k,b[i])-c;
+			if (d==1) ans1[i]=c[1]-b[i];
+			else if (d>k) ans1[i]=b[i]-c[k];
+			else ans1[i]=min(c[d]-b[i],b[i]-c[d-1]);
+		//	printf("%d %lld\n",i,ans1[i]);
+		}
+		for (int i=1;i<=n;i++)
+		{
+			d=lower_bound(b+1,b+1+m,a[i])-b;
+			if (d==1) ans2[i]=b[1]-a[i]+ans1[1];
+			else if (d>m) ans2[i]=a[i]-b[m]+ans1[m];
+			else ans2[i]=min(b[d]-a[i]+ans1[d],a[i]-b[d-1]+ans1[d-1]);
+			ans=min(ans,ans2[i]);
+		//	printf("%d %lld %d\n",i,ans2[i],d);
+		}
+		printf("%lld\n",ans+3);
+	}
+	return 0;
+}

@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+double k(int n)
+{
+    double ans=1;
+    for(double i = n-1;i<=n;i++)
+    {
+        ans*=i;
+    }
+    return ans;
+}
+int main ()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n ;
+        scanf("%d",&n);
+        double di = k(n);
+        double ans = 2*(n-1);
+         //printf("%lf\n",ans);
+        for(double i = 1; i<=n;i++)
+        {
+            for(double j = 1;j<=n;j++)
+            {
+                if(fabs(i-j)<0.05)
+                    continue;
+                else
+                    ans-=fabs(i-j)/di;
+            }
+        }
+        printf("%.13lf\n",ans);
+    }
+
+}

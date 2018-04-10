@@ -1,4 +1,4 @@
-# BNUOJ-code
+# BNUOJ-Code-Similarity-Detect
 针对BNUOJ的代码查重辅助工具
 
 BNU Online Judge:

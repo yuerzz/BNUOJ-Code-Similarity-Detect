@@ -18,3 +18,7 @@ BNU Online Judge:
 
 没有可执行文件，使用方法示例：
 [Jupyter Notebook](https://github.com/ZitanChen/BNUOJ-utility/blob/master/BNUOJ%20Submission%20Analysis.ipynb)
+
+## 欢迎大家来改进啊
+可选思路：
+* 拼接上开源工具[SIM](https://dickgrune.com/Programs/similarity_tester/)，从词法层面增强检测效果
